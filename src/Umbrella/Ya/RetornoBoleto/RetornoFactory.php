@@ -18,7 +18,8 @@ class RetornoFactory
      * @param string $aoProcessarLinhaFunctionName @see RetornoBase
      * @return AbstractRetorno Retorna um objeto de uma das sub-classes de RetornoBase.
      */
-    public static function getRetorno($fileName, $aoProcessarLinhaFunctionName)
+    public static function getRetorno($fileName,
+                                      $aoProcessarLinhaFunctionName = null)
     {
         if (!$fileName) {
             throw new \InvalidArgumentException("Informe o nome do arquivo de retorno.");

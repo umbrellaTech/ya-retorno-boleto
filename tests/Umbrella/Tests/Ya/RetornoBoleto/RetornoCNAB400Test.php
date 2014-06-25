@@ -31,10 +31,29 @@ class RetornoCNAB400Test extends PHPUnit_Framework_TestCase
         );
     }
 
+    public function conveio7Provider()
+    {
+        return array(
+            array(__DIR__ . '/../../Resources/ret/retorno_cnab400conv7.ret')
+        );
+    }
+
     /**
      * @dataProvider conveio6Provider
      */
     public function testConvenio6($fileName)
+    {
+        $cnab400 = RetornoFactory::getRetorno($fileName,
+                                              array($this, "linhaProcessada"));
+
+        $retorno = new RetornoHandler($cnab400);
+        $retorno->processar();
+    }
+
+    /**
+     * @dataProvider conveio7Provider
+     */
+    public function testConvenio7($fileName)
     {
         $cnab400 = RetornoFactory::getRetorno($fileName,
                                               array($this, "linhaProcessada"));
