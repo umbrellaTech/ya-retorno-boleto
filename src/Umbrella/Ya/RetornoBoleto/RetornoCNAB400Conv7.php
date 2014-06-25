@@ -32,6 +32,16 @@ class RetornoCNAB400Conv7 extends AbstractRetornoCNAB400
         parent::__construct($nomeArquivo, $aoProcessarLinhaFunctionName);
     }
 
+    public function createHeader()
+    {
+        return new HeaderConvenio();
+    }
+
+    public function createDetail()
+    {
+        return new DetailConvenio();
+    }
+
     /**
      * Processa a linha header do arquivo
      * @param string $linha Linha do header de arquivo processado
@@ -39,13 +49,14 @@ class RetornoCNAB400Conv7 extends AbstractRetornoCNAB400
      */
     protected function processarHeaderArquivo($linha)
     {
-        $vlinha = parent::processarHeaderArquivo($linha);
-        //X = ALFANUMÉRICO 9 = NUMÉRICO V = VÍRGULA DECIMAL ASSUMIDA
-        //$vlinha["zeros"]              = substr($linha, 41,    6); //Zeros
-        $vlinha["complemento2"] = substr($linha, 108, 42); //Complemento do Registro: “Brancos”
-        $vlinha["convenio"] = substr($linha, 150, 7); //9 Número do convênio
-        $vlinha["complemento3"] = substr($linha, 157, 238); //X Complemento do Registro: “Brancos”
-        return $vlinha;
+        $header = parent::processarHeaderArquivo($linha);
+        $header
+            ->addComplemento(substr($linha, 108, 42))
+            ->setConvenio(substr($linha, 150, 7))
+            ->addComplemento(substr($linha, 108, 42))
+        ;
+
+        return $header;
     }
 
     /**
@@ -55,30 +66,20 @@ class RetornoCNAB400Conv7 extends AbstractRetornoCNAB400
      */
     protected function processarDetalhe($linha)
     {
-        $vlinha = parent::processarDetalhe($linha);
-        //X = ALFANUMÉRICO 9 = NUMÉRICO V = VÍRGULA DECIMAL ASSUMIDA
-        $vlinha["convenio"] = substr($linha, 32, 7); //9  Número do Convênio de Cobrança do Cedente
-        $vlinha["controle"] = substr($linha, 39, 25); //X  Número de Controle do Participante
-        $vlinha["nosso_numero"] = substr($linha, 64, 17); //9  Nosso-Número
-        $vlinha["tipo_cobranca"] = substr($linha, 81, 1); //9  Tipo de cobrança - nota 02
-        $vlinha["tipo_cobranca_cmd72"] = substr($linha, 82, 1); //9  Tipo de cobrança específico p/ comando 72 - nota 03
-        $vlinha["dias_calculo"] = substr($linha, 83, 4); //9  Dias para cálculo - nota 04
-        $vlinha["natureza"] = substr($linha, 87, 2); //9  Natureza do recebimento - nota 05
-        $vlinha["prefixo_titulo"] = substr($linha, 89, 3); //X  Prefixo do título
-        $vlinha["variacao_carteira"] = substr($linha, 92, 3); //9  Variação da Carteira
-        $vlinha["conta_caucao"] = substr($linha, 95, 1); //9  Conta Caução - nota 06
-
-        /*
-          $vlinha["brancos"]             = substr($linha, 127,  20); //X  Brancos
-          $vlinha["zeros3"]              = substr($linha, 343,   7); //9 Zeros - nota 14
-          $vlinha["zeros4"]              = substr($linha, 350,   9); //9 Zeros - nota 14
-          $vlinha["zeros5"]              = substr($linha, 359,   7); //9 Zeros - nota 14
-          $vlinha["zeros6"]              = substr($linha, 366,   9); //9 Zeros - nota 14
-          $vlinha["zeros7"]              = substr($linha, 375,   7); //9 Zeros - nota 14
-          $vlinha["zeros8"]              = substr($linha, 382,   9); //9 Zeros - nota 14
-          $vlinha["brancos3"]            = substr($linha, 391,   2); //X Brancos
-         */
-        return $vlinha;
+        $detail = parent::processarDetalhe($linha);
+        $detail
+            ->setConvenio(substr($linha, 32, 7))
+            ->setControle(substr($linha, 38, 25))
+            ->setNossoNumero(substr($linha, 64, 17))
+            ->setTipoCobranca(substr($linha, 81, 1))
+            ->setTipoCobrancaCmd72(substr($linha, 82, 1))
+            ->setDiasCalculo(substr($linha, 83, 4))
+            ->setNatureza(substr($linha, 87, 2))
+            ->setPrefixoTitulo(substr($linha, 89, 3))
+            ->setVariacaoCarteira(substr($linha, 92, 3))
+            ->setContaCaucao(substr($linha, 95, 1))
+        ;
+        return $detail;
     }
 
     /**
