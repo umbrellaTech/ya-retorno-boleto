@@ -1,6 +1,6 @@
 <?php
 
-namespace Umbrella\Ya\RetornoBoleto;
+namespace Umbrella\Ya\RetornoBoleto\Cnab\Cnab400;
 
 use Umbrella\Ya\RetornoBoleto\Model\Banco;
 use Umbrella\Ya\RetornoBoleto\Model\Cobranca;

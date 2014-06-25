@@ -2,8 +2,17 @@
 
 namespace Umbrella\Ya\RetornoBoleto;
 
+use Umbrella\Ya\RetornoBoleto\Cnab\Cnab400\Detail;
+use Umbrella\Ya\RetornoBoleto\Cnab\Cnab400\Header;
+use Umbrella\Ya\RetornoBoleto\Cnab\Cnab400\IDetail;
+use Umbrella\Ya\RetornoBoleto\Cnab\Cnab400\IHeader;
+use Umbrella\Ya\RetornoBoleto\Cnab\Cnab400\ITrailer;
+use Umbrella\Ya\RetornoBoleto\Cnab\Cnab400\Trailer;
 use Umbrella\Ya\RetornoBoleto\Exception\EmptyLineException;
 use Umbrella\Ya\RetornoBoleto\Exception\InvalidPositionException;
+use Umbrella\Ya\RetornoBoleto\Model\Banco;
+use Umbrella\Ya\RetornoBoleto\Model\Cedente;
+use Umbrella\Ya\RetornoBoleto\Model\Cobranca;
 
 /**
  * Classe abstrata para leitura de arquivos de retorno de cobranças no padrão CNAB400/CBR643.<br/>
@@ -64,7 +73,7 @@ abstract class AbstractRetornoCNAB400 extends AbstractRetorno
         $header->setTipoServico(substr($linha, 12, 8));
         $header->addComplemento(substr($linha, 20, 7));
 
-        $banco = new Model\Banco();
+        $banco = new Banco();
         $banco
             ->setCod(substr($linha, 77, 18))
             ->setAgencia(substr($linha, 27, 4))
@@ -73,7 +82,7 @@ abstract class AbstractRetornoCNAB400 extends AbstractRetorno
             ->setDvConta(substr($linha, 40, 1));
 
 
-        $cedente = new Model\Cedente();
+        $cedente = new Cedente();
         $cedente->setBanco($banco)
             ->setNome(substr($linha, 47, 30));
 
@@ -93,14 +102,14 @@ abstract class AbstractRetornoCNAB400 extends AbstractRetorno
     {
         $detail = $this->createDetail();
 
-        $bancoEmissor = new Model\Banco();
+        $bancoEmissor = new Banco();
         $bancoEmissor
             ->setAgencia(substr($linha, 22, 1))
             ->setDvAgencia(substr($linha, 31, 1))
             ->setConta(substr($linha, 23, 8))
             ->setDvConta(substr($linha, 31, 1));
 
-        $bancoRecebedor = new Model\Banco();
+        $bancoRecebedor = new Banco();
         $bancoRecebedor
             ->setCod(substr($linha, 166, 3))
             ->setAgencia(substr($linha, 169, 4))
@@ -151,30 +160,30 @@ abstract class AbstractRetornoCNAB400 extends AbstractRetorno
     {
         $trailer = $this->createTrailer();
 
-        $banco = new Model\Banco();
+        $banco = new Banco();
         $banco->setCod(substr($linha, 5, 3));
 
-        $simples = new Model\Cobranca();
+        $simples = new Cobranca();
         $simples->setQtdTitulos(substr($linha, 18, 8))
             ->setValorTotal($this->formataNumero(substr($linha, 26, 14)))
             ->setNumAviso(substr($linha, 40, 8));
 
-        $vinculada = new Model\Cobranca();
+        $vinculada = new Cobranca();
         $vinculada->setQtdTitulos(substr($linha, 58, 8))
             ->setValorTotal($this->formataNumero(substr($linha, 66, 14)))
             ->setNumAviso(substr($linha, 80, 8));
 
-        $caucionada = new Model\Cobranca();
+        $caucionada = new Cobranca();
         $caucionada->setQtdTitulos(substr($linha, 98, 8))
             ->setValorTotal($this->formataNumero(substr($linha, 106, 14)))
             ->setNumAviso(substr($linha, 120, 8));
 
-        $descontada = new Model\Cobranca();
+        $descontada = new Cobranca();
         $descontada->setQtdTitulos(substr($linha, 138, 8))
             ->setValorTotal($this->formataNumero(substr($linha, 146, 14)))
             ->setNumAviso(substr($linha, 160, 8));
 
-        $vendor = new Model\Cobranca();
+        $vendor = new Cobranca();
         $vendor->setQtdTitulos(substr($linha, 218, 8))
             ->setValorTotal($this->formataNumero(substr($linha, 226, 14)))
             ->setNumAviso(substr($linha, 240, 8));

@@ -1,9 +1,9 @@
 <?php
 
-namespace Umbrella\Ya\RetornoBoleto\Convenio;
+namespace Umbrella\Ya\RetornoBoleto\Cnab\Cnab400\Convenio;
 
 use Easy\Collections\IVector;
-use Umbrella\Ya\RetornoBoleto\IDetail;
+use Umbrella\Ya\RetornoBoleto\Cnab\Cnab400\IDetail;
 
 interface IDetailConvenio extends IDetail
 {

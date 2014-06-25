@@ -1,10 +1,10 @@
 <?php
 
-namespace Umbrella\Ya\RetornoBoleto\Convenio;
+namespace Umbrella\Ya\RetornoBoleto\Cnab\Cnab400\Convenio;
 
 use Easy\Collections\ArrayList;
 use Easy\Collections\IVector;
-use Umbrella\Ya\RetornoBoleto\Detail;
+use Umbrella\Ya\RetornoBoleto\Cnab\Cnab400\Detail;
 
 class DetailConvenio extends Detail implements IDetailConvenio
 {

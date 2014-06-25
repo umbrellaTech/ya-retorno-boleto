@@ -7,6 +7,8 @@
  */
 namespace Umbrella\Ya\RetornoBoleto;
 
+use Umbrella\Ya\RetornoBoleto\Cnab\Cnab400\Convenio\DetailConvenio;
+use Umbrella\Ya\RetornoBoleto\Cnab\Cnab400\Convenio\HeaderConvenio;
 use Umbrella\Ya\RetornoBoleto\Exception\EmptyLineException;
 use Umbrella\Ya\RetornoBoleto\Exception\InvalidPositionException;
 

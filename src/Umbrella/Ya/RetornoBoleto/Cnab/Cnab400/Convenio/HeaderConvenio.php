@@ -1,8 +1,8 @@
 <?php
 
-namespace Umbrella\Ya\RetornoBoleto\Convenio;
+namespace Umbrella\Ya\RetornoBoleto\Cnab\Cnab400\Convenio;
 
-use Umbrella\Ya\RetornoBoleto\Header;
+use Umbrella\Ya\RetornoBoleto\Cnab\Cnab400\Header;
 
 class HeaderConvenio extends Header implements IHeaderConvenio
 {

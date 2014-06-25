@@ -1,6 +1,6 @@
 <?php
 
-namespace Umbrella\Ya\RetornoBoleto;
+namespace Umbrella\Ya\RetornoBoleto\Cnab\Cnab400;
 
 use Easy\Collections\IVector;
 use Umbrella\Ya\RetornoBoleto\Model\Cedente;

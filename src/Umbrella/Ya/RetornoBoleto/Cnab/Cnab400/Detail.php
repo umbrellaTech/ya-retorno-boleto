@@ -1,6 +1,6 @@
 <?php
 
-namespace Umbrella\Ya\RetornoBoleto;
+namespace Umbrella\Ya\RetornoBoleto\Cnab\Cnab400;
 
 use Easy\Collections\ArrayList;
 use Easy\Collections\IVector;
