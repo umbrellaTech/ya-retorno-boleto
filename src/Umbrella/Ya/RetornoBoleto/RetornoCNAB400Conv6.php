@@ -7,6 +7,11 @@
  */
 namespace Umbrella\Ya\RetornoBoleto;
 
+use Umbrella\Ya\RetornoBoleto\Convenio\DetailConvenio;
+use Umbrella\Ya\RetornoBoleto\Convenio\HeaderConvenio;
+use Umbrella\Ya\RetornoBoleto\Exception\EmptyLineException;
+use Umbrella\Ya\RetornoBoleto\Exception\InvalidPositionException;
+
 /**
  * Classe para leitura de arquivos de retorno de cobranças no padrão CNAB400/CBR643 com convênio de 7 posições.<br/>
  * Layout Padrão CNAB/Febraban 400 posições<br/>.
@@ -31,6 +36,16 @@ class RetornoCNAB400Conv6 extends AbstractRetornoCNAB400
         parent::__construct($nomeArquivo, $aoProcessarLinhaFunctionName);
     }
 
+    public function createHeader()
+    {
+        return new HeaderConvenio();
+    }
+
+    public function createDetail()
+    {
+        return new DetailConvenio();
+    }
+
     /**
      * Processa a linha header do arquivo
      * @param string $linha Linha do header de arquivo processado
@@ -43,10 +58,6 @@ class RetornoCNAB400Conv6 extends AbstractRetornoCNAB400
             ->setSequencialRet(substr($linha, 101, 7))
             ->addComplemento(substr($linha, 108, 287));
 
-        //X = ALFANUMÉRICO 9 = NUMÉRICO V = VÍRGULA DECIMAL ASSUMIDA
-//        $header["convenio"] = substr($linha, 41, 6); //9 Número do convênio líder 
-//        $header["sequencial_ret"] = substr($linha, 101, 7); //9 Seqüencial do Retorno - ver nota 01		
-//        $header["complemento2"] = substr($linha, 108, 287); //X Complemento do Registro: “Brancos”
         return $header;
     }
 
@@ -74,43 +85,7 @@ class RetornoCNAB400Conv6 extends AbstractRetornoCNAB400
             ->addUsoBanco(substr($linha, 95, 1))
             ->setConfirmacao(substr($linha, 127, 20))
         ;
-        //X = ALFANUMÉRICO 9 = NUMÉRICO V = VÍRGULA DECIMAL ASSUMIDA
-//        $vlinha["convenio"] = substr($linha, 32, 6); //9  Número do Convênio de Cobrança do Cedente
-//        $vlinha["controle"] = substr($linha, 38, 25); //X  Número de Controle do Participante
-//        $vlinha["nosso_numero"] = substr($linha, 63, 11); //9  Nosso-Número
-//        $vlinha["dv_nosso_numero"] = substr($linha, 74, 1); //X  DV do Nosso-Número
-//        $vlinha["tipo_cobranca"] = substr($linha, 75, 1); //9  Tipo de cobrança - nota 02
-//        $vlinha["tipo_cobranca_cmd72"] = substr($linha, 76, 1); //9  Tipo de cobrança específico p/ comando 72 - nota 03
-//        $vlinha["dias_calculo"] = substr($linha, 77, 4); //9  Dias para cálculo - nota 04
-//        $vlinha["natureza"] = substr($linha, 81, 2); //9  Natureza do recebimento - nota 05
-//        $vlinha["uso_banco1"] = substr($linha, 83, 3); //X  Uso do Banco
-//        $vlinha["variacao_carteira"] = substr($linha, 86, 3); //9  Variação da Carteira
-//        $vlinha["conta_caucao"] = substr($linha, 89, 1); //9  Conta Caução - nota 06
-//
-//        $vlinha["uso_banco2"] = substr($linha, 90, 5); //9  Uso do Banco
-//        $vlinha["uso_banco3"] = substr($linha, 95, 1); //X  Uso do Banco
-//        $vlinha["confirmacao"] = substr($linha, 127, 20); //X  Confirmação das posições 63 a 82
-
-        /*
-          $vlinha["zeros3"]              = substr($linha, 343,   6); //9 Zeros - nota 14
-          $vlinha["zeros4"]              = substr($linha, 349,   9); //9 Zeros - nota 14
-          $vlinha["zeros5"]              = substr($linha, 358,   6); //9 Zeros - nota 14
-          $vlinha["zeros6"]              = substr($linha, 364,   9); //9 Zeros - nota 14
-          $vlinha["zeros7"]              = substr($linha, 373,   6); //9 Zeros - nota 14
-          $vlinha["zeros8"]              = substr($linha, 379,   9); //9 Zeros - nota 14
-          $vlinha["brancos3"]            = substr($linha, 388,   5); //X Brancos
-         */
         return $detail;
-    }
-
-    public function createHeader()
-    {
-        return new Convenio\HeaderConvenio();
-    }
-
-    public function createDetail()
-    {
-        return new Convenio\DetailConvenio();
     }
 
     /**

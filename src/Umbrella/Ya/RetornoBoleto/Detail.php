@@ -2,6 +2,8 @@
 
 namespace Umbrella\Ya\RetornoBoleto;
 
+use Easy\Collections\ArrayList;
+use Easy\Collections\IVector;
 use Umbrella\Ya\RetornoBoleto\Model\Banco;
 use Umbrella\Ya\RetornoBoleto\Model\Cedente;
 
@@ -34,6 +36,7 @@ class Detail implements IDetail
     protected $valorAjuste;
     protected $canalPagTitulo;
     protected $sequencial;
+    protected $dataEntradaLiquidacao;
 
     /**
      *
@@ -52,6 +55,24 @@ class Detail implements IDetail
      * @var Cedente
      */
     protected $cedente;
+
+    /**
+     *
+     * @var IVector
+     */
+    protected $zeros;
+
+    /**
+     *
+     * @var IVector
+     */
+    protected $brancos;
+
+    public function __construct()
+    {
+        $this->zeros = new ArrayList();
+        $this->brancos = new ArrayList();
+    }
 
     public function getRegistro()
     {
@@ -380,6 +401,63 @@ class Detail implements IDetail
     public function setIndicadorValor($indicadorValor)
     {
         $this->indicadorValor = $indicadorValor;
+        return $this;
+    }
+
+    public function getZeros()
+    {
+        return $this->zeros;
+    }
+
+    public function setZeros(IVector $zeros)
+    {
+        $this->zeros = $zeros;
+        return $this;
+    }
+
+    public function addZeros($zeros)
+    {
+        $this->zeros->add($zeros);
+        return $this;
+    }
+
+    public function removeZeros($zeros)
+    {
+        $this->zeros->remove($zeros);
+        return $this;
+    }
+
+    public function getBrancos()
+    {
+        return $this->brancos;
+    }
+
+    public function setBrancos($brancos)
+    {
+        $this->brancos = $brancos;
+        return $this;
+    }
+
+    public function addBranco($zeros)
+    {
+        $this->brancos->add($zeros);
+        return $this;
+    }
+
+    public function removeBranco($zeros)
+    {
+        $this->brancos->remove($zeros);
+        return $this;
+    }
+
+    public function getDataEntradaLiquidacao()
+    {
+        return $this->dataEntradaLiquidacao;
+    }
+
+    public function setDataEntradaLiquidacao($dataEntradaLiquidacao)
+    {
+        $this->dataEntradaLiquidacao = $dataEntradaLiquidacao;
         return $this;
     }
 }

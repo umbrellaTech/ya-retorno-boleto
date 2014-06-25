@@ -2,6 +2,8 @@
 
 namespace Umbrella\Ya\RetornoBoleto;
 
+use Easy\Collections\ArrayList;
+use Easy\Collections\IVector;
 use Umbrella\Ya\RetornoBoleto\Model\Banco;
 use Umbrella\Ya\RetornoBoleto\Model\Cobranca;
 
@@ -41,6 +43,17 @@ class Trailer implements ITrailer
      * @var Cobranca
      */
     protected $descontada;
+
+    /**
+     *
+     * @var IVector
+     */
+    protected $brancos;
+
+    public function __construct()
+    {
+        $this->brancos = new ArrayList();
+    }
 
     public function getRegistro()
     {
@@ -149,6 +162,29 @@ class Trailer implements ITrailer
     public function setDescontada(Cobranca $descontada)
     {
         $this->descontada = $descontada;
+        return $this;
+    }
+
+    public function getBrancos()
+    {
+        return $this->brancos;
+    }
+
+    public function setBrancos($brancos)
+    {
+        $this->brancos = $brancos;
+        return $this;
+    }
+
+    public function addBranco($zeros)
+    {
+        $this->brancos->add($zeros);
+        return $this;
+    }
+
+    public function removeBranco($zeros)
+    {
+        $this->brancos->remove($zeros);
         return $this;
     }
 }
