@@ -39,9 +39,10 @@ class RetornoHandler
 
         $details = new \Easy\Collections\ArrayList();
 
-        $linhas = file($this->retorno->getNomeArquivo());
+        $linhas = file($this->retorno->getNomeArquivo(), FILE_IGNORE_NEW_LINES);
         foreach ($linhas as $numLn => $linha) {
-            $vlinha = $this->retorno->processarLinha($numLn, $linha);
+            $vlinha = $this->retorno->processarLinha($numLn,
+                                                     rtrim($linha, "\r\n"));
 
             if ($vlinha->getRegistro() === AbstractRetornoCNAB400::HEADER_ARQUIVO) {
                 $retorno->setHeader($vlinha);
