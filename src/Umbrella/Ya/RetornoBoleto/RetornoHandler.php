@@ -44,20 +44,20 @@ class RetornoHandler
 
         $linhas = file($this->retorno->getNomeArquivo(), FILE_IGNORE_NEW_LINES);
         foreach ($linhas as $numLn => $linha) {
-            $vlinha = $this->retorno->processarLinha($numLn,
-                                                     rtrim($linha, "\r\n"));
+            $consumable = $this->retorno->processarLinha($numLn,
+                                                         rtrim($linha, "\r\n"));
 
-            if ($vlinha->getRegistro() == AbstractCNAB400Processor::HEADER_ARQUIVO) {
-                $retorno->setHeader($vlinha);
-            } elseif ($vlinha->getRegistro() == AbstractCNAB400Processor::TRAILER_ARQUIVO) {
-                $retorno->setTrailer($vlinha);
+            if ($consumable->getRegistro() == AbstractCNAB400Processor::HEADER_ARQUIVO) {
+                $retorno->setHeader($consumable);
+            } elseif ($consumable->getRegistro() == AbstractCNAB400Processor::TRAILER_ARQUIVO) {
+                $retorno->setTrailer($consumable);
             } else {
-                $details->add($vlinha);
+                $details->add($consumable);
             }
 
             //Dispara o evento aoProcessarLinha, caso haja alguma função handler associada a ele
             $this->retorno->triggerAoProcessarLinha($this->retorno, $numLn,
-                                                    $vlinha);
+                                                    $consumable);
         }
 
         $retorno->setDetails($details);

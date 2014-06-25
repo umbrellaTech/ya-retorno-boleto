@@ -22,8 +22,8 @@ class RetornoFactory
      * com base no tipo do arquivo de retorno indicado por $fileName
      * @param string fileName Nome do arquivo de retorno a ser identificado
      * para poder instancia a classe específica para leitura do mesmo.
-     * @param string $aoProcessarLinhaFunctionName @see RetornoBase
-     * @return AbstractProcessor Retorna um objeto de uma das sub-classes de RetornoBase.
+     * @param string $aoProcessarLinhaFunctionName 
+     * @return AbstractProcessor Retorna um objeto de uma das sub-classes de AbstractProcessor.
      */
     public static function getRetorno($fileName,
                                       $aoProcessarLinhaFunctionName = null)
@@ -41,7 +41,7 @@ class RetornoFactory
                 $len = strlen($linha);
                 if ($len >= 240 and $len <= 242) {
                     return new CNAB240Processor($fileName,
-                                              $aoProcessarLinhaFunctionName);
+                                                $aoProcessarLinhaFunctionName);
                 } else if ($len >= 400 and $len <= 402) {
                     if (strstr($linha, "BRADESCO")) {
                         return new RetornoCNAB400Bradesco($fileName,
@@ -54,11 +54,11 @@ class RetornoFactory
                         switch ($linha[0]) {
                             case CNAB400Conv6Processor::DETALHE:
                                 return new CNAB400Conv6Processor($fileName,
-                                                               $aoProcessarLinhaFunctionName);
+                                                                 $aoProcessarLinhaFunctionName);
                                 break;
                             case CNAB400Conv7Processor::DETALHE:
                                 return new CNAB400Conv7Processor($fileName,
-                                                               $aoProcessarLinhaFunctionName);
+                                                                 $aoProcessarLinhaFunctionName);
                                 break;
                             default:
                                 throw new Exception("Tipo de registro detalhe desconhecido: " . $linha[0]);
