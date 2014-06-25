@@ -2,6 +2,8 @@
 
 namespace Umbrella\Ya\RetornoBoleto;
 
+use Umbrella\Ya\RetornoBoleto\Cnab\Cnab400\IDetail;
+
 interface IRetorno
 {
 

@@ -2,10 +2,11 @@
 
 namespace Umbrella\Ya\RetornoBoleto\Cnab\Cnab400;
 
+use Umbrella\Ya\RetornoBoleto\Cnab\IComposable;
 use Umbrella\Ya\RetornoBoleto\Model\Banco;
 use Umbrella\Ya\RetornoBoleto\Model\Cedente;
 
-interface IDetail
+interface IDetail extends IComposable
 {
 
     public function getRegistro();

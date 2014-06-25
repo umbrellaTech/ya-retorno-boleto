@@ -4,6 +4,9 @@ namespace Umbrella\Ya\RetornoBoleto;
 
 use Easy\Collections\ArrayList;
 use Easy\Collections\IVector;
+use Umbrella\Ya\RetornoBoleto\Cnab\Cnab400\IDetail;
+use Umbrella\Ya\RetornoBoleto\Cnab\Cnab400\IHeader;
+use Umbrella\Ya\RetornoBoleto\Cnab\Cnab400\ITrailer;
 
 class Retorno implements IRetorno
 {

@@ -4,13 +4,15 @@ namespace Umbrella\Tests\Ya\RetornoBoleto;
 
 use PHPUnit_Framework_TestCase;
 use Umbrella\Ya\RetornoBoleto\AbstractRetorno;
+use Umbrella\Ya\RetornoBoleto\Cnab\IComposable;
 use Umbrella\Ya\RetornoBoleto\RetornoFactory;
 use Umbrella\Ya\RetornoBoleto\RetornoHandler;
 
 class RetornoCNAB400Test extends PHPUnit_Framework_TestCase
 {
 
-    public function linhaProcessada(AbstractRetorno $self, $numLn, $vlinha)
+    public function linhaProcessada(AbstractRetorno $self, $numLn,
+                                    IComposable $vlinha)
     {
         if ($vlinha) {
             if ($vlinha->getRegistro() == $self::DETALHE) {
@@ -43,8 +45,7 @@ class RetornoCNAB400Test extends PHPUnit_Framework_TestCase
      */
     public function testConvenio6($fileName)
     {
-        $cnab400 = RetornoFactory::getRetorno($fileName,
-                                              array($this, "linhaProcessada"));
+        $cnab400 = RetornoFactory::getRetorno($fileName);
 
         $retorno = new RetornoHandler($cnab400);
         $retorno->processar();
@@ -55,8 +56,7 @@ class RetornoCNAB400Test extends PHPUnit_Framework_TestCase
      */
     public function testConvenio7($fileName)
     {
-        $cnab400 = RetornoFactory::getRetorno($fileName,
-                                              array($this, "linhaProcessada"));
+        $cnab400 = RetornoFactory::getRetorno($fileName);
 
         $retorno = new RetornoHandler($cnab400);
         $retorno->processar();

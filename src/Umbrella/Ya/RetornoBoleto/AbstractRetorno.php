@@ -57,7 +57,7 @@ abstract class AbstractRetorno
      * Processa uma linha do arquivo de retorno. O método é abstrato e deve ser implementado nas sub-classes.
      * @param int $numLn Número da linha a ser processada
      * @param string $linha String contendo a linha a ser processada
-     * @return array Retorna um vetor associativo contendo os valores da linha processada.
+     * @return Cnab\IComposable Retorna um vetor associativo contendo os valores da linha processada.
      * @abstract
      */
     public abstract function processarLinha($numLn, $linha);

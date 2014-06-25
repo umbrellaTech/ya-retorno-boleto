@@ -2,6 +2,8 @@
 
 namespace Umbrella\Ya\RetornoBoleto;
 
+use Easy\Collections\ArrayList;
+
 /**
  * Classe que implementa o design pattern Strategy,
  * para leitura de arquivos de retorno de cobranças dos bancos brasileiros,
@@ -37,16 +39,16 @@ class RetornoHandler
     {
         $retorno = new Retorno();
 
-        $details = new \Easy\Collections\ArrayList();
+        $details = new ArrayList();
 
         $linhas = file($this->retorno->getNomeArquivo(), FILE_IGNORE_NEW_LINES);
         foreach ($linhas as $numLn => $linha) {
             $vlinha = $this->retorno->processarLinha($numLn,
                                                      rtrim($linha, "\r\n"));
 
-            if ($vlinha->getRegistro() === AbstractRetornoCNAB400::HEADER_ARQUIVO) {
+            if ($vlinha->getRegistro() == AbstractRetornoCNAB400::HEADER_ARQUIVO) {
                 $retorno->setHeader($vlinha);
-            } elseif ($vlinha->getRegistro() === AbstractRetornoCNAB400::TRAILER_ARQUIVO) {
+            } elseif ($vlinha->getRegistro() == AbstractRetornoCNAB400::TRAILER_ARQUIVO) {
                 $retorno->setTrailer($vlinha);
             } else {
                 $details->add($vlinha);

@@ -3,9 +3,10 @@
 namespace Umbrella\Ya\RetornoBoleto\Cnab\Cnab400;
 
 use Easy\Collections\IVector;
+use Umbrella\Ya\RetornoBoleto\Cnab\IComposable;
 use Umbrella\Ya\RetornoBoleto\Model\Cedente;
 
-interface IHeader
+interface IHeader extends IComposable
 {
 
     public function getRegistro();
