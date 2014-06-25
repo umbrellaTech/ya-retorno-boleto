@@ -3,7 +3,7 @@
 namespace Umbrella\Tests\Ya\RetornoBoleto;
 
 use PHPUnit_Framework_TestCase;
-use Umbrella\Ya\RetornoBoleto\AbstractRetorno;
+use Umbrella\Ya\RetornoBoleto\AbstractProcessor;
 use Umbrella\Ya\RetornoBoleto\Cnab\IComposable;
 use Umbrella\Ya\RetornoBoleto\RetornoFactory;
 use Umbrella\Ya\RetornoBoleto\RetornoHandler;
@@ -11,7 +11,7 @@ use Umbrella\Ya\RetornoBoleto\RetornoHandler;
 class RetornoCNAB400Test extends PHPUnit_Framework_TestCase
 {
 
-    public function linhaProcessada(AbstractRetorno $self, $numLn,
+    public function linhaProcessada(AbstractProcessor $self, $numLn,
                                     IComposable $vlinha)
     {
         if ($vlinha) {

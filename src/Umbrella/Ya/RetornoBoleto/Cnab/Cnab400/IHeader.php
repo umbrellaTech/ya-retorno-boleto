@@ -3,13 +3,11 @@
 namespace Umbrella\Ya\RetornoBoleto\Cnab\Cnab400;
 
 use Easy\Collections\IVector;
-use Umbrella\Ya\RetornoBoleto\Cnab\IComposable;
+use Umbrella\Ya\RetornoBoleto\Cnab\ICnabHeader;
 use Umbrella\Ya\RetornoBoleto\Model\Cedente;
 
-interface IHeader extends IComposable
+interface IHeader extends ICnabHeader
 {
-
-    public function getRegistro();
 
     public function getTipoOperacao();
 
@@ -24,8 +22,6 @@ interface IHeader extends IComposable
     public function getSequencialReg();
 
     public function getCedente();
-
-    public function setRegistro($registro);
 
     public function setTipoOperacao($tipoOperacao);
 

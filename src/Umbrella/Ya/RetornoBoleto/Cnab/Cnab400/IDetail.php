@@ -2,14 +2,12 @@
 
 namespace Umbrella\Ya\RetornoBoleto\Cnab\Cnab400;
 
-use Umbrella\Ya\RetornoBoleto\Cnab\IComposable;
+use Umbrella\Ya\RetornoBoleto\Cnab\ICnabDetail;
 use Umbrella\Ya\RetornoBoleto\Model\Banco;
 use Umbrella\Ya\RetornoBoleto\Model\Cedente;
 
-interface IDetail extends IComposable
+interface IDetail extends ICnabDetail
 {
-
-    public function getRegistro();
 
     public function getTaxaDesconto();
 
@@ -64,8 +62,6 @@ interface IDetail extends IComposable
     public function getBancoEmissor();
 
     public function getCedente();
-
-    public function setRegistro($registro);
 
     public function setTaxaDesconto($taxaDesconto);
 

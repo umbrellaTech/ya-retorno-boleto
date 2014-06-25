@@ -5,7 +5,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-namespace Umbrella\Ya\RetornoBoleto;
+namespace Umbrella\Ya\RetornoBoleto\Cnab\Cnab400\Convenio\Processor;
 
 use Umbrella\Ya\RetornoBoleto\Cnab\Cnab400\Convenio\DetailConvenio;
 use Umbrella\Ya\RetornoBoleto\Cnab\Cnab400\Convenio\HeaderConvenio;
@@ -25,7 +25,7 @@ use Umbrella\Ya\RetornoBoleto\Exception\InvalidPositionException;
  * @author Manoel Campos da Silva Filho. http://manoelcampos.com/contato
  * @version 0.4
  */
-class RetornoCNAB400Conv6 extends AbstractRetornoCNAB400
+class CNAB400Conv6Processor extends AbstractCNAB400Processor
 {
     /**
      * @property int DETALHE Define o valor que identifica uma coluna do tipo DETALHE 

@@ -5,7 +5,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-namespace Umbrella\Ya\RetornoBoleto;
+namespace Umbrella\Ya\RetornoBoleto\Cnab\Cnab400\Convenio\Processor;
 
 use Umbrella\Ya\RetornoBoleto\Cnab\Cnab400\Convenio\DetailConvenio;
 use Umbrella\Ya\RetornoBoleto\Cnab\Cnab400\Convenio\HeaderConvenio;
@@ -21,7 +21,7 @@ use Umbrella\Ya\RetornoBoleto\Exception\InvalidPositionException;
  * disponível em http://www.bb.com.br/docs/pub/emp/empl/dwn/Doc2628CBR643Pos7.pdf
  * @author Ítalo Lelis de Vietro <italolelis@gmail.com>
  */
-class RetornoCNAB400Conv7 extends AbstractRetornoCNAB400
+class CNAB400Conv7Processor extends AbstractCNAB400Processor
 {
     /**
      * @property int DETALHE Define o valor que identifica uma coluna do tipo DETALHE 
@@ -108,11 +108,11 @@ class RetornoCNAB400Conv7 extends AbstractRetornoCNAB400
         //como no manual CNAB400
         $linha = " $linha";
         $tipoLn = substr($linha, 1, 1);
-        if ($tipoLn == RetornoCNAB400Conv7::HEADER_ARQUIVO) {
+        if ($tipoLn == CNAB400Conv7Processor::HEADER_ARQUIVO) {
             $vlinha = $this->processarHeaderArquivo($linha);
-        } else if ($tipoLn == RetornoCNAB400Conv7::DETALHE) {
+        } else if ($tipoLn == CNAB400Conv7Processor::DETALHE) {
             $vlinha = $this->processarDetalhe($linha);
-        } else if ($tipoLn == RetornoCNAB400Conv7::TRAILER_ARQUIVO) {
+        } else if ($tipoLn == CNAB400Conv7Processor::TRAILER_ARQUIVO) {
             $vlinha = $this->processarTrailerArquivo($linha);
         } else {
             $vlinha = null;

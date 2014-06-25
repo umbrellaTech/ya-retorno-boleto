@@ -2,11 +2,13 @@
 
 namespace Umbrella\Ya\RetornoBoleto;
 
+use Umbrella\Ya\RetornoBoleto\Cnab\IComposable;
+
 /**
  * Classe base para leitura de arquivos de retorno de cobranças dos bancos brasileiros.<br/>
  * @author Ítalo Lelis de Vietro <italolelis@gmail.com>
  */
-abstract class AbstractRetorno
+abstract class AbstractProcessor
 {
     /**
      * @property string $nomeArquivo Nome do arquivo de texto a ser lido 
@@ -57,7 +59,7 @@ abstract class AbstractRetorno
      * Processa uma linha do arquivo de retorno. O método é abstrato e deve ser implementado nas sub-classes.
      * @param int $numLn Número da linha a ser processada
      * @param string $linha String contendo a linha a ser processada
-     * @return Cnab\IComposable Retorna um vetor associativo contendo os valores da linha processada.
+     * @return IComposable Retorna um vetor associativo contendo os valores da linha processada.
      * @abstract
      */
     public abstract function processarLinha($numLn, $linha);

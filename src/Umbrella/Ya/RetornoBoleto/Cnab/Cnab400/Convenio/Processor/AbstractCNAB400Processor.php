@@ -1,7 +1,8 @@
 <?php
 
-namespace Umbrella\Ya\RetornoBoleto;
+namespace Umbrella\Ya\RetornoBoleto\Cnab\Cnab400\Convenio\Processor;
 
+use Umbrella\Ya\RetornoBoleto\AbstractProcessor;
 use Umbrella\Ya\RetornoBoleto\Cnab\Cnab400\Detail;
 use Umbrella\Ya\RetornoBoleto\Cnab\Cnab400\Header;
 use Umbrella\Ya\RetornoBoleto\Cnab\Cnab400\IDetail;
@@ -24,7 +25,7 @@ use Umbrella\Ya\RetornoBoleto\Model\Cobranca;
  * (arquivos Doc8826BR643Pos6.pdf e Doc2628CBR643Pos7.pdf)
  * @author Ítalo Lelis de Vietro <italolelis@gmail.com>
  */
-abstract class AbstractRetornoCNAB400 extends AbstractRetorno
+abstract class AbstractCNAB400Processor extends AbstractProcessor
 {
     /**
      * @property int HEADER_ARQUIVO Define o valor que identifica uma coluna do tipo HEADER DE ARQUIVO 

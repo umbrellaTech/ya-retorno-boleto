@@ -2,14 +2,12 @@
 
 namespace Umbrella\Ya\RetornoBoleto\Cnab\Cnab400;
 
-use Umbrella\Ya\RetornoBoleto\Cnab\IComposable;
+use Umbrella\Ya\RetornoBoleto\Cnab\ICnabTrailer;
 use Umbrella\Ya\RetornoBoleto\Model\Banco;
 use Umbrella\Ya\RetornoBoleto\Model\Cobranca;
 
-interface ITrailer extends IComposable
+interface ITrailer extends ICnabTrailer
 {
-
-    public function getRegistro();
 
     public function getRetorno();
 
@@ -28,8 +26,6 @@ interface ITrailer extends IComposable
     public function getVendor();
 
     public function getDescontada();
-
-    public function setRegistro($registro);
 
     public function setRetorno($retorno);
 

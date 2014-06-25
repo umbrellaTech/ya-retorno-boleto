@@ -5,7 +5,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-namespace Umbrella\Ya\RetornoBoleto;
+namespace Umbrella\Ya\RetornoBoleto\Cnab\Cnab240\Processor;
+
+use Umbrella\Ya\RetornoBoleto\AbstractProcessor;
 
 /**
  * Classe para leitura_arquivos_retorno_cobranças_padrão CNAB240.<br/>
@@ -13,7 +15,7 @@ namespace Umbrella\Ya\RetornoBoleto;
  * http://www.febraban.org.br
  * @author Ítalo Lelis de Vietro <italolelis@gmail.com>
  */
-class RetornoCNAB240 extends AbstractRetorno
+class CNAB240Processor extends AbstractProcessor
 {
     /**
      * @property int HEADER_ARQUIVO Define o valor que identifica uma coluna do tipo HEADER DE ARQUIVO 
@@ -181,15 +183,15 @@ class RetornoCNAB240 extends AbstractRetorno
         $linha = " $linha";
         $tipoLn = substr($linha, 8, 1);
 
-        if ($tipoLn == RetornoCNAB240::HEADER_ARQUIVO) {
+        if ($tipoLn == CNAB240Processor::HEADER_ARQUIVO) {
             $vlinha = $this->processarHeaderArquivo($linha);
-        } else if ($tipoLn == RetornoCNAB240::HEADER_LOTE) {
+        } else if ($tipoLn == CNAB240Processor::HEADER_LOTE) {
             $vlinha = $this->processarHeaderLote($linha);
-        } else if ($tipoLn == RetornoCNAB240::DETALHE) {
+        } else if ($tipoLn == CNAB240Processor::DETALHE) {
             $vlinha = $this->processarDetalhe($linha);
-        } else if ($tipoLn == RetornoCNAB240::TRAILER_LOTE) {
+        } else if ($tipoLn == CNAB240Processor::TRAILER_LOTE) {
             $vlinha = $this->processarTrailerLote($linha);
-        } else if ($tipoLn == RetornoCNAB240::TRAILER_ARQUIVO) {
+        } else if ($tipoLn == CNAB240Processor::TRAILER_ARQUIVO) {
             $vlinha = $this->processarTrailerArquivo($linha);
         }
         return $vlinha;

@@ -5,7 +5,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-namespace Umbrella\Ya\RetornoBoleto;
+namespace Umbrella\Ya\RetornoBoleto\Cnab\Cnab400\Processor;
 
 use Umbrella\Ya\RetornoBoleto\Cnab\Cnab400\Convenio\DetailConvenio;
 use Umbrella\Ya\RetornoBoleto\Cnab\Cnab400\Convenio\HeaderConvenio;
@@ -24,7 +24,7 @@ use Umbrella\Ya\RetornoBoleto\Model\Cobranca;
  * do Banco do Brasil (arquivo CBR643-6_posicoes.pdf)
  * @author Ítalo Lelis de Vietro <italolelis@gmail.com>
  */
-class RetornoCNAB400 extends AbstractRetorno
+class CNAB400Processor extends \Umbrella\Ya\RetornoBoleto\AbstractProcessor
 {
     /**
      * @property int HEADER_ARQUIVO Define o valor que identifica uma coluna do tipo HEADER DE ARQUIVO 
@@ -239,9 +239,9 @@ class RetornoCNAB400 extends AbstractRetorno
      * Processa uma linha_arquivo_retorno.
      * @param int $numLn Número_linha a ser processada
      * @param string $linha String contendo a linha a ser processada
-     * @return array Retorna um vetor associativo contendo os valores_linha processada. 
+     * @return Cnab\IComposable Retorna um vetor associativo contendo os valores_linha processada. 
      */
-    function processarLinha($numLn, $linha)
+    public function processarLinha($numLn, $linha)
     {
         $tamLinha = 400; //total de caracteres das linhas do arquivo
         //o +2 é utilizado para contar o \r\n no final da linha
@@ -260,14 +260,16 @@ class RetornoCNAB400 extends AbstractRetorno
         //como no manual CNAB400
         $linha = " $linha";
         $tipoLn = substr($linha, 1, 1);
+        $composable = null;
 
-        if ($tipoLn == RetornoCNAB400::HEADER_ARQUIVO) {
-            $vlinha = $this->processarHeaderArquivo($linha);
-        } else if ($tipoLn == RetornoCNAB400::DETALHE) {
-            $vlinha = $this->processarDetalhe($linha);
-        } else if ($tipoLn == RetornoCNAB400::TRAILER_ARQUIVO) {
-            $vlinha = $this->processarTrailerArquivo($linha);
+        if ($tipoLn == CNAB400Processor::HEADER_ARQUIVO) {
+            $composable = $this->processarHeaderArquivo($linha);
+        } else if ($tipoLn == CNAB400Processor::DETALHE) {
+            $composable = $this->processarDetalhe($linha);
+        } else if ($tipoLn == CNAB400Processor::TRAILER_ARQUIVO) {
+            $composable = $this->processarTrailerArquivo($linha);
         }
-        return $vlinha;
+
+        return $composable;
     }
 }

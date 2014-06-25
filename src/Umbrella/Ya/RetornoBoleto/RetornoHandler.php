@@ -3,6 +3,7 @@
 namespace Umbrella\Ya\RetornoBoleto;
 
 use Easy\Collections\ArrayList;
+use Umbrella\Ya\RetornoBoleto\Cnab\Cnab400\Convenio\Processor\AbstractCNAB400Processor;
 
 /**
  * Classe que implementa o design pattern Strategy,
@@ -15,18 +16,18 @@ use Easy\Collections\ArrayList;
 class RetornoHandler
 {
     /**
-     * @property AbstractRetorno $retorno 
+     * @property AbstractProcessor $retorno 
      * Atributo que deve ser um objeto de uma classe que estenda a classe AbstractRetorno 
      */
     protected $retorno;
 
     /**
      * Construtor da classe
-     * @param AbstractRetorno $retorno Objeto de uma sub-classe de AbstractRetorno,
+     * @param AbstractProcessor $retorno Objeto de uma sub-classe de AbstractRetorno,
      * que implementa a leitura de arquivo de retorno para uma determinada carteira
      * de um banco específico.
      */
-    public function __construct(AbstractRetorno $retorno)
+    public function __construct(AbstractProcessor $retorno)
     {
         $this->retorno = $retorno;
     }
@@ -46,9 +47,9 @@ class RetornoHandler
             $vlinha = $this->retorno->processarLinha($numLn,
                                                      rtrim($linha, "\r\n"));
 
-            if ($vlinha->getRegistro() == AbstractRetornoCNAB400::HEADER_ARQUIVO) {
+            if ($vlinha->getRegistro() == AbstractCNAB400Processor::HEADER_ARQUIVO) {
                 $retorno->setHeader($vlinha);
-            } elseif ($vlinha->getRegistro() == AbstractRetornoCNAB400::TRAILER_ARQUIVO) {
+            } elseif ($vlinha->getRegistro() == AbstractCNAB400Processor::TRAILER_ARQUIVO) {
                 $retorno->setTrailer($vlinha);
             } else {
                 $details->add($vlinha);

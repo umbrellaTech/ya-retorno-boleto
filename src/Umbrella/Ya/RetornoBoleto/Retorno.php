@@ -7,15 +7,26 @@ use Easy\Collections\IVector;
 use Umbrella\Ya\RetornoBoleto\Cnab\Cnab400\IDetail;
 use Umbrella\Ya\RetornoBoleto\Cnab\Cnab400\IHeader;
 use Umbrella\Ya\RetornoBoleto\Cnab\Cnab400\ITrailer;
+use Umbrella\Ya\RetornoBoleto\Cnab\ICnabHeader;
+use Umbrella\Ya\RetornoBoleto\Cnab\ICnabTrailer;
 
 class Retorno implements IRetorno
 {
+    /**
+     *
+     * @var ICnabHeader
+     */
     protected $header;
 
     /**
      * @var IVector
      */
     protected $details;
+
+    /**
+     *
+     * @var ICnabTrailer
+     */
     protected $trailer;
 
     public function __construct()
