@@ -22,6 +22,9 @@ class Cedente
         return $this->banco;
     }
 
+    /**
+     * @param string $nome
+     */
     public function setNome($nome)
     {
         $this->nome = $nome;

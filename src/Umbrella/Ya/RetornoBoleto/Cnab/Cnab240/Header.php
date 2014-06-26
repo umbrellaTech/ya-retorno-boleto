@@ -37,6 +37,9 @@ class Header extends AbstractHeader implements ICnab240, ICnabHeader
         return $this->sequencialReg;
     }
 
+    /**
+     * @param string $codArquivo
+     */
     public function setCodArquivo($codArquivo)
     {
         $this->codArquivo = $codArquivo;
@@ -55,6 +58,9 @@ class Header extends AbstractHeader implements ICnab240, ICnabHeader
         return $this;
     }
 
+    /**
+     * @param string $sequencialReg
+     */
     public function setSequencialReg($sequencialReg)
     {
         $this->sequencialReg = $sequencialReg;

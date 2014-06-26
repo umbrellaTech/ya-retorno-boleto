@@ -68,24 +68,36 @@ class Banco
         return $this;
     }
 
+    /**
+     * @param string $agencia
+     */
     public function setAgencia($agencia)
     {
         $this->agencia = $agencia;
         return $this;
     }
 
+    /**
+     * @param string $dvAgencia
+     */
     public function setDvAgencia($dvAgencia)
     {
         $this->dvAgencia = $dvAgencia;
         return $this;
     }
 
+    /**
+     * @param string $conta
+     */
     public function setConta($conta)
     {
         $this->conta = $conta;
         return $this;
     }
 
+    /**
+     * @param string $dvConta
+     */
     public function setDvConta($dvConta)
     {
         $this->dvConta = $dvConta;
@@ -97,6 +109,9 @@ class Banco
         return $this->dvAgenciaConta;
     }
 
+    /**
+     * @param string $dvAgenciaConta
+     */
     public function setDvAgenciaConta($dvAgenciaConta)
     {
         $this->dvAgenciaConta = $dvAgenciaConta;
@@ -108,12 +123,18 @@ class Banco
         return $this->nome;
     }
 
+    /**
+     * @param string $nome
+     */
     public function setNome($nome)
     {
         $this->nome = $nome;
         return $this;
     }
 
+    /**
+     * @param string $cnab
+     */
     public function addReservado($cnab)
     {
         $trim = trim($cnab);

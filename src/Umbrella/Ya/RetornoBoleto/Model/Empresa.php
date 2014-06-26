@@ -59,18 +59,27 @@ class Empresa
         return $this->usos;
     }
 
+    /**
+     * @param string $tipoInscricao
+     */
     public function setTipoInscricao($tipoInscricao)
     {
         $this->tipoInscricao = $tipoInscricao;
         return $this;
     }
 
+    /**
+     * @param string $numInscricao
+     */
     public function setNumInscricao($numInscricao)
     {
         $this->numInscricao = $numInscricao;
         return $this;
     }
 
+    /**
+     * @param string $nome
+     */
     public function setNome($nome)
     {
         $this->nome = $nome;
@@ -89,6 +98,9 @@ class Empresa
         return $this;
     }
 
+    /**
+     * @param string $cnab
+     */
     public function addReservado($cnab)
     {
         $trim = trim($cnab);

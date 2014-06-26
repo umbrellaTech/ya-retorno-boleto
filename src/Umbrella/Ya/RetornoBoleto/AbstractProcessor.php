@@ -41,6 +41,7 @@ abstract class AbstractProcessor
 
     /**
      * Setter para o atributo @see nomeArquivo 
+     * @param string $nomeArquivo
      */
     public function setNomeArquivo($nomeArquivo)
     {
@@ -84,10 +85,11 @@ abstract class AbstractProcessor
      * Se existe uma função handler associadao ao evento aoProcessarLinha,
      * executa a mesma, disparando o evento.
      * @param int $numLn Número da linha processada.
-     * @param array $vlinha Vetor contendo a linha processada, contendo os valores da armazenados
+     * @param IComposable $vlinha Vetor contendo a linha processada, contendo os valores da armazenados
      * nas colunas deste vetor. Nesta função o usuário pode fazer o que desejar,
      * como setar um campo em uma tabela do banco de dados, para indicar
      * o pagamento de um boleto de um determinado cliente.
+     * @param AbstractProcessor $self
      * @see setAoProcessarLinha 
      */
     public function triggerAoProcessarLinha($self, $numLn, $vlinha)

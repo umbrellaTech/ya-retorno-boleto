@@ -415,6 +415,9 @@ class Detail implements IDetail
         return $this;
     }
 
+    /**
+     * @param string $zeros
+     */
     public function addZeros($zeros)
     {
         $this->zeros->add($zeros);

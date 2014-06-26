@@ -108,30 +108,45 @@ class Detail extends AbstractCnab240 implements ICnab240, ICnabDetail
         return $this->codMoeda;
     }
 
+    /**
+     * @param string $numRegistroLote
+     */
     public function setNumRegistroLote($numRegistroLote)
     {
         $this->numRegistroLote = $numRegistroLote;
         return $this;
     }
 
+    /**
+     * @param string $segmento
+     */
     public function setSegmento($segmento)
     {
         $this->segmento = $segmento;
         return $this;
     }
 
+    /**
+     * @param string $tipoMovimento
+     */
     public function setTipoMovimento($tipoMovimento)
     {
         $this->tipoMovimento = $tipoMovimento;
         return $this;
     }
 
+    /**
+     * @param string $codMovimento
+     */
     public function setCodMovimento($codMovimento)
     {
         $this->codMovimento = $codMovimento;
         return $this;
     }
 
+    /**
+     * @param string $codBarras
+     */
     public function setCodBarras($codBarras)
     {
         $this->codBarras = $codBarras;
@@ -150,48 +165,72 @@ class Detail extends AbstractCnab240 implements ICnab240, ICnabDetail
         return $this;
     }
 
+    /**
+     * @param string $valorTitulo
+     */
     public function setValorTitulo($valorTitulo)
     {
         $this->valorTitulo = $valorTitulo;
         return $this;
     }
 
+    /**
+     * @param string $desconto
+     */
     public function setDesconto($desconto)
     {
         $this->desconto = $desconto;
         return $this;
     }
 
+    /**
+     * @param string $acrescimos
+     */
     public function setAcrescimos($acrescimos)
     {
         $this->acrescimos = $acrescimos;
         return $this;
     }
 
+    /**
+     * @param string $valorPagamento
+     */
     public function setValorPagamento($valorPagamento)
     {
         $this->valorPagamento = $valorPagamento;
         return $this;
     }
 
+    /**
+     * @param string $quantidadeMoeda
+     */
     public function setQuantidadeMoeda($quantidadeMoeda)
     {
         $this->quantidadeMoeda = $quantidadeMoeda;
         return $this;
     }
 
+    /**
+     * @param string $referenciaSacado
+     */
     public function setReferenciaSacado($referenciaSacado)
     {
         $this->referenciaSacado = $referenciaSacado;
         return $this;
     }
 
+    /**
+     * @param string $nossoNumero
+     */
     public function setNossoNumero($nossoNumero)
     {
         $this->nossoNumero = $nossoNumero;
         return $this;
     }
 
+    /**
+     * @param string $codMoeda
+     */
     public function setCodMoeda($codMoeda)
     {
         $this->codMoeda = $codMoeda;

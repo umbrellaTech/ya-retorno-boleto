@@ -23,6 +23,9 @@ class Cobranca
         return $this->numAviso;
     }
 
+    /**
+     * @param string $qtdTitulos
+     */
     public function setQtdTitulos($qtdTitulos)
     {
         $this->qtdTitulos = $qtdTitulos;
@@ -35,6 +38,9 @@ class Cobranca
         return $this;
     }
 
+    /**
+     * @param string $numAviso
+     */
     public function setNumAviso($numAviso)
     {
         $this->numAviso = $numAviso;

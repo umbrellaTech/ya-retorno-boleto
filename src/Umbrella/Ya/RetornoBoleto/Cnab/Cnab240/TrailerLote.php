@@ -31,24 +31,36 @@ class TrailerLote extends AbstractTrailer implements ICnab240, ICnabTrailer
         return $this->numAvisoDepbito;
     }
 
+    /**
+     * @param string $quantidadeRegistros
+     */
     public function setQuantidadeRegistros($quantidadeRegistros)
     {
         $this->quantidadeRegistros = $quantidadeRegistros;
         return $this;
     }
 
+    /**
+     * @param string $valor
+     */
     public function setValor($valor)
     {
         $this->valor = $valor;
         return $this;
     }
 
+    /**
+     * @param string $quantidadeMoedas
+     */
     public function setQuantidadeMoedas($quantidadeMoedas)
     {
         $this->quantidadeMoedas = $quantidadeMoedas;
         return $this;
     }
 
+    /**
+     * @param string $numAvisoDepbito
+     */
     public function setNumAvisoDepbito($numAvisoDepbito)
     {
         $this->numAvisoDepbito = $numAvisoDepbito;

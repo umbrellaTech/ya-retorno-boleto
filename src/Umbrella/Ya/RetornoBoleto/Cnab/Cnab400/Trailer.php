@@ -176,6 +176,9 @@ class Trailer implements ITrailer
         return $this;
     }
 
+    /**
+     * @param string $zeros
+     */
     public function addBranco($zeros)
     {
         $this->brancos->add($zeros);
