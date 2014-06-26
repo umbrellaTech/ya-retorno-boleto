@@ -36,6 +36,9 @@ abstract class AbstractCnab240
         $this->ocorrencias = new ArrayList();
     }
 
+    /**
+     * @param string $cnab
+     */
     public function addCnab($cnab)
     {
         $trim = trim($cnab);
@@ -77,12 +80,18 @@ abstract class AbstractCnab240
         return $this->cedente;
     }
 
+    /**
+     * @param string $registro
+     */
     public function setRegistro($registro)
     {
         $this->registro = $registro;
         return $this;
     }
 
+    /**
+     * @param string $lote
+     */
     public function setLote($lote)
     {
         $this->lote = $lote;
@@ -106,6 +115,9 @@ abstract class AbstractCnab240
         return $this;
     }
 
+    /**
+     * @param string $ocorrencia
+     */
     public function addOcorrencia($ocorrencia)
     {
         $trim = trim($ocorrencia);

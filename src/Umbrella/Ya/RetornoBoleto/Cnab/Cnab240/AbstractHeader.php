@@ -31,12 +31,18 @@ abstract class AbstractHeader extends AbstractCnab240
         return $this->empresa;
     }
 
+    /**
+     * @param string $convenio
+     */
     public function setConvenio($convenio)
     {
         $this->convenio = $convenio;
         return $this;
     }
 
+    /**
+     * @param string $versaoLayout
+     */
     public function setVersaoLayout($versaoLayout)
     {
         $this->versaoLayout = $versaoLayout;

@@ -9,8 +9,6 @@ namespace Umbrella\Ya\RetornoBoleto\Cnab\Cnab400\Convenio\Processor;
 
 use Umbrella\Ya\RetornoBoleto\Cnab\Cnab400\Convenio\DetailConvenio;
 use Umbrella\Ya\RetornoBoleto\Cnab\Cnab400\Convenio\HeaderConvenio;
-use Umbrella\Ya\RetornoBoleto\Cnab\ICnabDetail;
-use Umbrella\Ya\RetornoBoleto\Cnab\ICnabHeader;
 use Umbrella\Ya\RetornoBoleto\Cnab\IComposable;
 use Umbrella\Ya\RetornoBoleto\Exception\EmptyLineException;
 use Umbrella\Ya\RetornoBoleto\Exception\InvalidPositionException;
@@ -46,7 +44,7 @@ class CNAB400Conv6Processor extends AbstractCNAB400Processor
     /**
      * Processa a linha header do arquivo
      * @param string $linha Linha do header de arquivo processado
-     * @return ICnabHeader Retorna um vetor contendo os dados dos campos do header do arquivo. 
+     * @return string Retorna um vetor contendo os dados dos campos do header do arquivo. 
      */
     protected function processarHeaderArquivo($linha)
     {
@@ -61,7 +59,7 @@ class CNAB400Conv6Processor extends AbstractCNAB400Processor
     /**
      * Processa uma linha detalhe do arquivo.
      * @param string $linha Linha detalhe do arquivo processado
-     * @return ICnabDetail Retorna um vetor contendo os dados dos campos da linha detalhe. 
+     * @return string Retorna um vetor contendo os dados dos campos da linha detalhe. 
      */
     protected function processarDetalhe($linha)
     {

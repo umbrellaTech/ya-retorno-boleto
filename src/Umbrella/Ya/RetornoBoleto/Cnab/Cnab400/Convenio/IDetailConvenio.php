@@ -30,37 +30,85 @@ interface IDetailConvenio extends IDetail
 
     public function getConfirmacao();
 
+    /**
+     * @return IVector
+     */
     public function getUsoBanco();
 
+    /**
+     * @return DetailConvenio
+     */
     public function setConvenio($convenio);
 
+    /**
+     * @return DetailConvenio
+     */
     public function setControle($controle);
 
+    /**
+     * @return DetailConvenio
+     */
     public function setNossoNumero($nossoNumero);
 
+    /**
+     * @return DetailConvenio
+     */
     public function setDvNossoNumero($dvNossoNumero);
 
+    /**
+     * @return DetailConvenio
+     */
     public function setTipoCobranca($tipoCobranca);
 
+    /**
+     * @return DetailConvenio
+     */
     public function setTipoCobrancaCmd72($tipoCobrancaCmd72);
 
+    /**
+     * @return DetailConvenio
+     */
     public function setDiasCalculo($diasCalculo);
 
+    /**
+     * @return DetailConvenio
+     */
     public function setNatureza($natureza);
 
+    /**
+     * @return DetailConvenio
+     */
     public function setVariacaoCarteira($variacaoCarteira);
 
+    /**
+     * @return DetailConvenio
+     */
     public function setContaCaucao($contaCaucao);
 
+    /**
+     * @return DetailConvenio
+     */
     public function setConfirmacao($confirmacao);
 
+    /**
+     * @return DetailConvenio
+     */
     public function setUsoBanco(IVector $usoBanco);
 
+    /**
+     * @return DetailConvenio
+     */
     public function addUsoBanco($usoBanco);
 
+    /**
+     * @return DetailConvenio
+     */
     public function removeUsoBanco($usoBanco);
 
     public function getPrefixoTitulo();
 
+    /**
+     * @return DetailConvenio
+     */
     public function setPrefixoTitulo($prefixoTitulo);
 }

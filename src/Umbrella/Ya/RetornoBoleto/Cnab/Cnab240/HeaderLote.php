@@ -44,18 +44,27 @@ class HeaderLote extends AbstractHeader implements ICnab240, ICnabHeader
         return $this->mensagens;
     }
 
+    /**
+     * @param string $operacao
+     */
     public function setOperacao($operacao)
     {
         $this->operacao = $operacao;
         return $this;
     }
 
+    /**
+     * @param string $servico
+     */
     public function setServico($servico)
     {
         $this->servico = $servico;
         return $this;
     }
 
+    /**
+     * @param string $formaLancamento
+     */
     public function setFormaLancamento($formaLancamento)
     {
         $this->formaLancamento = $formaLancamento;
@@ -68,6 +77,9 @@ class HeaderLote extends AbstractHeader implements ICnab240, ICnabHeader
         return $this;
     }
 
+    /**
+     * @param string $mensagem
+     */
     public function addMensagem($mensagem)
     {
         $trim = trim($mensagem);

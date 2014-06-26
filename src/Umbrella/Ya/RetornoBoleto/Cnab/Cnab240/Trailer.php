@@ -25,18 +25,27 @@ class Trailer extends AbstractTrailer implements ICnab240, ICnabTrailer
         return $this->quantidadeContasConc;
     }
 
+    /**
+     * @param string $quantidadeLotes
+     */
     public function setQuantidadeLotes($quantidadeLotes)
     {
         $this->quantidadeLotes = $quantidadeLotes;
         return $this;
     }
 
+    /**
+     * @param string $quantidadeRegistros
+     */
     public function setQuantidadeRegistros($quantidadeRegistros)
     {
         $this->quantidadeRegistros = $quantidadeRegistros;
         return $this;
     }
 
+    /**
+     * @param string $quantidadeContasConc
+     */
     public function setQuantidadeContasConc($quantidadeContasConc)
     {
         $this->quantidadeContasConc = $quantidadeContasConc;

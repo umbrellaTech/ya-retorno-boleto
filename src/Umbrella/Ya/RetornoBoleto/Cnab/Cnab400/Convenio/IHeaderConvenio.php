@@ -11,7 +11,13 @@ interface IHeaderConvenio extends IHeader
 
     public function getSequencialRet();
 
+    /**
+     * @return HeaderConvenio
+     */
     public function setConvenio($convenio);
 
+    /**
+     * @return HeaderConvenio
+     */
     public function setSequencialRet($sequencialRet);
 }
