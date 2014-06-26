@@ -8,7 +8,7 @@ use Umbrella\Ya\RetornoBoleto\Cnab\IComposable;
 use Umbrella\Ya\RetornoBoleto\ProcessFactory;
 use Umbrella\Ya\RetornoBoleto\ProcessHandler;
 
-class RetornoCNAB400Test extends PHPUnit_Framework_TestCase
+class RetornoCNAB240Test extends PHPUnit_Framework_TestCase
 {
 
     public function linhaProcessada(AbstractProcessor $self, $numLn,
@@ -17,7 +17,6 @@ class RetornoCNAB400Test extends PHPUnit_Framework_TestCase
         if ($vlinha) {
             if ($vlinha->getRegistro() == $self::DETALHE) {
                 printf("%08d: ", $numLn);
-                print_r($vlinha);
                 echo get_class($self) . ": Nosso N&uacute;mero <b>" . $vlinha->getNossoNumero() . "</b> " .
                 "Data <b>" . $vlinha->getDataOcorrencia() . "</b> " .
                 "Valor <b>" . $vlinha->getValor() . "</b><br/>\n";
@@ -27,39 +26,31 @@ class RetornoCNAB400Test extends PHPUnit_Framework_TestCase
         }
     }
 
-    public function conveio6Provider()
+    public function cnabProvider()
     {
         return array(
-            array(__DIR__ . '/../../Resources/ret/retorno_cnab400conv6.ret')
-        );
-    }
-
-    public function conveio7Provider()
-    {
-        return array(
-            array(__DIR__ . '/../../Resources/ret/retorno_cnab400conv7.ret')
+            array(__DIR__ . '/../../Resources/ret/retorno_cnab240.ret')
         );
     }
 
     /**
-     * @dataProvider conveio6Provider
+     * @dataProvider cnabProvider
      */
-    public function testConvenio6($fileName)
+    public function testCnab240($fileName)
     {
-        $cnab400 = ProcessFactory::getRetorno($fileName);
+        $cnab = ProcessFactory::getRetorno($fileName);
 
-        $retorno = new ProcessHandler($cnab400);
-        $retorno->processar();
-    }
+        $retorno = new ProcessHandler($cnab);
+        $retornoObj = $retorno->processar();
 
-    /**
-     * @dataProvider conveio7Provider
-     */
-    public function testConvenio7($fileName)
-    {
-        $cnab400 = ProcessFactory::getRetorno($fileName);
-
-        $retorno = new ProcessHandler($cnab400);
-        $retorno->processar();
+        $retornoObj->getHeader();
+        $retornoObj->getTrailer();
+        foreach ($retornoObj->getLotes() as $lote) {
+            $lote->getHeader();
+            $lote->getTrailer();
+            foreach ($lote->getDetails() as $details) {
+                
+            }
+        }
     }
 }

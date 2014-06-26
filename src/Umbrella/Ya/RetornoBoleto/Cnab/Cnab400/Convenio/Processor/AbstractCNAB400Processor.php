@@ -37,12 +37,6 @@ abstract class AbstractCNAB400Processor extends AbstractProcessor
      */
     const TRAILER_ARQUIVO = 9;
 
-    public function __construct($nomeArquivo = NULL,
-                                $aoProcessarLinhaFunctionName = "")
-    {
-        parent::__construct($nomeArquivo, $aoProcessarLinhaFunctionName);
-    }
-
     public function createHeader()
     {
         return new Header();
@@ -74,9 +68,15 @@ abstract class AbstractCNAB400Processor extends AbstractProcessor
         $header->setTipoServico(substr($linha, 12, 8));
         $header->addComplemento(substr($linha, 20, 7));
 
+
+        if (!preg_match('#^([\d]{3})(.+)#', substr($linha, 77, 18), $bancoArray)) {
+            throw new \InvalidArgumentException('Banco invalido');
+        }
+
         $banco = new Banco();
         $banco
-            ->setCod(substr($linha, 77, 18))
+            ->setCod($bancoArray[1])
+            ->setNome($bancoArray[2])
             ->setAgencia(substr($linha, 27, 4))
             ->setDvAgencia(substr($linha, 31, 1))
             ->setConta(substr($linha, 32, 8))

@@ -2,18 +2,26 @@
 
 namespace Umbrella\Ya\RetornoBoleto;
 
-use Umbrella\Ya\RetornoBoleto\Cnab\Cnab400\IDetail;
+use Easy\Collections\IVector;
+use Umbrella\Ya\RetornoBoleto\Cnab\ICnabHeader;
+use Umbrella\Ya\RetornoBoleto\Cnab\ICnabTrailer;
 
 interface IRetorno
 {
 
     public function getHeader();
 
-    public function getDetails();
+    public function getLotes();
 
     public function getTrailer();
 
-    public function addDetail(IDetail $detail);
+    public function addLote(ILote $detail);
 
-    public function removeDetail(IDetail $detail);
+    public function removeLote(ILote $detail);
+
+    public function setHeader(ICnabHeader $header);
+
+    public function setTrailer(ICnabTrailer $trailer);
+
+    public function setLotes(IVector $lote);
 }

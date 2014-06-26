@@ -6,7 +6,7 @@ use Umbrella\Ya\RetornoBoleto\Cnab\ICnabDetail;
 use Umbrella\Ya\RetornoBoleto\Model\Banco;
 use Umbrella\Ya\RetornoBoleto\Model\Cedente;
 
-interface IDetail extends ICnabDetail
+interface IDetail extends ICnabDetail, ICnab400
 {
 
     public function getTaxaDesconto();

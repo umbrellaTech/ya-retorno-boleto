@@ -4,10 +4,11 @@ namespace Umbrella\Ya\RetornoBoleto;
 
 use Easy\Collections\ArrayList;
 use Easy\Collections\IVector;
+use Umbrella\Ya\RetornoBoleto\Cnab\ICnabDetail;
 use Umbrella\Ya\RetornoBoleto\Cnab\ICnabHeader;
 use Umbrella\Ya\RetornoBoleto\Cnab\ICnabTrailer;
 
-class Retorno implements IRetorno
+class Lote implements ILote
 {
     /**
      *
@@ -18,7 +19,7 @@ class Retorno implements IRetorno
     /**
      * @var IVector
      */
-    protected $lotes;
+    protected $details;
 
     /**
      *
@@ -28,18 +29,18 @@ class Retorno implements IRetorno
 
     public function __construct()
     {
-        $this->lotes = new ArrayList();
+        $this->details = new ArrayList();
     }
 
-    public function addLote(ILote $lote)
+    public function addDetail(ICnabDetail $detail)
     {
-        $this->lotes->add($lote);
+        $this->details->add($detail);
         return $this;
     }
 
-    public function removeLote(ILote $lote)
+    public function removeDetail(ICnabDetail $detail)
     {
-        $this->lotes->remove($lote);
+        $this->details->remove($detail);
         return $this;
     }
 
@@ -50,7 +51,7 @@ class Retorno implements IRetorno
 
     public function getDetails()
     {
-        return $this->lotes;
+        return $this->details;
     }
 
     public function getTrailer()
@@ -63,19 +64,13 @@ class Retorno implements IRetorno
         $this->header = $header;
     }
 
+    public function setDetails(IVector $details)
+    {
+        $this->details = $details;
+    }
+
     public function setTrailer(ICnabTrailer $trailer)
     {
         $this->trailer = $trailer;
-    }
-
-    public function getLotes()
-    {
-        return $this->lotes;
-    }
-
-    public function setLotes(IVector $lotes)
-    {
-        $this->lotes = $lotes;
-        return $this;
     }
 }

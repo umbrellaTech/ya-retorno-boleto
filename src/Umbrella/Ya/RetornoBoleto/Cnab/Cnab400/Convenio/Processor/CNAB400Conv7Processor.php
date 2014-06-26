@@ -9,6 +9,9 @@ namespace Umbrella\Ya\RetornoBoleto\Cnab\Cnab400\Convenio\Processor;
 
 use Umbrella\Ya\RetornoBoleto\Cnab\Cnab400\Convenio\DetailConvenio;
 use Umbrella\Ya\RetornoBoleto\Cnab\Cnab400\Convenio\HeaderConvenio;
+use Umbrella\Ya\RetornoBoleto\Cnab\ICnabDetail;
+use Umbrella\Ya\RetornoBoleto\Cnab\ICnabHeader;
+use Umbrella\Ya\RetornoBoleto\Cnab\IComposable;
 use Umbrella\Ya\RetornoBoleto\Exception\EmptyLineException;
 use Umbrella\Ya\RetornoBoleto\Exception\InvalidPositionException;
 
@@ -28,12 +31,6 @@ class CNAB400Conv7Processor extends AbstractCNAB400Processor
      */
     const DETALHE = 7;
 
-    public function __construct($nomeArquivo = NULL,
-                                $aoProcessarLinhaFunctionName = "")
-    {
-        parent::__construct($nomeArquivo, $aoProcessarLinhaFunctionName);
-    }
-
     public function createHeader()
     {
         return new HeaderConvenio();
@@ -47,7 +44,7 @@ class CNAB400Conv7Processor extends AbstractCNAB400Processor
     /**
      * Processa a linha header do arquivo
      * @param string $linha Linha do header de arquivo processado
-     * @return array<mixed> Retorna um vetor contendo os dados dos campos do header do arquivo. 
+     * @return ICnabHeader Retorna um vetor contendo os dados dos campos do header do arquivo. 
      */
     protected function processarHeaderArquivo($linha)
     {
@@ -64,7 +61,7 @@ class CNAB400Conv7Processor extends AbstractCNAB400Processor
     /**
      * Processa uma linha detalhe do arquivo.
      * @param string $linha Linha detalhe do arquivo processado
-     * @return array<mixed> Retorna um vetor contendo os dados dos campos da linha detalhe. 
+     * @return ICnabDetail Retorna um vetor contendo os dados dos campos da linha detalhe. 
      */
     protected function processarDetalhe($linha)
     {
@@ -88,7 +85,7 @@ class CNAB400Conv7Processor extends AbstractCNAB400Processor
      * Processa uma linha do arquivo de retorno.
      * @param int $numLn Número_linha a ser processada
      * @param string $linha String contendo a linha a ser processada
-     * @return array Retorna um vetor associativo contendo os valores_linha processada. 
+     * @return IComposable Retorna um vetor associativo contendo os valores_linha processada. 
      */
     public function processarLinha($numLn, $linha)
     {

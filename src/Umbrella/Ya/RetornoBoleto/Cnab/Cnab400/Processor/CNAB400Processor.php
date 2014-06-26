@@ -7,9 +7,14 @@
  */
 namespace Umbrella\Ya\RetornoBoleto\Cnab\Cnab400\Processor;
 
+use Umbrella\Ya\RetornoBoleto\AbstractProcessor;
 use Umbrella\Ya\RetornoBoleto\Cnab\Cnab400\Convenio\DetailConvenio;
 use Umbrella\Ya\RetornoBoleto\Cnab\Cnab400\Convenio\HeaderConvenio;
 use Umbrella\Ya\RetornoBoleto\Cnab\Cnab400\Trailer;
+use Umbrella\Ya\RetornoBoleto\Cnab\ICnabDetail;
+use Umbrella\Ya\RetornoBoleto\Cnab\ICnabHeader;
+use Umbrella\Ya\RetornoBoleto\Cnab\ICnabTrailer;
+use Umbrella\Ya\RetornoBoleto\Cnab\IComposable;
 use Umbrella\Ya\RetornoBoleto\Exception\EmptyLineException;
 use Umbrella\Ya\RetornoBoleto\Exception\InvalidPositionException;
 use Umbrella\Ya\RetornoBoleto\Model\Banco;
@@ -24,7 +29,7 @@ use Umbrella\Ya\RetornoBoleto\Model\Cobranca;
  * do Banco do Brasil (arquivo CBR643-6_posicoes.pdf)
  * @author Ítalo Lelis de Vietro <italolelis@gmail.com>
  */
-class CNAB400Processor extends \Umbrella\Ya\RetornoBoleto\AbstractProcessor
+class CNAB400Processor extends AbstractProcessor
 {
     /**
      * @property int HEADER_ARQUIVO Define o valor que identifica uma coluna do tipo HEADER DE ARQUIVO 
@@ -59,7 +64,7 @@ class CNAB400Processor extends \Umbrella\Ya\RetornoBoleto\AbstractProcessor
     /**
      * Processa a linha header do arquivo
      * @param string $linha Linha do header de arquivo processado
-     * @return array<mixed> Retorna um vetor contendo os dados dos campos do header do arquivo. 
+     * @return ICnabHeader Retorna um vetor contendo os dados dos campos do header do arquivo. 
      */
     public function processarHeaderArquivo($linha)
     {
@@ -73,9 +78,13 @@ class CNAB400Processor extends \Umbrella\Ya\RetornoBoleto\AbstractProcessor
             ->setTipoServico(substr($linha, 12, 8))
             ->addComplemento(substr($linha, 20, 7));
 
+        $bancoArray = array();
+        preg_match('^([\d]{3})(.+)', substr($linha, 77, 18), $bancoArray);
+
         $banco = new Banco();
         $banco
-            ->setCod(substr($linha, 77, 18))
+            ->setCod($bancoArray[0])
+            ->setNome($bancoArray[1])
             ->setAgencia(substr($linha, 27, 4))
             ->setDvAgencia(substr($linha, 31, 1))
             ->setConta(substr($linha, 32, 8))
@@ -101,11 +110,10 @@ class CNAB400Processor extends \Umbrella\Ya\RetornoBoleto\AbstractProcessor
     /**
      * Processa uma linha detalhe do arquivo.
      * @param string $linha Linha detalhe do arquivo processado
-     * @return array<mixed> Retorna um vetor contendo os dados dos campos da linha detalhe. 
+     * @return ICnabDetail Retorna um vetor contendo os dados dos campos da linha detalhe. 
      */
     public function processarDetalhe($linha)
     {
-
         $detail = $this->createDetail();
         $bancoEmissor = new Banco();
         $bancoEmissor
@@ -185,7 +193,7 @@ class CNAB400Processor extends \Umbrella\Ya\RetornoBoleto\AbstractProcessor
 
     /** Processa a linha trailer do arquivo.
      * @param string $linha Linha trailer do arquivo processado
-     * @return array<mixed> Retorna um vetor contendo os dados dos campos da linha trailer do arquivo. 
+     * @return ICnabTrailer Retorna um vetor contendo os dados dos campos da linha trailer do arquivo. 
      */
     public function processarTrailerArquivo($linha)
     {
@@ -239,7 +247,7 @@ class CNAB400Processor extends \Umbrella\Ya\RetornoBoleto\AbstractProcessor
      * Processa uma linha_arquivo_retorno.
      * @param int $numLn Número_linha a ser processada
      * @param string $linha String contendo a linha a ser processada
-     * @return Cnab\IComposable Retorna um vetor associativo contendo os valores_linha processada. 
+     * @return IComposable Retorna um vetor associativo contendo os valores_linha processada. 
      */
     public function processarLinha($numLn, $linha)
     {

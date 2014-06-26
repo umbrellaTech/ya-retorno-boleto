@@ -14,7 +14,7 @@ use Umbrella\Ya\RetornoBoleto\Cnab\Cnab400\Convenio\Processor\CNAB400Conv7Proces
  * específica para leitura do mesmo.
  * @author Ítalo Lelis de Vietro <italolelis@gmail.com>
  */
-class RetornoFactory
+class ProcessFactory
 {
 
     /**

@@ -6,7 +6,7 @@ use Easy\Collections\IVector;
 use Umbrella\Ya\RetornoBoleto\Cnab\ICnabHeader;
 use Umbrella\Ya\RetornoBoleto\Model\Cedente;
 
-interface IHeader extends ICnabHeader
+interface IHeader extends ICnabHeader, ICnab400
 {
 
     public function getTipoOperacao();
@@ -21,8 +21,6 @@ interface IHeader extends ICnabHeader
 
     public function getSequencialReg();
 
-    public function getCedente();
-
     public function setTipoOperacao($tipoOperacao);
 
     public function setIdTipoOperacao($idTipoOperacao);
@@ -34,8 +32,6 @@ interface IHeader extends ICnabHeader
     public function setDataGravacao($dataGravacao);
 
     public function setSequencialReg($sequencialReg);
-
-    public function setCedente(Cedente $cedente);
 
     public function getComplementos();
 
