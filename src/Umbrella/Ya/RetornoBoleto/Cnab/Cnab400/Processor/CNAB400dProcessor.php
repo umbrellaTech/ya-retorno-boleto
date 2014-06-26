@@ -17,6 +17,8 @@ use Umbrella\Ya\RetornoBoleto\Cnab\ICnabTrailer;
 use Umbrella\Ya\RetornoBoleto\Cnab\IComposable;
 use Umbrella\Ya\RetornoBoleto\Exception\EmptyLineException;
 use Umbrella\Ya\RetornoBoleto\Exception\InvalidPositionException;
+use Umbrella\Ya\RetornoBoleto\ILote;
+use Umbrella\Ya\RetornoBoleto\IRetorno;
 use Umbrella\Ya\RetornoBoleto\Model\Banco;
 use Umbrella\Ya\RetornoBoleto\Model\Cedente;
 use Umbrella\Ya\RetornoBoleto\Model\Cobranca;
@@ -137,7 +139,6 @@ class CNAB400Processor extends AbstractProcessor
             ->addConvenio(substr($linha, 32, 6))
             ->addControle(substr($linha, 38, 25))
             ->addNossoNumero(substr($linha, 63, 11))
-            //
             ->setTipoCobranca(substr($linha, 75, 1))
             ->setTipoCobrancaCmd72(substr($linha, 76, 1))
             ->setDiasCalculo(substr($linha, 77, 4))
@@ -148,8 +149,6 @@ class CNAB400Processor extends AbstractProcessor
             ->addUsoBanco(substr($linha, 90, 5))
             ->addUsoBanco(substr($linha, 95, 1))
             ->setConfirmacao(substr($linha, 127, 20))
-
-            //
             ->setTaxaDesconto($this->formataNumero(substr($linha, 96, 5)))
             ->setTaxaIof(substr($linha, 101, 5))
             ->addBranco(substr($linha, 106, 1))
@@ -270,7 +269,9 @@ class CNAB400Processor extends AbstractProcessor
         $tipoLn = substr($linha, 1, 1);
         $composable = null;
 
+        $this->needToCreateLote = false;
         if ($tipoLn == CNAB400Processor::HEADER_ARQUIVO) {
+            $this->needToCreateLote = true;
             $composable = $this->processarHeaderArquivo($linha);
         } else if ($tipoLn == CNAB400Processor::DETALHE) {
             $composable = $this->processarDetalhe($linha);
@@ -279,5 +280,23 @@ class CNAB400Processor extends AbstractProcessor
         }
 
         return $composable;
+    }
+
+    public function processCnab(IRetorno $retorno, IComposable $composable,
+                                ILote $lote = null)
+    {
+        switch ((int) $composable->getRegistro()) {
+            case CNAB400Processor::HEADER_ARQUIVO:
+                $retorno->setHeader($composable);
+                break;
+
+            case CNAB400Processor::TRAILER_ARQUIVO:
+                $retorno->setTrailer($composable);
+                break;
+
+            default:
+                $lote->addDetail($composable);
+                break;
+        }
     }
 }

@@ -8,6 +8,9 @@ use League\Flysystem\FileNotFoundException;
 use Umbrella\Ya\RetornoBoleto\Cnab\Cnab240\Processor\CNAB240Processor;
 use Umbrella\Ya\RetornoBoleto\Cnab\Cnab400\Convenio\Processor\CNAB400Conv6Processor;
 use Umbrella\Ya\RetornoBoleto\Cnab\Cnab400\Convenio\Processor\CNAB400Conv7Processor;
+use Umbrella\Ya\RetornoBoleto\Exception\DetailSectionNotFoundException;
+use Umbrella\Ya\RetornoBoleto\Exception\HeaderSectionNotFoundException;
+use Umbrella\Ya\RetornoBoleto\Exception\InvalidHeaderException;
 
 /**
  * Classe que identifica o tipo de arquivo de retorno sendo carregado e instancia a classe
@@ -33,49 +36,43 @@ class ProcessFactory
         }
 
         $arq = fopen($fileName, "r");
-        if ($arq) {
-            //Lê o header do arquivo
-            $linha = fgets($arq, 500);
-            if ($linha) {
-                //echo "<h1>Arquivo: $fileName. Linha: $linha</h1>";
-                $len = strlen($linha);
-                if ($len >= 240 and $len <= 242) {
-                    return new CNAB240Processor($fileName,
-                                                $aoProcessarLinhaFunctionName);
-                } else if ($len >= 400 and $len <= 402) {
-                    if (strstr($linha, "BRADESCO")) {
-                        return new RetornoCNAB400Bradesco($fileName,
-                                                          $aoProcessarLinhaFunctionName);
-                    }
+        if (!$arq) {
+            throw new FileNotFoundException("Não foi possível abrir o arquivo \"$fileName\".");
+        }
 
-                    //Lê o primeiro registro detalhe
-                    $linha = fgets($arq, 500);
-                    if ($linha) {
-                        switch ($linha[0]) {
-                            case CNAB400Conv6Processor::DETALHE:
-                                return new CNAB400Conv6Processor($fileName,
-                                                                 $aoProcessarLinhaFunctionName);
-                                break;
-                            case CNAB400Conv7Processor::DETALHE:
-                                return new CNAB400Conv7Processor($fileName,
-                                                                 $aoProcessarLinhaFunctionName);
-                                break;
-                            default:
-                                throw new Exception("Tipo de registro detalhe desconhecido: " . $linha[0]);
-                                break;
-                        }
-                    } else {
-                        throw new Exception("Tipo de arquivo de retorno não identificado. Não foi possível ler um registro detalhe.");
-                    }
-                } else {
-                    throw new Exception("Tipo de arquivo de retorno não identificado. Total de colunas do header: $len");
-                }
-            } else {
-                fclose($arq);
-                throw new Exception("Tipo de arquivo de retorno não identificado. Não foi possível ler o header do arquivo.");
+        //Lê o header do arquivo
+        $linha = fgets($arq, 500);
+        if (!$linha) {
+            fclose($arq);
+            throw new HeaderSectionNotFoundException("Tipo de arquivo de retorno não identificado. Não foi possível ler o header do arquivo.");
+        }
+        //echo "<h1>Arquivo: $fileName. Linha: $linha</h1>";
+        $len = strlen($linha);
+        if ($len >= 240 and $len <= 242) {
+            return new CNAB240Processor($fileName, $aoProcessarLinhaFunctionName);
+        } elseif ($len >= 400 and $len <= 402) {
+            if (strstr($linha, "BRADESCO")) {
+                return new RetornoCNAB400Bradesco($fileName,
+                                                  $aoProcessarLinhaFunctionName);
+            }
+
+            //Lê o primeiro registro detalhe
+            $linha = fgets($arq, 500);
+            if (!$linha) {
+                throw new DetailSectionNotFoundException("Tipo de arquivo de retorno não identificado. Não foi possível ler um registro detalhe.");
+            }
+            switch ($linha[0]) {
+                case CNAB400Conv6Processor::DETALHE:
+                    return new CNAB400Conv6Processor($fileName,
+                                                     $aoProcessarLinhaFunctionName);
+                case CNAB400Conv7Processor::DETALHE:
+                    return new CNAB400Conv7Processor($fileName,
+                                                     $aoProcessarLinhaFunctionName);
+                default:
+                    throw new Exception("Tipo de registro detalhe desconhecido: " . $linha[0]);
             }
         } else {
-            throw new FileNotFoundException("Não foi possível abrir o arquivo \"$fileName\".");
+            throw new InvalidHeaderException("Tipo de arquivo de retorno não identificado. Total de colunas do header: $len");
         }
     }
 }

@@ -21,6 +21,7 @@ abstract class AbstractProcessor
      * isto, definindo um evento aoProcessarLinha.	 
      */
     protected $aoProcessarLinha = "";
+    protected $needToCreateLote = false;
 
     /**
      * Construtor da classe.
@@ -37,6 +38,17 @@ abstract class AbstractProcessor
         }
 
         $this->setAoProcessarLinha($aoProcessarLinhaFunctionName);
+    }
+
+    public function needToCreateLote()
+    {
+        return $this->needToCreateLote;
+    }
+
+    public function setNeedToCreateLote($needToCreateLote)
+    {
+        $this->needToCreateLote = $needToCreateLote;
+        return $this;
     }
 
     /**
@@ -64,6 +76,10 @@ abstract class AbstractProcessor
      * @abstract
      */
     public abstract function processarLinha($numLn, $linha);
+
+    public abstract function processCnab(IRetorno $retorno,
+                                         IComposable $composable,
+                                         ILote $lote = null);
 
     /**
      * Atribui uma função ao evento aoProcessarLinha.

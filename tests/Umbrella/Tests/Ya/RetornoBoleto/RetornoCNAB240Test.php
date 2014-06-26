@@ -29,7 +29,8 @@ class RetornoCNAB240Test extends PHPUnit_Framework_TestCase
     public function cnabProvider()
     {
         return array(
-            array(__DIR__ . '/../../Resources/ret/retorno_cnab240.ret')
+            array(__DIR__ . '/../../Resources/ret/retorno_cnab240.ret'),
+            array(__DIR__ . '/../../Resources/ret/IEDCBR361502201214659.ret')
         );
     }
 
@@ -40,17 +41,16 @@ class RetornoCNAB240Test extends PHPUnit_Framework_TestCase
     {
         $cnab = ProcessFactory::getRetorno($fileName);
 
-        $retorno = new ProcessHandler($cnab);
-        $retornoObj = $retorno->processar();
+        $processor = new ProcessHandler($cnab);
+        $retorno = $processor->processar();
 
-        $retornoObj->getHeader();
-        $retornoObj->getTrailer();
-        foreach ($retornoObj->getLotes() as $lote) {
-            $lote->getHeader();
-            $lote->getTrailer();
-            foreach ($lote->getDetails() as $details) {
-                
-            }
-        }
+        $this->assertInstanceOf("Umbrella\\Ya\\RetornoBoleto\\Retorno",
+                                $retorno);
+
+        $this->assertInstanceOf("Umbrella\Ya\RetornoBoleto\Cnab\Cnab240\\Header",
+                                $retorno->getHeader());
+
+        $this->assertInstanceOf("Umbrella\Ya\RetornoBoleto\Cnab\Cnab240\\Trailer",
+                                $retorno->getTrailer());
     }
 }

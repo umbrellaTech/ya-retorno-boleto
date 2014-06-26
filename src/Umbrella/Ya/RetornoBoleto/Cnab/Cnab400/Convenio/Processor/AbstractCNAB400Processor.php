@@ -2,13 +2,16 @@
 
 namespace Umbrella\Ya\RetornoBoleto\Cnab\Cnab400\Convenio\Processor;
 
+use InvalidArgumentException;
 use Umbrella\Ya\RetornoBoleto\AbstractProcessor;
 use Umbrella\Ya\RetornoBoleto\Cnab\Cnab400\Detail;
 use Umbrella\Ya\RetornoBoleto\Cnab\Cnab400\Header;
 use Umbrella\Ya\RetornoBoleto\Cnab\Cnab400\ITrailer;
+use Umbrella\Ya\RetornoBoleto\Cnab\Cnab400\Processor\CNAB400Processor;
 use Umbrella\Ya\RetornoBoleto\Cnab\Cnab400\Trailer;
-use Umbrella\Ya\RetornoBoleto\Exception\EmptyLineException;
-use Umbrella\Ya\RetornoBoleto\Exception\InvalidPositionException;
+use Umbrella\Ya\RetornoBoleto\Cnab\IComposable;
+use Umbrella\Ya\RetornoBoleto\ILote;
+use Umbrella\Ya\RetornoBoleto\IRetorno;
 use Umbrella\Ya\RetornoBoleto\Model\Banco;
 use Umbrella\Ya\RetornoBoleto\Model\Cedente;
 use Umbrella\Ya\RetornoBoleto\Model\Cobranca;
@@ -68,7 +71,7 @@ abstract class AbstractCNAB400Processor extends AbstractProcessor
 
 
         if (!preg_match('#^([\d]{3})(.+)#', substr($linha, 77, 18), $bancoArray)) {
-            throw new \InvalidArgumentException('Banco invalido');
+            throw new InvalidArgumentException('Banco invalido');
         }
 
         $banco = new Banco();
@@ -202,41 +205,21 @@ abstract class AbstractCNAB400Processor extends AbstractProcessor
         return $trailer;
     }
 
-    /**
-     * Processa uma linha do arquivo de retorno.
-     * @param int $numLn Número_linha a ser processada
-     * @param string $linha String contendo a linha a ser processada
-     * @return array Retorna um vetor associativo contendo os valores_linha processada. 
-     */
-    public function processarLinha($numLn, $linha)
+    public function processCnab(IRetorno $retorno, IComposable $composable,
+                                ILote $lote = null)
     {
-        $tamLinha = 400; //total de caracteres das linhas do arquivo
-        //o +2 é utilizado para contar o \r\n no final da linha
-        if (strlen($linha) != $tamLinha and strlen($linha) != $tamLinha + 2) {
-            throw new InvalidPositionException("A linha $numLn não tem $tamLinha posições. Possui " . strlen($linha));
+        switch ((int) $composable->getRegistro()) {
+            case CNAB400Processor::HEADER_ARQUIVO:
+                $retorno->setHeader($composable);
+                break;
+
+            case CNAB400Processor::TRAILER_ARQUIVO:
+                $retorno->setTrailer($composable);
+                break;
+
+            default:
+                $lote->addDetail($composable);
+                break;
         }
-
-        if (trim($linha) == "") {
-            throw new EmptyLineException("A linha $numLn está vazia.");
-        }
-
-        //é adicionado um espaço vazio no início_linha para que
-        //possamos trabalhar com índices iniciando_1, no lugar_zero,
-        //e assim, ter os valores_posição_campos exatamente
-        //como no manual CNAB400
-        $linha = " $linha";
-        $tipoLn = substr($linha, 1, 1);
-
-        if ($tipoLn == RetornoCNAB400Base::HEADER_ARQUIVO) {
-            $vlinha = $this->processarHeaderArquivo($linha);
-        } else if ($tipoLn == RetornoCNAB400Base::DETALHE) {
-            $vlinha = $this->processarDetalhe($linha);
-        } else if ($tipoLn == RetornoCNAB400Base::TRAILER_ARQUIVO) {
-            $vlinha = $this->processarTrailerArquivo($linha);
-        } else {
-            $vlinha = NULL;
-        }
-
-        return $vlinha;
     }
 }

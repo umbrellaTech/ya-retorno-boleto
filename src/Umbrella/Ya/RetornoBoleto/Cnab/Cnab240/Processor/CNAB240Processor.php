@@ -12,8 +12,13 @@ use Umbrella\Ya\RetornoBoleto\AbstractProcessor;
 use Umbrella\Ya\RetornoBoleto\Cnab\Cnab240\Detail;
 use Umbrella\Ya\RetornoBoleto\Cnab\Cnab240\Header;
 use Umbrella\Ya\RetornoBoleto\Cnab\Cnab240\HeaderLote;
+use Umbrella\Ya\RetornoBoleto\Cnab\Cnab240\ICnab240;
 use Umbrella\Ya\RetornoBoleto\Cnab\Cnab240\Trailer;
 use Umbrella\Ya\RetornoBoleto\Cnab\Cnab240\TrailerLote;
+use Umbrella\Ya\RetornoBoleto\Cnab\Cnab400\Convenio\Processor\AbstractCNAB400Processor;
+use Umbrella\Ya\RetornoBoleto\Cnab\IComposable;
+use Umbrella\Ya\RetornoBoleto\ILote;
+use Umbrella\Ya\RetornoBoleto\IRetorno;
 use Umbrella\Ya\RetornoBoleto\Model\Banco;
 use Umbrella\Ya\RetornoBoleto\Model\Cedente;
 use Umbrella\Ya\RetornoBoleto\Model\Empresa;
@@ -291,9 +296,11 @@ class CNAB240Processor extends AbstractProcessor
         $linha = " $linha";
         $tipoLn = substr($linha, 8, 1);
 
+        $this->needToCreateLote = false;
         if ($tipoLn == CNAB240Processor::HEADER_ARQUIVO) {
             $vlinha = $this->processarHeaderArquivo($linha);
         } else if ($tipoLn == CNAB240Processor::HEADER_LOTE) {
+            $this->needToCreateLote = true;
             $vlinha = $this->processarHeaderLote($linha);
         } else if ($tipoLn == CNAB240Processor::DETALHE) {
             $vlinha = $this->processarDetalhe($linha);
@@ -303,5 +310,35 @@ class CNAB240Processor extends AbstractProcessor
             $vlinha = $this->processarTrailerArquivo($linha);
         }
         return $vlinha;
+    }
+
+    public function processCnab(IRetorno $retorno, IComposable $composable,
+                                ILote $lote = null)
+    {
+        switch ((int) $composable->getRegistro()) {
+            case AbstractCNAB400Processor::HEADER_ARQUIVO:
+                $retorno->setHeader($composable);
+                break;
+
+            case self::TRAILER_ARQUIVO:
+                $retorno->setTrailer($composable);
+                break;
+
+            case self::HEADER_LOTE:
+                if ($composable instanceof ICnab240) {
+                    $lote->setHeader($composable);
+                } else {
+                    $lote->addDetail($composable);
+                }
+                break;
+
+            case self::TRAILER_LOTE:
+                $lote->setTrailer($composable);
+                break;
+
+            default:
+                $lote->addDetail($composable);
+                break;
+        }
     }
 }

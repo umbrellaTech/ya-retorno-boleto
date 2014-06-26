@@ -1,10 +1,5 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 namespace Umbrella\Ya\RetornoBoleto\Cnab\Cnab400\Convenio\Processor;
 
 use Umbrella\Ya\RetornoBoleto\Cnab\Cnab400\Convenio\DetailConvenio;
@@ -103,11 +98,14 @@ class CNAB400Conv7Processor extends AbstractCNAB400Processor
         //como no manual CNAB400
         $linha = " $linha";
         $tipoLn = substr($linha, 1, 1);
-        if ($tipoLn == CNAB400Conv7Processor::HEADER_ARQUIVO) {
+
+        $this->needToCreateLote = false;
+        if ($tipoLn == self::HEADER_ARQUIVO) {
+            $this->needToCreateLote = true;
             $vlinha = $this->processarHeaderArquivo($linha);
-        } else if ($tipoLn == CNAB400Conv7Processor::DETALHE) {
+        } elseif ($tipoLn == self::DETALHE) {
             $vlinha = $this->processarDetalhe($linha);
-        } else if ($tipoLn == CNAB400Conv7Processor::TRAILER_ARQUIVO) {
+        } elseif ($tipoLn == self::TRAILER_ARQUIVO) {
             $vlinha = $this->processarTrailerArquivo($linha);
         } else {
             $vlinha = null;

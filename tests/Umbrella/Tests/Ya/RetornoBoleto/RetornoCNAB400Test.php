@@ -17,7 +17,6 @@ class RetornoCNAB400Test extends PHPUnit_Framework_TestCase
         if ($vlinha) {
             if ($vlinha->getRegistro() == $self::DETALHE) {
                 printf("%08d: ", $numLn);
-                print_r($vlinha);
                 echo get_class($self) . ": Nosso N&uacute;mero <b>" . $vlinha->getNossoNumero() . "</b> " .
                 "Data <b>" . $vlinha->getDataOcorrencia() . "</b> " .
                 "Valor <b>" . $vlinha->getValor() . "</b><br/>\n";
@@ -48,8 +47,13 @@ class RetornoCNAB400Test extends PHPUnit_Framework_TestCase
     {
         $cnab400 = ProcessFactory::getRetorno($fileName);
 
-        $retorno = new ProcessHandler($cnab400);
-        $retorno->processar();
+        $processor = new ProcessHandler($cnab400);
+        $retorno = $processor->processar();
+
+        $this->assertInstanceOf("Umbrella\\Ya\\RetornoBoleto\\Retorno", $retorno);
+
+        $this->assertInstanceOf("Umbrella\\Ya\\RetornoBoleto\\Cnab\\Cnab400\\Convenio\\IHeaderConvenio",
+                                $retorno->getHeader());
     }
 
     /**
@@ -59,7 +63,15 @@ class RetornoCNAB400Test extends PHPUnit_Framework_TestCase
     {
         $cnab400 = ProcessFactory::getRetorno($fileName);
 
-        $retorno = new ProcessHandler($cnab400);
-        $retorno->processar();
+        $processor = new ProcessHandler($cnab400);
+        $retorno = $processor->processar();
+
+        $this->assertInstanceOf("Umbrella\\Ya\\RetornoBoleto\\Retorno", $retorno);
+
+        $this->assertInstanceOf("Umbrella\\Ya\\RetornoBoleto\\Cnab\\Cnab400\\IHeader",
+                                $retorno->getHeader());
+
+        $this->assertInstanceOf("Umbrella\\Ya\\RetornoBoleto\\Cnab\\Cnab400\\ITrailer",
+                                $retorno->getTrailer());
     }
 }

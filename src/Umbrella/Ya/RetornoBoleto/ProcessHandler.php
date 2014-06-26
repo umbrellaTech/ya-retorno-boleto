@@ -5,6 +5,7 @@ namespace Umbrella\Ya\RetornoBoleto;
 use Umbrella\Ya\RetornoBoleto\Cnab\Cnab240\ICnab240;
 use Umbrella\Ya\RetornoBoleto\Cnab\Cnab240\Processor\CNAB240Processor;
 use Umbrella\Ya\RetornoBoleto\Cnab\Cnab400\Convenio\Processor\AbstractCNAB400Processor;
+use Umbrella\Ya\RetornoBoleto\Cnab\Cnab400\ICnab400;
 use Umbrella\Ya\RetornoBoleto\Cnab\IComposable;
 
 /**
@@ -34,6 +35,13 @@ class ProcessHandler
         $this->retorno = $retorno;
     }
 
+    private function createLote(IRetorno $retorno)
+    {
+        $lote = new Lote(); //Lote padrão
+        $retorno->addLote($lote);
+        return $lote;
+    }
+
     /**
      * Executa o processamento de todo o arquivo, linha a linha. 
      * @return IRetorno
@@ -41,22 +49,18 @@ class ProcessHandler
     public function processar()
     {
         $retorno = new Retorno();
-        $lote = new Lote(); //Lote padrão
+        $lote = null;
 
         $linhas = file($this->retorno->getNomeArquivo(), FILE_IGNORE_NEW_LINES);
         foreach ($linhas as $numLn => $linha) {
             $composable = $this->retorno->processarLinha($numLn,
                                                          rtrim($linha, "\r\n"));
 
-            if ($composable->getRegistro() == CNAB240Processor::HEADER_LOTE) {
-                $lote = new Lote();
+            if ($this->retorno->needToCreateLote()) {
+                $lote = $this->createLote($retorno);
             }
 
-            if ($composable instanceof ICnab240) {
-                $this->processCnab240($retorno, $lote, $composable);
-            } else {
-                $this->processCnab400($retorno, $lote, $composable);
-            }
+            $this->retorno->processCnab($retorno, $composable, $lote);
 
             //Dispara o evento aoProcessarLinha, caso haja alguma função handler associada a ele
             $this->retorno->triggerAoProcessarLinha($this->retorno, $numLn,
@@ -64,33 +68,5 @@ class ProcessHandler
         }
 
         return $retorno;
-    }
-
-    public function processCnab240(IRetorno $retorno, ILote $lote,
-                                   IComposable $composable)
-    {
-        if ($composable->getRegistro() == CNAB240Processor::HEADER_ARQUIVO) {
-            $retorno->setHeader($composable);
-        } elseif ($composable->getRegistro() == CNAB240Processor::TRAILER_ARQUIVO) {
-            $retorno->setTrailer($composable);
-        } elseif ($composable->getRegistro() == CNAB240Processor::HEADER_LOTE) {
-            $lote->setHeader($composable);
-        } elseif ($composable->getRegistro() == CNAB240Processor::TRAILER_LOTE) {
-            $lote->setTrailer($composable);
-        } else {
-            $lote->addDetail($composable);
-        }
-    }
-
-    public function processCnab400(IRetorno $retorno, ILote $lote,
-                                   IComposable $composable)
-    {
-        if ($composable->getRegistro() == AbstractCNAB400Processor::HEADER_ARQUIVO) {
-            $retorno->setHeader($composable);
-        } elseif ($composable->getRegistro() == AbstractCNAB400Processor::TRAILER_ARQUIVO) {
-            $retorno->setTrailer($composable);
-        } else {
-            $lote->addDetail($composable);
-        }
     }
 }
