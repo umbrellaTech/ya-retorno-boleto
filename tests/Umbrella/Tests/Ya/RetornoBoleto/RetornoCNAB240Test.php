@@ -44,8 +44,7 @@ class RetornoCNAB240Test extends PHPUnit_Framework_TestCase
         $processor = new ProcessHandler($cnab);
         $retorno = $processor->processar();
 
-        $this->assertInstanceOf("Umbrella\\Ya\\RetornoBoleto\\Retorno",
-                                $retorno);
+        $this->assertInstanceOf("Umbrella\\Ya\\RetornoBoleto\\Retorno", $retorno);
 
         $this->assertInstanceOf("Umbrella\Ya\RetornoBoleto\Cnab\Cnab240\\Header",
                                 $retorno->getHeader());
