@@ -7,7 +7,6 @@ use Umbrella\Ya\RetornoBoleto\AbstractProcessor;
 use Umbrella\Ya\RetornoBoleto\Cnab\Cnab400\Detail;
 use Umbrella\Ya\RetornoBoleto\Cnab\Cnab400\Header;
 use Umbrella\Ya\RetornoBoleto\Cnab\Cnab400\ITrailer;
-use Umbrella\Ya\RetornoBoleto\Cnab\Cnab400\Processor\CNAB400Processor;
 use Umbrella\Ya\RetornoBoleto\Cnab\Cnab400\Trailer;
 use Umbrella\Ya\RetornoBoleto\Cnab\IComposable;
 use Umbrella\Ya\RetornoBoleto\ILote;
@@ -69,7 +68,7 @@ abstract class AbstractCNAB400Processor extends AbstractProcessor
         $header->setTipoServico(substr($linha, 12, 8));
         $header->addComplemento(substr($linha, 20, 7));
 
-
+        $bancoArray = array();
         if (!preg_match('#^([\d]{3})(.+)#', substr($linha, 77, 18), $bancoArray)) {
             throw new InvalidArgumentException('Banco invalido');
         }
@@ -89,7 +88,7 @@ abstract class AbstractCNAB400Processor extends AbstractProcessor
             ->setNome(substr($linha, 47, 30));
 
         $header->setCedente($cedente);
-        $header->setDataGravacao($this->formataData(substr($linha, 95, 6)));
+        $header->setDataGravacao($this->createDate(substr($linha, 95, 6)));
         $header->setSequencialReg(substr($linha, 395, 6));
 
         return $header;
@@ -125,7 +124,7 @@ abstract class AbstractCNAB400Processor extends AbstractProcessor
             ->setTaxaIof(substr($linha, 101, 5))
             ->setCateira(substr($linha, 107, 2))
             ->setComando(substr($linha, 109, 2))
-            ->setDataOcorrencia($this->formataData(substr($linha, 111, 6)))
+            ->setDataOcorrencia($this->createDate(substr($linha, 111, 6)))
             ->setNumTitulo(substr($linha, 117, 10))
             ->setDataVencimento(substr($linha, 147, 6))
             ->setValor($this->formataNumero(substr($linha, 153, 13)))
@@ -209,11 +208,11 @@ abstract class AbstractCNAB400Processor extends AbstractProcessor
                                 ILote $lote = null)
     {
         switch ((int) $composable->getRegistro()) {
-            case CNAB400Processor::HEADER_ARQUIVO:
+            case self::HEADER_ARQUIVO:
                 $retorno->setHeader($composable);
                 break;
 
-            case CNAB400Processor::TRAILER_ARQUIVO:
+            case self::TRAILER_ARQUIVO:
                 $retorno->setTrailer($composable);
                 break;
 

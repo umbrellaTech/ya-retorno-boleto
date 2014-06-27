@@ -14,10 +14,7 @@ use Umbrella\Ya\RetornoBoleto\Exception\InvalidPositionException;
  * Baseado na documentação para "Layout de Arquivo Retorno para convênios na faixa numérica entre 1.000.000 a 9.999.999
  * (Convênios de 7 posições). Versão Set/09" do Banco do Brasil (arquivo Doc8826BR643Pos6.pdf),
  * disponível em http://www.bb.com.br/docs/pub/emp/empl/dwn/Doc8826BR643Pos6.pdf
- * @copyright GPLv2
- * @package ArquivoRetornoTitulosBancarios
- * @author Manoel Campos da Silva Filho. http://manoelcampos.com/contato
- * @version 0.4
+ * @author Ítalo Lelis de Vietro <italolelis@gmail.com>
  */
 class CNAB400Conv6Processor extends AbstractCNAB400Processor
 {

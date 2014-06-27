@@ -2,6 +2,7 @@
 
 namespace Umbrella\Ya\RetornoBoleto;
 
+use DateTime;
 use Umbrella\Ya\RetornoBoleto\Cnab\IComposable;
 
 /**
@@ -31,7 +32,7 @@ abstract class AbstractProcessor
      * será executada após cada linha ser processada no arquivo de retorno.
      */
     public function __construct($nomeArquivo = null,
-                                $aoProcessarLinhaFunctionName = "")
+                                $aoProcessarLinhaFunctionName = null)
     {
         if (isset($nomeArquivo)) {
             $this->setNomeArquivo($nomeArquivo);
@@ -52,7 +53,7 @@ abstract class AbstractProcessor
     }
 
     /**
-     * Setter para o atributo @see nomeArquivo 
+     * Setter para o atributo
      * @param string $nomeArquivo
      */
     public function setNomeArquivo($nomeArquivo)
@@ -61,7 +62,7 @@ abstract class AbstractProcessor
     }
 
     /**
-     * Getter para o atributo @see nomeArquivo 
+     * Getter para o atributo
      */
     public function getNomeArquivo()
     {
@@ -73,7 +74,6 @@ abstract class AbstractProcessor
      * @param int $numLn Número da linha a ser processada
      * @param string $linha String contendo a linha a ser processada
      * @return IComposable Retorna um vetor associativo contendo os valores da linha processada.
-     * @abstract
      */
     public abstract function processarLinha($numLn, $linha);
 
@@ -100,21 +100,20 @@ abstract class AbstractProcessor
     /**
      * Se existe uma função handler associadao ao evento aoProcessarLinha,
      * executa a mesma, disparando o evento.
-     * @param int $numLn Número da linha processada.
-     * @param IComposable $vlinha Vetor contendo a linha processada, contendo os valores da armazenados
+     * @param AbstractProcessor $self
+     * @param int $lineNumber Número da linha processada.
+     * @param IComposable $composable IComposable contendo a linha processada, contendo os valores da armazenados
      * nas colunas deste vetor. Nesta função o usuário pode fazer o que desejar,
      * como setar um campo em uma tabela do banco de dados, para indicar
      * o pagamento de um boleto de um determinado cliente.
-     * @param AbstractProcessor $self
-     * @see setAoProcessarLinha 
      */
-    public function triggerAoProcessarLinha($self, $numLn, $vlinha)
+    public function triggerAoProcessarLinha($self, $lineNumber, $composable)
     {
         //Obtém o nome da função handler associada ao evento aoProcessarLinha
         $funcName = $this->aoProcessarLinha;
 
         if ($this->aoProcessarLinha) {
-            return call_user_func($funcName, $self, $numLn, $vlinha);
+            return call_user_func($funcName, $self, $lineNumber, $composable);
         }
     }
 
@@ -130,7 +129,7 @@ abstract class AbstractProcessor
      */
     public function formataNumero($valor, $numCasasDecimais = 2)
     {
-        if ($valor == "") {
+        if (empty($valor)) {
             return 0;
         }
         $casas = $numCasasDecimais;
@@ -147,22 +146,30 @@ abstract class AbstractProcessor
     }
 
     /**
-     * Formata uma string, contendo uma data sem o separador, no formato DDMMAA,
-     * para o formato DD/MM/AAAA.
-     * @param string $data String contendo a data no formato DDMMAA.
-     * @return string Retorna a data non formato DD/MM/AAAA. 
+     * Formata uma string, contendo uma data sem o separador, no formato DDMMAA.
+     * @param string $date String contendo a data no formato DDMMAA.
+     * @return DateTime
      */
-    public function formataData($data)
+    public function createDate($date)
     {
-        if ($data == "") {
+        if (empty($date)) {
             return "";
         }
-        //formata a data par ao padrão americano MM/DD/AA
-        $data = substr($data, 2, 2) . "/" . substr($data, 0, 2) . "/" . substr($data,
-                                                                               4,
-                                                                               2);
 
-        //formata a data, a partir do padrão americano, para o padrão DD/MM/AAAA
-        return date("d/m/Y", strtotime($data));
+        return DateTime::createFromFormat("mdY", $date);
+    }
+
+    /**
+     * Formata uma string, contendo uma data sem o separador, no formato DDMMAA HHIISS.
+     * @param string $dateTimeString String contendo a data no formato DDMMAA.
+     * @return DateTime 
+     */
+    public function createDateTime($dateTimeString)
+    {
+        if (empty($dateTimeString)) {
+            return "";
+        }
+
+        return DateTime::createFromFormat("mdY His", $dateTimeString);
     }
 }

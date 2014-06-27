@@ -1,13 +1,7 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 namespace Umbrella\Ya\RetornoBoleto\Cnab\Cnab240\Processor;
 
-use DateTime;
 use Umbrella\Ya\RetornoBoleto\AbstractProcessor;
 use Umbrella\Ya\RetornoBoleto\Cnab\Cnab240\Detail;
 use Umbrella\Ya\RetornoBoleto\Cnab\Cnab240\Header;
@@ -76,13 +70,9 @@ class CNAB240Processor extends AbstractProcessor
             ->setCodArquivo(substr($linha, 143, 1))
         ;
 
-        $dataGravacao = DateTime::createFromFormat("dmY his",
-                                                   substr($linha, 144, 8) . " " . substr($linha,
-                                                                                         152,
-                                                                                         6));
-
-        $header
-            ->setDataGeracao($dataGravacao)
+        $header->setDataGeracao($this->createDateTime(substr($linha, 144, 8) . " " . substr($linha,
+                                                                                            152,
+                                                                                            6)))
             ->setSequencialReg(substr($linha, 158, 6))
             ->setVersaoLayout(substr($linha, 164, 3))
         ;
@@ -189,13 +179,11 @@ class CNAB240Processor extends AbstractProcessor
             ->setTipoMovimento(substr($linha, 15, 1))
             ->setCodMovimento(substr($linha, 16, 2))
             ->setCodBarras(substr($linha, 18, 44))
-            ->setDataVencimento(DateTime::createFromFormat("dmY",
-                                                           substr($linha, 92, 8)))
+            ->setDataVencimento($this->createDate(substr($linha, 92, 8)))
             ->setValorTitulo(substr($linha, 100, 13))
             ->setDesconto(substr($linha, 115, 13))
             ->setAcrescimos(substr($linha, 130, 13))
-            ->setDataPagamento(DateTime::createFromFormat("dmY",
-                                                          substr($linha, 145, 8)))
+            ->setDataPagamento($this->createDate(substr($linha, 145, 8)))
             ->setValorPagamento(substr($linha, 153, 13))
             ->setQuantidadeMoeda(substr($linha, 168, 10))
             ->setReferenciaSacado(substr($linha, 183, 20))

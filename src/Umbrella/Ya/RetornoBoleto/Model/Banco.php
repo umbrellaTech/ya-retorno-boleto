@@ -5,6 +5,9 @@ namespace Umbrella\Ya\RetornoBoleto\Model;
 use Easy\Collections\ArrayList;
 use Easy\Collections\IVector;
 
+/**
+ * Classe que representa um banco.
+ */
 class Banco
 {
     protected $cod;
@@ -16,11 +19,13 @@ class Banco
     protected $dvAgenciaConta;
 
     /**
-     *
      * @var IVector
      */
     protected $reservados;
 
+    /**
+     * Inicializa uma instância da classe Banco.
+     */
     public function __construct()
     {
         $this->reservados = new ArrayList();
