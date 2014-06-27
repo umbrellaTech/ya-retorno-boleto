@@ -7,6 +7,7 @@ use Easy\Collections\IVector;
 
 class Empresa
 {
+    protected $cod;
     protected $tipoInscricao;
     protected $numInscricao;
     protected $nome;
@@ -29,9 +30,25 @@ class Empresa
      */
     protected $reservados;
 
+    /**
+     * @var Banco
+     */
+    protected $banco;
+
     public function __construct()
     {
         $this->reservados = new ArrayList();
+    }
+
+    public function getCod()
+    {
+        return $this->cod;
+    }
+
+    public function setCod($cod)
+    {
+        $this->cod = $cod;
+        return $this;
     }
 
     public function getTipoInscricao()
@@ -124,6 +141,17 @@ class Empresa
     public function setReservados(IVector $reservados)
     {
         $this->reservados = $reservados;
+        return $this;
+    }
+
+    public function getBanco()
+    {
+        return $this->banco;
+    }
+
+    public function setBanco(Banco $banco)
+    {
+        $this->banco = $banco;
         return $this;
     }
 }

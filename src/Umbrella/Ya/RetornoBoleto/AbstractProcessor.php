@@ -156,7 +156,7 @@ abstract class AbstractProcessor
             return "";
         }
 
-        return DateTime::createFromFormat("mdY", $date);
+        return DateTime::createFromFormat("mdy", $date);
     }
 
     /**
@@ -170,6 +170,6 @@ abstract class AbstractProcessor
             return "";
         }
 
-        return DateTime::createFromFormat("mdY His", $dateTimeString);
+        return DateTime::createFromFormat("mdy His", $dateTimeString);
     }
 }

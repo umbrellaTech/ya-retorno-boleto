@@ -46,11 +46,12 @@ class ProcessFactory
             fclose($arq);
             throw new HeaderSectionNotFoundException("Tipo de arquivo de retorno não identificado. Não foi possível ler o header do arquivo.");
         }
+        
         //echo "<h1>Arquivo: $fileName. Linha: $linha</h1>";
         $len = strlen($linha);
-        if ($len >= 240 and $len <= 242) {
+        if ($len >= 240 && $len <= 242) {
             return new CNAB240Processor($fileName, $aoProcessarLinhaFunctionName);
-        } elseif ($len >= 400 and $len <= 402) {
+        } elseif ($len >= 400 && $len <= 402) {
             if (strstr($linha, "BRADESCO")) {
                 return new RetornoCNAB400Bradesco($fileName,
                                                   $aoProcessarLinhaFunctionName);

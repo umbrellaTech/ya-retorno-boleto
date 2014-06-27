@@ -5,11 +5,9 @@ namespace Umbrella\Ya\RetornoBoleto\Cnab\Cnab400;
 use Easy\Collections\ArrayList;
 use Easy\Collections\IVector;
 use Umbrella\Ya\RetornoBoleto\Model\Banco;
-use Umbrella\Ya\RetornoBoleto\Model\Cedente;
 
-class Detail implements IDetail
+class Detail extends AbstractCnab400 implements IDetail
 {
-    protected $registro;
     protected $taxaDesconto;
     protected $taxaIof;
     protected $cateira;
@@ -52,12 +50,6 @@ class Detail implements IDetail
 
     /**
      *
-     * @var Cedente
-     */
-    protected $cedente;
-
-    /**
-     *
      * @var IVector
      */
     protected $zeros;
@@ -72,11 +64,7 @@ class Detail implements IDetail
     {
         $this->zeros = new ArrayList();
         $this->brancos = new ArrayList();
-    }
-
-    public function getRegistro()
-    {
-        return $this->registro;
+        parent::__construct();
     }
 
     public function getTaxaDesconto()
@@ -207,17 +195,6 @@ class Detail implements IDetail
     public function getBancoEmissor()
     {
         return $this->bancoEmissor;
-    }
-
-    public function getCedente()
-    {
-        return $this->cedente;
-    }
-
-    public function setRegistro($registro)
-    {
-        $this->registro = $registro;
-        return $this;
     }
 
     public function setTaxaDesconto($taxaDesconto)
@@ -373,12 +350,6 @@ class Detail implements IDetail
     public function setBancoEmissor(Banco $bancoEmissor)
     {
         $this->bancoEmissor = $bancoEmissor;
-        return $this;
-    }
-
-    public function setCedente(Cedente $cedente)
-    {
-        $this->cedente = $cedente;
         return $this;
     }
 

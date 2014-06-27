@@ -2,19 +2,10 @@
 
 namespace Umbrella\Ya\RetornoBoleto\Cnab\Cnab240;
 
-use Umbrella\Ya\RetornoBoleto\Model\Cedente;
-use Umbrella\Ya\RetornoBoleto\Model\Empresa;
-
 abstract class AbstractHeader extends AbstractCnab240
 {
     protected $convenio;
     protected $versaoLayout;
-
-    /**
-     *
-     * @var Cedente
-     */
-    protected $empresa;
 
     public function getConvenio()
     {
@@ -24,11 +15,6 @@ abstract class AbstractHeader extends AbstractCnab240
     public function getVersaoLayout()
     {
         return $this->versaoLayout;
-    }
-
-    public function getEmpresa()
-    {
-        return $this->empresa;
     }
 
     /**
@@ -46,12 +32,6 @@ abstract class AbstractHeader extends AbstractCnab240
     public function setVersaoLayout($versaoLayout)
     {
         $this->versaoLayout = $versaoLayout;
-        return $this;
-    }
-
-    public function setEmpresa(Empresa $empresa)
-    {
-        $this->empresa = $empresa;
         return $this;
     }
 }

@@ -1,11 +1,10 @@
 <?php
 
-namespace Umbrella\Ya\RetornoBoleto\Cnab\Cnab400\Convenio\Processor;
+namespace Umbrella\Ya\RetornoBoleto\Cnab\Cnab400\Bradesco\Processor;
 
-use InvalidArgumentException;
 use Umbrella\Ya\RetornoBoleto\AbstractProcessor;
-use Umbrella\Ya\RetornoBoleto\Cnab\Cnab400\Detail;
-use Umbrella\Ya\RetornoBoleto\Cnab\Cnab400\Header;
+use Umbrella\Ya\RetornoBoleto\Cnab\Cnab400\Bradesco\DetailBradesco;
+use Umbrella\Ya\RetornoBoleto\Cnab\Cnab400\Bradesco\HeaderBradesco;
 use Umbrella\Ya\RetornoBoleto\Cnab\Cnab400\ITrailer;
 use Umbrella\Ya\RetornoBoleto\Cnab\Cnab400\Trailer;
 use Umbrella\Ya\RetornoBoleto\Cnab\IComposable;
@@ -14,6 +13,7 @@ use Umbrella\Ya\RetornoBoleto\IRetorno;
 use Umbrella\Ya\RetornoBoleto\Model\Banco;
 use Umbrella\Ya\RetornoBoleto\Model\Cedente;
 use Umbrella\Ya\RetornoBoleto\Model\Cobranca;
+use Umbrella\Ya\RetornoBoleto\Model\Empresa;
 
 /**
  * Classe abstrata para leitura de arquivos de retorno de cobranças no padrão CNAB400/CBR643.<br/>
@@ -25,7 +25,7 @@ use Umbrella\Ya\RetornoBoleto\Model\Cobranca;
  * (arquivos Doc8826BR643Pos6.pdf e Doc2628CBR643Pos7.pdf)
  * @author Ítalo Lelis de Vietro <italolelis@gmail.com>
  */
-abstract class AbstractCNAB400Processor extends AbstractProcessor
+class CNAB400BradescoProcessor extends AbstractProcessor
 {
     /**
      * @property int HEADER_ARQUIVO Define o valor que identifica uma coluna do tipo HEADER DE ARQUIVO 
@@ -39,12 +39,12 @@ abstract class AbstractCNAB400Processor extends AbstractProcessor
 
     public function createHeader()
     {
-        return new Header();
+        return new HeaderBradesco();
     }
 
     public function createDetail()
     {
-        return new Detail();
+        return new DetailBradesco();
     }
 
     public function createTrailer()
@@ -61,35 +61,32 @@ abstract class AbstractCNAB400Processor extends AbstractProcessor
     {
         $header = $this->createHeader();
         //X = ALFANUMÉRICO 9 = NUMÉRICO V = VÍRGULA DECIMAL ASSUMIDA
-        $header->setRegistro(substr($linha, 1, 1));
-        $header->setTipoOperacao(substr($linha, 2, 1));
-        $header->setIdTipoOperacao(substr($linha, 3, 7));
-        $header->setIdTipoServico(substr($linha, 10, 2));
-        $header->setTipoServico(substr($linha, 12, 8));
-        $header->addComplemento(substr($linha, 20, 7));
+        $header->setRegistro(substr($linha, 1, 1))
+            ->setTipoOperacao(substr($linha, 2, 1))
+            ->setIdTipoOperacao(substr($linha, 3, 7))
+            ->setIdTipoServico(substr($linha, 10, 2))
+            ->setTipoServico(substr($linha, 12, 15));
 
-        $bancoArray = array();
-        if (!preg_match('#^([\d]{3})(.+)#', substr($linha, 77, 18), $bancoArray)) {
-            throw new InvalidArgumentException('Banco invalido');
-        }
+        $empresa = new Empresa();
+        $empresa->setCod(substr($linha, 27, 20))
+            ->setNome(substr($linha, 47, 30));
 
         $banco = new Banco();
         $banco
-            ->setCod($bancoArray[1])
-            ->setNome($bancoArray[2])
-            ->setAgencia(substr($linha, 27, 4))
-            ->setDvAgencia(substr($linha, 31, 1))
-            ->setConta(substr($linha, 32, 8))
-            ->setDvConta(substr($linha, 40, 1));
+            ->setCod(substr($linha, 77, 3))
+            ->setNome(substr($linha, 80, 15));
 
 
         $cedente = new Cedente();
         $cedente->setBanco($banco)
             ->setNome(substr($linha, 47, 30));
 
-        $header->setCedente($cedente);
-        $header->setDataGravacao($this->createDate(substr($linha, 95, 6)));
-        $header->setSequencialReg(substr($linha, 395, 6));
+        $header->setEmpresa($empresa)
+            ->setCedente($cedente)
+            ->setDataGravacao($this->createDate(substr($linha, 95, 6)))
+            ->setDensidadeGravacao(substr($linha, 101, 8))
+            ->setNumAvisoCredito(substr($linha, 109, 5))
+            ->setSequencialReg(substr($linha, 395, 6));
 
         return $header;
     }
@@ -116,40 +113,53 @@ abstract class AbstractCNAB400Processor extends AbstractProcessor
             ->setAgencia(substr($linha, 169, 4))
             ->setDvAgencia(substr($linha, 173, 1));
 
+        $bancoEmpresa = new Banco();
+        $bancoEmpresa->setCod(substr($linha, 21, 17));
+        $empresa = new Empresa();
+        $empresa
+            ->setBanco($bancoEmpresa)
+            ->setTipoInscricao(substr($linha, 2, 2))
+            ->setNumInscricao(substr($linha, 4, 14))
+            ->addReservado(substr($linha, 38, 25));
+
         $detail
             ->setBancoEmissor($bancoEmissor)
             ->setBancoRecebedor($bancoRecebedor)
             ->setRegistro(substr($linha, 1, 1))
-            ->setTaxaDesconto($this->formataNumero(substr($linha, 96, 5)))
-            ->setTaxaIof(substr($linha, 101, 5))
-            ->setCateira(substr($linha, 107, 2))
-            ->setComando(substr($linha, 109, 2))
-            ->setDataOcorrencia($this->createDate(substr($linha, 111, 6)))
-            ->setNumTitulo(substr($linha, 117, 10))
-            ->setDataVencimento($this->createDate(substr($linha, 147, 6)))
+            ->setNumOcorrencia(substr($linha, 117, 10))
+            ->setDataVencimento(substr($linha, 147, 6))
             ->setValor($this->formataNumero(substr($linha, 153, 13)))
-            ->setEspecie(substr($linha, 174, 2))
-            ->setDataCredito($this->createDate(substr($linha, 176, 6)))
-            ->setValorTarifa($this->formataNumero(substr($linha, 182, 7)))
+            ->setDespCobranca(substr($linha, 176, 2))
             ->setOutrasDespesas($this->formataNumero(substr($linha, 189, 13)))
-            ->setJurosDesconto($this->formataNumero(substr($linha, 202, 13)))
-            ->setIofDesconto($this->formataNumero(substr($linha, 215, 13)))
-            ->setValorAbatimento($this->formataNumero(substr($linha, 228, 13)))
+            ->setJurosAtraso($this->formataNumero(substr($linha, 202, 13)))
+            ->setTaxaIof($this->formataNumero(substr($linha, 215, 13)))
             ->setDescontoConcedido($this->formataNumero(substr($linha, 241, 13)))
             ->setValorRecebido($this->formataNumero(substr($linha, 254, 13)))
             ->setJurosMora($this->formataNumero(substr($linha, 267, 13)))
             ->setOutrosRecebimentos($this->formataNumero(substr($linha, 280, 13)))
-            ->setAbatimentoNaoAprovado($this->formataNumero(substr($linha, 293,
-                                                                   13)))
+            ->setValorAbatimento($this->formataNumero(substr($linha, 228, 13)))
             ->setValorLancamento($this->formataNumero(substr($linha, 306, 13)))
             ->setIndicativoDc(substr($linha, 319, 1))
             ->setIndicadorValor(substr($linha, 320, 1))
             ->setValorAjuste($this->formataNumero(substr($linha, 321, 12)))
-            ->setCanalPagTitulo(substr($linha, 393, 2))
             ->setSequencial(substr($linha, 395, 6))
+            ->setMotivoCodOcorrencia(substr($linha, 319, 10))
+            ->setNumCartorio(substr($linha, 369, 2))
+            ->setNumCartorio(substr($linha, 369, 2))
+            ->setNumCartorio(substr($linha, 369, 2))
         ;
 
         return $detail;
+
+        $vlinha["motivo_cod_ocorrencia"] = substr($linha, 319, 10);  //Motivos das Rejeições para 
+        //os Códigos de Ocorrência da Posição 109 a 110 
+        $vlinha["num_cartorio"] = substr($linha, 369, 2);
+        $vlinha["num_protocolo"] = substr($linha, 371, 10);
+
+        $vlinha["abatimento_nao_aprov"] = $this->formataNumero(substr($linha,
+                                                                      293, 13)); //9  v99 Abatimento não aproveitado pelo sacado
+
+        return $vlinha;
     }
 
     /**
@@ -220,5 +230,10 @@ abstract class AbstractCNAB400Processor extends AbstractProcessor
                 $lote->addDetail($composable);
                 break;
         }
+    }
+
+    public function processarLinha($numLn, $linha)
+    {
+        
     }
 }

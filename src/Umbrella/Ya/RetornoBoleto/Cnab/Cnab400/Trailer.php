@@ -7,9 +7,8 @@ use Easy\Collections\IVector;
 use Umbrella\Ya\RetornoBoleto\Model\Banco;
 use Umbrella\Ya\RetornoBoleto\Model\Cobranca;
 
-class Trailer implements ITrailer
+class Trailer extends AbstractCnab400 implements ITrailer
 {
-    protected $registro;
     protected $retorno;
     protected $tipoRegistro;
     protected $sequencial;
@@ -53,11 +52,7 @@ class Trailer implements ITrailer
     public function __construct()
     {
         $this->brancos = new ArrayList();
-    }
-
-    public function getRegistro()
-    {
-        return $this->registro;
+        parent::__construct();
     }
 
     public function getRetorno()
@@ -103,12 +98,6 @@ class Trailer implements ITrailer
     public function getDescontada()
     {
         return $this->descontada;
-    }
-
-    public function setRegistro($registro)
-    {
-        $this->registro = $registro;
-        return $this;
     }
 
     public function setRetorno($retorno)

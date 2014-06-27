@@ -2,29 +2,11 @@
 
 namespace Umbrella\Tests\Ya\RetornoBoleto;
 
-use PHPUnit_Framework_TestCase;
-use Umbrella\Ya\RetornoBoleto\AbstractProcessor;
-use Umbrella\Ya\RetornoBoleto\Cnab\IComposable;
 use Umbrella\Ya\RetornoBoleto\ProcessFactory;
 use Umbrella\Ya\RetornoBoleto\ProcessHandler;
 
-class RetornoCNAB400Test extends PHPUnit_Framework_TestCase
+class RetornoCNAB400Test extends AbstractCnabTestCase
 {
-
-    public function linhaProcessada(AbstractProcessor $self, $numLn,
-                                    IComposable $vlinha)
-    {
-        if ($vlinha) {
-            if ($vlinha->getRegistro() == $self::DETALHE) {
-                printf("%08d: ", $numLn);
-                echo get_class($self) . ": Nosso N&uacute;mero <b>" . $vlinha->getNossoNumero() . "</b> " .
-                "Data <b>" . $vlinha->getDataOcorrencia() . "</b> " .
-                "Valor <b>" . $vlinha->getValor() . "</b><br/>\n";
-            }
-        } else {
-            echo "Tipo da linha n&atilde;o identificado<br/>\n";
-        }
-    }
 
     public function conveio6Provider()
     {

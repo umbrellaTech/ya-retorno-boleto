@@ -6,9 +6,8 @@ use Easy\Collections\ArrayList;
 use Easy\Collections\IVector;
 use Umbrella\Ya\RetornoBoleto\Model\Cedente;
 
-class Header implements IHeader
+class Header extends AbstractCnab400 implements IHeader
 {
-    protected $registro;
     protected $tipoOperacao;
     protected $idTipoOperacao;
     protected $idTipoServico;
@@ -31,11 +30,7 @@ class Header implements IHeader
     public function __construct()
     {
         $this->complementos = new ArrayList();
-    }
-
-    public function getRegistro()
-    {
-        return $this->registro;
+        parent::__construct();
     }
 
     public function getTipoOperacao()
@@ -71,12 +66,6 @@ class Header implements IHeader
     public function getCedente()
     {
         return $this->cedente;
-    }
-
-    public function setRegistro($registro)
-    {
-        $this->registro = $registro;
-        return $this;
     }
 
     public function setTipoOperacao($tipoOperacao)
