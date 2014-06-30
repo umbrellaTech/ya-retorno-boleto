@@ -5,6 +5,7 @@ namespace Umbrella\Ya\RetornoBoleto\Cnab;
 use Easy\Collections\ArrayList;
 use Easy\Collections\IVector;
 use Umbrella\Ya\RetornoBoleto\Model\Cedente;
+use Umbrella\Ya\RetornoBoleto\Model\Empresa;
 
 abstract class AbstractCnab
 {
