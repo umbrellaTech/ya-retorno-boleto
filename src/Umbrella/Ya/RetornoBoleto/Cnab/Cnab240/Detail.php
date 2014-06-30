@@ -153,13 +153,13 @@ class Detail extends AbstractCnab240 implements ICnab240, ICnabDetail
         return $this;
     }
 
-    public function setDataVencimento(DateTime $dataVencimento)
+    public function setDataVencimento($dataVencimento)
     {
         $this->dataVencimento = $dataVencimento;
         return $this;
     }
 
-    public function setDataPagamento(DateTime $dataPagamento)
+    public function setDataPagamento($dataPagamento)
     {
         $this->dataPagamento = $dataPagamento;
         return $this;

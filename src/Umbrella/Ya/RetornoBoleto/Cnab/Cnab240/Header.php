@@ -52,7 +52,7 @@ class Header extends AbstractHeader implements ICnab240, ICnabHeader
         return $this;
     }
 
-    public function setDataGeracao(DateTime $dataGeracao)
+    public function setDataGeracao($dataGeracao)
     {
         $this->dataGeracao = $dataGeracao;
         return $this;
