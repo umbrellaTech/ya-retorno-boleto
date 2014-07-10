@@ -7,6 +7,7 @@ use Umbrella\Ya\RetornoBoleto\Cnab\ICnabHeader;
 
 class Header extends AbstractHeader implements ICnab240, ICnabHeader
 {
+
     protected $codArquivo;
     protected $densidade;
 
@@ -15,55 +16,56 @@ class Header extends AbstractHeader implements ICnab240, ICnabHeader
      * @var DateTime
      */
     protected $dataGeracao;
-    protected $sequencialReg;
+    protected $sequencialRet;
 
-    public function getCodArquivo()
+    public function getCodArquivo ()
     {
         return $this->codArquivo;
     }
 
-    public function getDensidade()
+    public function getDensidade ()
     {
         return $this->densidade;
     }
 
-    public function getDataGeracao()
+    public function getDataGeracao ()
     {
         return $this->dataGeracao;
     }
 
-    public function getSequencialReg()
+    public function getSequencialRet ()
     {
-        return $this->sequencialReg;
+        return $this->sequencialRet;
     }
 
     /**
      * @param string $codArquivo
      */
-    public function setCodArquivo($codArquivo)
+    public function setCodArquivo ($codArquivo)
     {
         $this->codArquivo = $codArquivo;
         return $this;
     }
 
-    public function setDensidade($densidade)
+    public function setDensidade ($densidade)
     {
         $this->densidade = $densidade;
         return $this;
     }
 
-    public function setDataGeracao($dataGeracao)
+    public function setDataGeracao ($dataGeracao)
     {
         $this->dataGeracao = $dataGeracao;
         return $this;
     }
 
     /**
-     * @param string $sequencialReg
+     * @param string $sequencialRet
      */
-    public function setSequencialReg($sequencialReg)
+    public function setSequencialRet ($sequencialRet)
     {
-        $this->sequencialReg = $sequencialReg;
+        $this->sequencialRet = $sequencialRet;
         return $this;
     }
+
 }

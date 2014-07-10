@@ -73,7 +73,7 @@ class CNAB240Processor extends AbstractProcessor
         $header->setDataGeracao($this->createDateTime(substr($linha, 144, 8) . " " . substr($linha,
                                                                                             152,
                                                                                             6)))
-            ->setSequencialReg(substr($linha, 158, 6))
+            ->setSequencialRet(substr($linha, 158, 6))
             ->setVersaoLayout(substr($linha, 164, 3))
         ;
 
