@@ -11,6 +11,7 @@ use Umbrella\Ya\RetornoBoleto\Cnab\Cnab400\Convenio\Processor\CNAB400Conv7Proces
 use Umbrella\Ya\RetornoBoleto\Exception\DetailSectionNotFoundException;
 use Umbrella\Ya\RetornoBoleto\Exception\HeaderSectionNotFoundException;
 use Umbrella\Ya\RetornoBoleto\Exception\InvalidHeaderException;
+use Cnab\Cnab400\Bradesco\Processor\CNAB400BradescoProcessor;
 
 /**
  * Classe que identifica o tipo de arquivo de retorno sendo carregado e instancia a classe
@@ -46,15 +47,16 @@ class ProcessFactory
             fclose($arq);
             throw new HeaderSectionNotFoundException("Tipo de arquivo de retorno não identificado. Não foi possível ler o header do arquivo.");
         }
-        
-        //echo "<h1>Arquivo: $fileName. Linha: $linha</h1>";
+
         $len = strlen($linha);
         if ($len >= 240 && $len <= 242) {
             return new CNAB240Processor($fileName, $aoProcessarLinhaFunctionName);
         } elseif ($len >= 400 && $len <= 402) {
             if (strstr($linha, "BRADESCO")) {
-                return new RetornoCNAB400Bradesco($fileName,
-                                                  $aoProcessarLinhaFunctionName);
+                throw new ReturnFileNotSupportedException('Arquivo de retorno Bradesco não suportado.');
+                //Tipo de retorno ainda não implementado (BRADESCO);
+//                return new CNAB400BradescoProcessor($fileName,
+//                                                  $aoProcessarLinhaFunctionName);
             }
 
             //Lê o primeiro registro detalhe
