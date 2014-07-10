@@ -11,7 +11,7 @@ use Umbrella\Ya\RetornoBoleto\Cnab\Cnab400\Convenio\Processor\CNAB400Conv7Proces
 use Umbrella\Ya\RetornoBoleto\Exception\DetailSectionNotFoundException;
 use Umbrella\Ya\RetornoBoleto\Exception\HeaderSectionNotFoundException;
 use Umbrella\Ya\RetornoBoleto\Exception\InvalidHeaderException;
-use Cnab\Cnab400\Bradesco\Processor\CNAB400BradescoProcessor;
+use Umbrella\Ya\RetornoBoleto\Exception\ReturnFileNotSupportedException;
 
 /**
  * Classe que identifica o tipo de arquivo de retorno sendo carregado e instancia a classe
