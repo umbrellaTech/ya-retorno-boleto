@@ -5,6 +5,7 @@ namespace Umbrella\Ya\RetornoBoleto;
 use Exception;
 use InvalidArgumentException;
 use League\Flysystem\FileNotFoundException;
+use Umbrella\Ya\RetornoBoleto\Cnab\Cnab150\Processor\CNAB150Processor;
 use Umbrella\Ya\RetornoBoleto\Cnab\Cnab240\Processor\CNAB240Processor;
 use Umbrella\Ya\RetornoBoleto\Cnab\Cnab400\Convenio\Processor\CNAB400Conv6Processor;
 use Umbrella\Ya\RetornoBoleto\Cnab\Cnab400\Convenio\Processor\CNAB400Conv7Processor;
@@ -49,7 +50,9 @@ class ProcessFactory
         }
 
         $len = strlen($linha);
-        if ($len >= 240 && $len <= 242) {
+        if ($len >= 150 && $len <= 152) {
+            return new CNAB150Processor($fileName, $aoProcessarLinhaFunctionName);
+        } elseif ($len >= 240 && $len <= 242) {
             return new CNAB240Processor($fileName, $aoProcessarLinhaFunctionName);
         } elseif ($len >= 400 && $len <= 402) {
             if (strstr($linha, "BRADESCO")) {
