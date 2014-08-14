@@ -11,14 +11,14 @@ class RetornoCNAB400Test extends AbstractCnabTestCase
     public function conveio6Provider()
     {
         return array(
-            array(__DIR__ . '/../../Resources/ret/retorno_cnab400conv6.ret')
+            array(__DIR__ . '/../../Resources/ret/400/retorno_cnab400conv6.ret')
         );
     }
 
     public function conveio7Provider()
     {
         return array(
-            array(__DIR__ . '/../../Resources/ret/retorno_cnab400conv7.ret')
+            array(__DIR__ . '/../../Resources/ret/400/retorno_cnab400conv7.ret')
         );
     }
 

@@ -5,7 +5,6 @@ namespace Umbrella\Ya\RetornoBoleto\Cnab\Cnab150\Processor;
 use Umbrella\Ya\RetornoBoleto\AbstractProcessor;
 use Umbrella\Ya\RetornoBoleto\Cnab\Cnab150\Detail;
 use Umbrella\Ya\RetornoBoleto\Cnab\Cnab150\Header;
-use Umbrella\Ya\RetornoBoleto\Cnab\Cnab150\ICnab150;
 use Umbrella\Ya\RetornoBoleto\Cnab\Cnab150\Trailer;
 use Umbrella\Ya\RetornoBoleto\Cnab\IComposable;
 use Umbrella\Ya\RetornoBoleto\ILote;
@@ -13,7 +12,6 @@ use Umbrella\Ya\RetornoBoleto\IRetorno;
 use Umbrella\Ya\RetornoBoleto\Model\Banco;
 use Umbrella\Ya\RetornoBoleto\Model\Cedente;
 use Umbrella\Ya\RetornoBoleto\Model\Empresa;
-use Umbrella\Ya\RetornoBoleto\Model\Endereco;
 
 /**
  * Classe para leitura_arquivos_retorno_cobranças_padrão CNAB150.<br/>

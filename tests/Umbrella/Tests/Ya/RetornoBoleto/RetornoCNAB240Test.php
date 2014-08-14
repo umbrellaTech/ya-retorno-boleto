@@ -11,8 +11,8 @@ class RetornoCNAB240Test extends AbstractCnabTestCase
     public function cnabProvider ()
     {
         return array(
-            array(__DIR__ . '/../../Resources/ret/retorno_cnab240.ret'),
-            array(__DIR__ . '/../../Resources/ret/IEDCBR361502201214659.ret')
+            array(__DIR__ . '/../../Resources/ret/240/retorno_cnab240.ret'),
+            array(__DIR__ . '/../../Resources/ret/240/IEDCBR361502201214659.ret')
         );
     }
 

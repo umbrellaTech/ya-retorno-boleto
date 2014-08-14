@@ -7,9 +7,6 @@ use Umbrella\Ya\RetornoBoleto\Cnab\ICnabHeader;
 
 class Header extends AbstractCnab150 implements ICnab150, ICnabHeader
 {
-    protected $codArquivo;
-    protected $densidade;
-
     /**
      * @var DateTime
      */
@@ -18,16 +15,6 @@ class Header extends AbstractCnab150 implements ICnab150, ICnabHeader
     protected $convenio;
     protected $versaoLayout;
     protected $remessa;
-
-    public function getCodArquivo()
-    {
-        return $this->codArquivo;
-    }
-
-    public function getDensidade()
-    {
-        return $this->densidade;
-    }
 
     public function getDataGeracao()
     {
@@ -52,18 +39,6 @@ class Header extends AbstractCnab150 implements ICnab150, ICnabHeader
     public function getRemessa()
     {
         return $this->remessa;
-    }
-
-    public function setCodArquivo($codArquivo)
-    {
-        $this->codArquivo = $codArquivo;
-        return $this;
-    }
-
-    public function setDensidade($densidade)
-    {
-        $this->densidade = $densidade;
-        return $this;
     }
 
     public function setDataGeracao(DateTime $dataGeracao)
