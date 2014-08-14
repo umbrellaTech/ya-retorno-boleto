@@ -8,18 +8,20 @@ use Umbrella\Ya\RetornoBoleto\ProcessHandler;
 class RetornoCNAB240Test extends AbstractCnabTestCase
 {
 
-    public function cnabProvider ()
+    public function cnabProvider()
     {
         return array(
             array(__DIR__ . '/../../Resources/ret/240/retorno_cnab240.ret'),
-            array(__DIR__ . '/../../Resources/ret/240/IEDCBR361502201214659.ret')
+            array(__DIR__ . '/../../Resources/ret/240/IEDCBR361502201214659.ret'),
+            array(__DIR__ . '/../../Resources/ret/240/RETORNOCEF120814.ret'),
+            array(__DIR__ . '/../../Resources/ret/240/RETORNOCEF090814.bax')
         );
     }
 
     /**
      * @dataProvider cnabProvider
      */
-    public function testCnab240 ($fileName)
+    public function testCnab240($fileName)
     {
         $cnab = ProcessFactory::getRetorno($fileName);
 
@@ -28,8 +30,10 @@ class RetornoCNAB240Test extends AbstractCnabTestCase
 
         $this->assertInstanceOf("Umbrella\\Ya\\RetornoBoleto\\Retorno", $retorno);
 
-        $this->assertInstanceOf("Umbrella\\Ya\\RetornoBoleto\\Cnab\\Cnab240\\Header", $retorno->getHeader());
+        $this->assertInstanceOf("Umbrella\\Ya\\RetornoBoleto\\Cnab\\Cnab240\\Header",
+                                $retorno->getHeader());
 
-        $this->assertInstanceOf("Umbrella\\Ya\\RetornoBoleto\\Cnab\\Cnab240\\Trailer", $retorno->getTrailer());
+        $this->assertInstanceOf("Umbrella\\Ya\\RetornoBoleto\\Cnab\\Cnab240\\Trailer",
+                                $retorno->getTrailer());
     }
 }
