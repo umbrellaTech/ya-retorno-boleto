@@ -6,7 +6,7 @@ use Easy\Collections\ArrayList;
 use Easy\Collections\VectorInterface;
 use Umbrella\Ya\RetornoBoleto\Cnab\Cnab400\Detail;
 
-class DetailConvenio extends Detail implements IDetailConvenio
+class DetailConvenio extends Detail implements DetailConvenioInterface
 {
     protected $convenio;
     protected $controle;

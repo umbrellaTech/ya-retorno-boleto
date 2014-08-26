@@ -3,7 +3,7 @@
 namespace Umbrella\Ya\RetornoBoleto;
 
 use DateTime;
-use Umbrella\Ya\RetornoBoleto\Cnab\IComposable;
+use Umbrella\Ya\RetornoBoleto\Cnab\ComposableInterface;
 
 /**
  * Classe base para leitura de arquivos de retorno de cobranças dos bancos brasileiros.<br/>
@@ -73,13 +73,13 @@ abstract class AbstractProcessor
      * Processa uma linha do arquivo de retorno. O método é abstrato e deve ser implementado nas sub-classes.
      * @param int $numLn Número da linha a ser processada
      * @param string $linha String contendo a linha a ser processada
-     * @return IComposable Retorna um vetor associativo contendo os valores da linha processada.
+     * @return ComposableInterface Retorna um vetor associativo contendo os valores da linha processada.
      */
     public abstract function processarLinha($numLn, $linha);
 
-    public abstract function processCnab(IRetorno $retorno,
-                                         IComposable $composable,
-                                         ILote $lote = null);
+    public abstract function processCnab(RetornoInterface $retorno,
+                                         ComposableInterface $composable,
+                                         LoteInterface $lote = null);
 
     /**
      * Atribui uma função ao evento aoProcessarLinha.
@@ -102,7 +102,7 @@ abstract class AbstractProcessor
      * executa a mesma, disparando o evento.
      * @param AbstractProcessor $self
      * @param int $lineNumber Número da linha processada.
-     * @param IComposable $composable IComposable contendo a linha processada, contendo os valores da armazenados
+     * @param ComposableInterface $composable IComposable contendo a linha processada, contendo os valores da armazenados
      * nas colunas deste vetor. Nesta função o usuário pode fazer o que desejar,
      * como setar um campo em uma tabela do banco de dados, para indicar
      * o pagamento de um boleto de um determinado cliente.

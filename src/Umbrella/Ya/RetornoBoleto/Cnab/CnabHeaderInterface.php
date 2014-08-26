@@ -4,7 +4,7 @@ namespace Umbrella\Ya\RetornoBoleto\Cnab;
 
 use Umbrella\Ya\RetornoBoleto\Model\Cedente;
 
-interface ICnabHeader extends IComposable
+interface CnabHeaderInterface extends ComposableInterface
 {
 
     /**

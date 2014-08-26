@@ -2,7 +2,7 @@
 
 namespace Umbrella\Ya\RetornoBoleto\Cnab;
 
-interface IComposable
+interface ComposableInterface
 {
 
     public function getRegistro();

@@ -4,9 +4,9 @@ namespace Umbrella\Ya\RetornoBoleto\Cnab\Cnab240;
 
 use Easy\Collections\ArrayList;
 use Easy\Collections\VectorInterface;
-use Umbrella\Ya\RetornoBoleto\Cnab\ICnabHeader;
+use Umbrella\Ya\RetornoBoleto\Cnab\CnabHeaderInterface;
 
-class HeaderLote extends AbstractHeader implements ICnab240, ICnabHeader
+class HeaderLote extends AbstractHeader implements Cnab240Interface, CnabHeaderInterface
 {
     protected $operacao;
     protected $servico;

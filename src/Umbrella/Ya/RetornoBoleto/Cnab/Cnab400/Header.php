@@ -6,7 +6,7 @@ use Easy\Collections\ArrayList;
 use Easy\Collections\VectorInterface;
 use Umbrella\Ya\RetornoBoleto\Model\Cedente;
 
-class Header extends AbstractCnab400 implements IHeader
+class Header extends AbstractCnab400 implements HeaderInterface
 {
     protected $tipoOperacao;
     protected $idTipoOperacao;

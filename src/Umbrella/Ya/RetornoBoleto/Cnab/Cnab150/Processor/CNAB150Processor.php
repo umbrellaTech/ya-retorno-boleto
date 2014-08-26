@@ -6,9 +6,9 @@ use Umbrella\Ya\RetornoBoleto\AbstractProcessor;
 use Umbrella\Ya\RetornoBoleto\Cnab\Cnab150\Detail;
 use Umbrella\Ya\RetornoBoleto\Cnab\Cnab150\Header;
 use Umbrella\Ya\RetornoBoleto\Cnab\Cnab150\Trailer;
-use Umbrella\Ya\RetornoBoleto\Cnab\IComposable;
-use Umbrella\Ya\RetornoBoleto\ILote;
-use Umbrella\Ya\RetornoBoleto\IRetorno;
+use Umbrella\Ya\RetornoBoleto\Cnab\ComposableInterface;
+use Umbrella\Ya\RetornoBoleto\LoteInterface;
+use Umbrella\Ya\RetornoBoleto\RetornoInterface;
 use Umbrella\Ya\RetornoBoleto\Model\Banco;
 use Umbrella\Ya\RetornoBoleto\Model\Cedente;
 use Umbrella\Ya\RetornoBoleto\Model\Empresa;
@@ -161,8 +161,8 @@ class CNAB150Processor extends AbstractProcessor
         return $vlinha;
     }
 
-    public function processCnab(IRetorno $retorno, IComposable $composable,
-                                ILote $lote = null)
+    public function processCnab(RetornoInterface $retorno, ComposableInterface $composable,
+                                LoteInterface $lote = null)
     {
         switch ($composable->getRegistro()) {
             case self::HEADER_ARQUIVO:

@@ -4,16 +4,16 @@ namespace Umbrella\Ya\RetornoBoleto;
 
 use Easy\Collections\ArrayList;
 use Easy\Collections\VectorInterface;
-use Umbrella\Ya\RetornoBoleto\Cnab\ICnabHeader;
-use Umbrella\Ya\RetornoBoleto\Cnab\ICnabTrailer;
+use Umbrella\Ya\RetornoBoleto\Cnab\CnabHeaderInterface;
+use Umbrella\Ya\RetornoBoleto\Cnab\CnabTrailerInterface;
 
 /**
  * Classe que representa um arquivo de retorno genérico.
  */
-class Retorno implements IRetorno
+class Retorno implements RetornoInterface
 {
     /**
-     * @var ICnabHeader
+     * @var CnabHeaderInterface
      */
     protected $header;
 
@@ -23,7 +23,7 @@ class Retorno implements IRetorno
     protected $lotes;
 
     /**
-     * @var ICnabTrailer
+     * @var CnabTrailerInterface
      */
     protected $trailer;
 
@@ -37,10 +37,10 @@ class Retorno implements IRetorno
 
     /**
      * Adiciona um lote.
-     * @param ILote $lote
+     * @param LoteInterface $lote
      * @return Retorno
      */
-    public function addLote(ILote $lote)
+    public function addLote(LoteInterface $lote)
     {
         $this->lotes->add($lote);
         return $this;
@@ -48,10 +48,10 @@ class Retorno implements IRetorno
 
     /**
      * Remove um lote.
-     * @param ILote $lote
+     * @param LoteInterface $lote
      * @return Retorno
      */
-    public function removeLote(ILote $lote)
+    public function removeLote(LoteInterface $lote)
     {
         $this->lotes->remove($lote);
         return $this;
@@ -59,7 +59,7 @@ class Retorno implements IRetorno
 
     /**
      * Recupera o header do arquivo.
-     * @return ICnabHeader
+     * @return CnabHeaderInterface
      */
     public function getHeader()
     {
@@ -68,7 +68,7 @@ class Retorno implements IRetorno
 
     /**
      * Recupera o trailer do arquivo.
-     * @return ICnabTrailer
+     * @return CnabTrailerInterface
      */
     public function getTrailer()
     {
@@ -77,18 +77,18 @@ class Retorno implements IRetorno
 
     /**
      * Define o header do arquivo.
-     * @param ICnabHeader $header
+     * @param CnabHeaderInterface $header
      */
-    public function setHeader(ICnabHeader $header)
+    public function setHeader(CnabHeaderInterface $header)
     {
         $this->header = $header;
     }
 
     /**
      * Define o trailer do arquivo.
-     * @param ICnabTrailer $trailer
+     * @param CnabTrailerInterface $trailer
      */
-    public function setTrailer(ICnabTrailer $trailer)
+    public function setTrailer(CnabTrailerInterface $trailer)
     {
         $this->trailer = $trailer;
     }

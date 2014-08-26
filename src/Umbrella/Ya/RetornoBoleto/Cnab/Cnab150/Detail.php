@@ -3,9 +3,9 @@
 namespace Umbrella\Ya\RetornoBoleto\Cnab\Cnab150;
 
 use DateTime;
-use Umbrella\Ya\RetornoBoleto\Cnab\ICnabDetail;
+use Umbrella\Ya\RetornoBoleto\Cnab\CnabDetailInterface;
 
-class Detail extends AbstractCnab150 implements ICnab150, ICnabDetail
+class Detail extends AbstractCnab150 implements Cnab150Interface, CnabDetailInterface
 {
     /**
      *

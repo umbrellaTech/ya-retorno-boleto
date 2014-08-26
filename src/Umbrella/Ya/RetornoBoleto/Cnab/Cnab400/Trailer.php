@@ -7,7 +7,7 @@ use Easy\Collections\VectorInterface;
 use Umbrella\Ya\RetornoBoleto\Model\Banco;
 use Umbrella\Ya\RetornoBoleto\Model\Cobranca;
 
-class Trailer extends AbstractCnab400 implements ITrailer
+class Trailer extends AbstractCnab400 implements TrailerInterface
 {
     protected $retorno;
     protected $tipoRegistro;

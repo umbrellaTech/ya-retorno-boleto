@@ -3,15 +3,15 @@
 namespace Umbrella\Ya\RetornoBoleto;
 
 use Easy\Collections\VectorInterface;
-use Umbrella\Ya\RetornoBoleto\Cnab\ICnabDetail;
-use Umbrella\Ya\RetornoBoleto\Cnab\ICnabHeader;
-use Umbrella\Ya\RetornoBoleto\Cnab\ICnabTrailer;
+use Umbrella\Ya\RetornoBoleto\Cnab\CnabDetailInterface;
+use Umbrella\Ya\RetornoBoleto\Cnab\CnabHeaderInterface;
+use Umbrella\Ya\RetornoBoleto\Cnab\CnabTrailerInterface;
 
-interface ILote
+interface LoteInterface
 {
 
     /**
-     * @return ICnabHeader
+     * @return CnabHeaderInterface
      */
     public function getHeader();
 
@@ -21,24 +21,24 @@ interface ILote
     public function getDetails();
 
     /**
-     * @return ICnabTrailer
+     * @return CnabTrailerInterface
      */
     public function getTrailer();
 
     /**
      * @return Lote
      */
-    public function addDetail(ICnabDetail $detail);
+    public function addDetail(CnabDetailInterface $detail);
 
     /**
      * @return Lote
      */
-    public function removeDetail(ICnabDetail $detail);
+    public function removeDetail(CnabDetailInterface $detail);
 
     /**
      * @return void
      */
-    public function setHeader(ICnabHeader $header);
+    public function setHeader(CnabHeaderInterface $header);
 
     /**
      * @return void
@@ -48,5 +48,5 @@ interface ILote
     /**
      * @return void
      */
-    public function setTrailer(ICnabTrailer $trailer);
+    public function setTrailer(CnabTrailerInterface $trailer);
 }

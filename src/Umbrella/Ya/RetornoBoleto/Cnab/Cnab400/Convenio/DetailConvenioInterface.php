@@ -3,9 +3,9 @@
 namespace Umbrella\Ya\RetornoBoleto\Cnab\Cnab400\Convenio;
 
 use Easy\Collections\VectorInterface;
-use Umbrella\Ya\RetornoBoleto\Cnab\Cnab400\IDetail;
+use Umbrella\Ya\RetornoBoleto\Cnab\Cnab400\DetailInterface;
 
-interface IDetailConvenio extends IDetail
+interface DetailConvenioInterface extends DetailInterface
 {
 
     public function getConvenio();

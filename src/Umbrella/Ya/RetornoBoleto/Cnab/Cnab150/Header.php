@@ -3,9 +3,9 @@
 namespace Umbrella\Ya\RetornoBoleto\Cnab\Cnab150;
 
 use DateTime;
-use Umbrella\Ya\RetornoBoleto\Cnab\ICnabHeader;
+use Umbrella\Ya\RetornoBoleto\Cnab\CnabHeaderInterface;
 
-class Header extends AbstractCnab150 implements ICnab150, ICnabHeader
+class Header extends AbstractCnab150 implements Cnab150Interface, CnabHeaderInterface
 {
     /**
      * @var DateTime

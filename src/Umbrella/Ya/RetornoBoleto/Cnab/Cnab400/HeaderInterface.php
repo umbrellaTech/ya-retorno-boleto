@@ -3,9 +3,9 @@
 namespace Umbrella\Ya\RetornoBoleto\Cnab\Cnab400;
 
 use Easy\Collections\VectorInterface;
-use Umbrella\Ya\RetornoBoleto\Cnab\ICnabHeader;
+use Umbrella\Ya\RetornoBoleto\Cnab\CnabHeaderInterface;
 
-interface IHeader extends ICnabHeader, ICnab400
+interface HeaderInterface extends CnabHeaderInterface, Cnab400Interface
 {
 
     public function getTipoOperacao();

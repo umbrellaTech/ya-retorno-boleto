@@ -2,7 +2,7 @@
 
 namespace Umbrella\Ya\RetornoBoleto\Cnab;
 
-interface ICnabTrailer extends IComposable
+interface CnabDetailInterface extends ComposableInterface
 {
     
 }

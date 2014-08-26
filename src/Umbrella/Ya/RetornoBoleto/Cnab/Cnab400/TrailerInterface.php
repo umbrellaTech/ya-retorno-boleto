@@ -6,7 +6,7 @@ use Umbrella\Ya\RetornoBoleto\Cnab\ICnabTrailer;
 use Umbrella\Ya\RetornoBoleto\Model\Banco;
 use Umbrella\Ya\RetornoBoleto\Model\Cobranca;
 
-interface ITrailer extends ICnabTrailer, ICnab400
+interface TrailerInterface extends ICnabTrailer, ICnab400
 {
 
     public function getRetorno();

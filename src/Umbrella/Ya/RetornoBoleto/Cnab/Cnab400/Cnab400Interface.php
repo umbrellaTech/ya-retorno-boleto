@@ -4,7 +4,7 @@ namespace Umbrella\Ya\RetornoBoleto\Cnab\Cnab400;
 
 use Umbrella\Ya\RetornoBoleto\Cnab\IComposable;
 
-interface ICnab400 extends IComposable
+interface Cnab400Interface extends IComposable
 {
     
 }

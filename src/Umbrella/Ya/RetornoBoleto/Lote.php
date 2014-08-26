@@ -4,17 +4,17 @@ namespace Umbrella\Ya\RetornoBoleto;
 
 use Easy\Collections\ArrayList;
 use Easy\Collections\VectorInterface;
-use Umbrella\Ya\RetornoBoleto\Cnab\ICnabDetail;
-use Umbrella\Ya\RetornoBoleto\Cnab\ICnabHeader;
-use Umbrella\Ya\RetornoBoleto\Cnab\ICnabTrailer;
+use Umbrella\Ya\RetornoBoleto\Cnab\CnabDetailInterface;
+use Umbrella\Ya\RetornoBoleto\Cnab\CnabHeaderInterface;
+use Umbrella\Ya\RetornoBoleto\Cnab\CnabTrailerInterface;
 
 /**
  * Classe que representa um lote do arquivo de retorno.
  */
-class Lote implements ILote
+class Lote implements LoteInterface
 {
     /**
-     * @var ICnabHeader
+     * @var CnabHeaderInterface
      */
     protected $header;
 
@@ -24,7 +24,7 @@ class Lote implements ILote
     protected $details;
 
     /**
-     * @var ICnabTrailer
+     * @var CnabTrailerInterface
      */
     protected $trailer;
 
@@ -38,10 +38,10 @@ class Lote implements ILote
 
     /**
      * Adiciona um detalhe ao lote.
-     * @param ICnabDetail $detail
+     * @param CnabDetailInterface $detail
      * @return Lote
      */
-    public function addDetail(ICnabDetail $detail)
+    public function addDetail(CnabDetailInterface $detail)
     {
         $this->details->add($detail);
         return $this;
@@ -49,10 +49,10 @@ class Lote implements ILote
 
     /**
      * Remove um detalhe do lote.
-     * @param ICnabDetail $detail
+     * @param CnabDetailInterface $detail
      * @return Lote
      */
-    public function removeDetail(ICnabDetail $detail)
+    public function removeDetail(CnabDetailInterface $detail)
     {
         $this->details->remove($detail);
         return $this;
@@ -60,7 +60,7 @@ class Lote implements ILote
 
     /**
      * Recupera o header do arquivo.
-     * @return ICnabHeader
+     * @return CnabHeaderInterface
      */
     public function getHeader()
     {
@@ -78,7 +78,7 @@ class Lote implements ILote
 
     /**
      * Recupera o trailer do arquivo.
-     * @return ICnabTrailer
+     * @return CnabTrailerInterface
      */
     public function getTrailer()
     {
@@ -87,9 +87,9 @@ class Lote implements ILote
 
     /**
      * Define o header do arquivo.
-     * @param ICnabHeader $header
+     * @param CnabHeaderInterface $header
      */
-    public function setHeader(ICnabHeader $header)
+    public function setHeader(CnabHeaderInterface $header)
     {
         $this->header = $header;
     }
@@ -105,9 +105,9 @@ class Lote implements ILote
 
     /**
      * Define o trailer do arquivo.
-     * @param ICnabTrailer $trailer
+     * @param CnabTrailerInterface $trailer
      */
-    public function setTrailer(ICnabTrailer $trailer)
+    public function setTrailer(CnabTrailerInterface $trailer)
     {
         $this->trailer = $trailer;
     }

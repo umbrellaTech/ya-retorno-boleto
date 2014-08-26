@@ -6,7 +6,7 @@ use Easy\Collections\ArrayList;
 use Easy\Collections\VectorInterface;
 use Umbrella\Ya\RetornoBoleto\Model\Banco;
 
-class Detail extends AbstractCnab400 implements IDetail
+class Detail extends AbstractCnab400 implements DetailInterface
 {
     protected $taxaDesconto;
     protected $taxaIof;

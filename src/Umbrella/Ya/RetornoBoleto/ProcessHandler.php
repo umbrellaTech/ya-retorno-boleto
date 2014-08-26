@@ -29,7 +29,7 @@ class ProcessHandler
         $this->processor = $retorno;
     }
 
-    private function createLote(IRetorno $retorno)
+    private function createLote(RetornoInterface $retorno)
     {
         $lote = new Lote(); //Lote padrão
         $retorno->addLote($lote);
@@ -38,7 +38,7 @@ class ProcessHandler
 
     /**
      * Executa o processamento de todo o arquivo, linha a linha. 
-     * @return IRetorno
+     * @return RetornoInterface
      */
     public function processar()
     {
