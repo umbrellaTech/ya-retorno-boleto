@@ -2,7 +2,7 @@
 
 namespace Umbrella\Ya\RetornoBoleto;
 
-use Easy\Collections\IVector;
+use Easy\Collections\VectorInterface;
 use Umbrella\Ya\RetornoBoleto\Cnab\ICnabHeader;
 use Umbrella\Ya\RetornoBoleto\Cnab\ICnabTrailer;
 
@@ -15,7 +15,7 @@ interface IRetorno
     public function getHeader();
 
     /**
-     * @return IVector
+     * @return VectorInterface
      */
     public function getLotes();
 
@@ -47,5 +47,5 @@ interface IRetorno
     /**
      * @return Retorno
      */
-    public function setLotes(IVector $lote);
+    public function setLotes(VectorInterface $lote);
 }

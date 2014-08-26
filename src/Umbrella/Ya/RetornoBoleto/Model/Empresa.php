@@ -3,7 +3,7 @@
 namespace Umbrella\Ya\RetornoBoleto\Model;
 
 use Easy\Collections\ArrayList;
-use Easy\Collections\IVector;
+use Easy\Collections\VectorInterface;
 
 class Empresa
 {
@@ -20,13 +20,13 @@ class Empresa
 
     /**
      *
-     * @var IVector
+     * @var VectorInterface
      */
     protected $usos;
 
     /**
      *
-     * @var IVector
+     * @var VectorInterface
      */
     protected $reservados;
 
@@ -109,7 +109,7 @@ class Empresa
         return $this;
     }
 
-    public function setUsos(IVector $usos)
+    public function setUsos(VectorInterface $usos)
     {
         $this->usos = $usos;
         return $this;
@@ -138,7 +138,7 @@ class Empresa
         return $this->reservados;
     }
 
-    public function setReservados(IVector $reservados)
+    public function setReservados(VectorInterface $reservados)
     {
         $this->reservados = $reservados;
         return $this;

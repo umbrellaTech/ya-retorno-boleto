@@ -3,7 +3,7 @@
 namespace Umbrella\Ya\RetornoBoleto\Cnab\Cnab400;
 
 use Easy\Collections\ArrayList;
-use Easy\Collections\IVector;
+use Easy\Collections\VectorInterface;
 use Umbrella\Ya\RetornoBoleto\Model\Banco;
 
 class Detail extends AbstractCnab400 implements IDetail
@@ -50,13 +50,13 @@ class Detail extends AbstractCnab400 implements IDetail
 
     /**
      *
-     * @var IVector
+     * @var VectorInterface
      */
     protected $zeros;
 
     /**
      *
-     * @var IVector
+     * @var VectorInterface
      */
     protected $brancos;
 
@@ -380,7 +380,7 @@ class Detail extends AbstractCnab400 implements IDetail
         return $this->zeros;
     }
 
-    public function setZeros(IVector $zeros)
+    public function setZeros(VectorInterface $zeros)
     {
         $this->zeros = $zeros;
         return $this;

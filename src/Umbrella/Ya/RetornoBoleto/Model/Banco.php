@@ -3,7 +3,7 @@
 namespace Umbrella\Ya\RetornoBoleto\Model;
 
 use Easy\Collections\ArrayList;
-use Easy\Collections\IVector;
+use Easy\Collections\VectorInterface;
 
 /**
  * Classe que representa um banco.
@@ -19,7 +19,7 @@ class Banco
     protected $dvAgenciaConta;
 
     /**
-     * @var IVector
+     * @var VectorInterface
      */
     protected $reservados;
 
@@ -31,7 +31,7 @@ class Banco
         $this->reservados = new ArrayList();
     }
 
-    public function setReservados(IVector $reservados)
+    public function setReservados(VectorInterface $reservados)
     {
         $this->reservados = $reservados;
         return $this;

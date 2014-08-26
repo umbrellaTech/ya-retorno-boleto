@@ -3,7 +3,7 @@
 namespace Umbrella\Ya\RetornoBoleto\Cnab\Cnab240;
 
 use Easy\Collections\ArrayList;
-use Easy\Collections\IVector;
+use Easy\Collections\VectorInterface;
 use Umbrella\Ya\RetornoBoleto\Cnab\ICnabHeader;
 
 class HeaderLote extends AbstractHeader implements ICnab240, ICnabHeader
@@ -14,7 +14,7 @@ class HeaderLote extends AbstractHeader implements ICnab240, ICnabHeader
 
     /**
      *
-     * @var IVector
+     * @var VectorInterface
      */
     protected $mensagens;
 
@@ -71,7 +71,7 @@ class HeaderLote extends AbstractHeader implements ICnab240, ICnabHeader
         return $this;
     }
 
-    public function setMensagens(IVector $mensagens)
+    public function setMensagens(VectorInterface $mensagens)
     {
         $this->mensagens = $mensagens;
         return $this;

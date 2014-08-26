@@ -3,7 +3,7 @@
 namespace Umbrella\Ya\RetornoBoleto;
 
 use Easy\Collections\ArrayList;
-use Easy\Collections\IVector;
+use Easy\Collections\VectorInterface;
 use Umbrella\Ya\RetornoBoleto\Cnab\ICnabHeader;
 use Umbrella\Ya\RetornoBoleto\Cnab\ICnabTrailer;
 
@@ -18,7 +18,7 @@ class Retorno implements IRetorno
     protected $header;
 
     /**
-     * @var IVector
+     * @var VectorInterface
      */
     protected $lotes;
 
@@ -95,7 +95,7 @@ class Retorno implements IRetorno
 
     /**
      * Recupera todos os lotes do arquivo.
-     * @return IVector
+     * @return VectorInterface
      */
     public function getLotes()
     {
@@ -104,10 +104,10 @@ class Retorno implements IRetorno
 
     /**
      * Define todos os lotes do arquivo.
-     * @param IVector $lotes
+     * @param VectorInterface $lotes
      * @return Retorno
      */
-    public function setLotes(IVector $lotes)
+    public function setLotes(VectorInterface $lotes)
     {
         $this->lotes = $lotes;
         return $this;

@@ -3,7 +3,7 @@
 namespace Umbrella\Ya\RetornoBoleto;
 
 use Easy\Collections\ArrayList;
-use Easy\Collections\IVector;
+use Easy\Collections\VectorInterface;
 use Umbrella\Ya\RetornoBoleto\Cnab\ICnabDetail;
 use Umbrella\Ya\RetornoBoleto\Cnab\ICnabHeader;
 use Umbrella\Ya\RetornoBoleto\Cnab\ICnabTrailer;
@@ -19,7 +19,7 @@ class Lote implements ILote
     protected $header;
 
     /**
-     * @var IVector
+     * @var VectorInterface
      */
     protected $details;
 
@@ -69,7 +69,7 @@ class Lote implements ILote
 
     /**
      * Recupera os detalhes do arquivo.
-     * @return IVector
+     * @return VectorInterface
      */
     public function getDetails()
     {
@@ -96,9 +96,9 @@ class Lote implements ILote
 
     /**
      * Define os detalhes do arquivo.
-     * @param IVector $details
+     * @param VectorInterface $details
      */
-    public function setDetails(IVector $details)
+    public function setDetails(VectorInterface $details)
     {
         $this->details = $details;
     }

@@ -2,7 +2,7 @@
 
 namespace Umbrella\Ya\RetornoBoleto\Cnab\Cnab400\Convenio;
 
-use Easy\Collections\IVector;
+use Easy\Collections\VectorInterface;
 use Umbrella\Ya\RetornoBoleto\Cnab\Cnab400\IDetail;
 
 interface IDetailConvenio extends IDetail
@@ -31,7 +31,7 @@ interface IDetailConvenio extends IDetail
     public function getConfirmacao();
 
     /**
-     * @return IVector
+     * @return VectorInterface
      */
     public function getUsoBanco();
 
@@ -93,7 +93,7 @@ interface IDetailConvenio extends IDetail
     /**
      * @return DetailConvenio
      */
-    public function setUsoBanco(IVector $usoBanco);
+    public function setUsoBanco(VectorInterface $usoBanco);
 
     /**
      * @return DetailConvenio

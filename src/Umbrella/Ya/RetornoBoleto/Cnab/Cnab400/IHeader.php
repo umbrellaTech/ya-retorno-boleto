@@ -2,7 +2,7 @@
 
 namespace Umbrella\Ya\RetornoBoleto\Cnab\Cnab400;
 
-use Easy\Collections\IVector;
+use Easy\Collections\VectorInterface;
 use Umbrella\Ya\RetornoBoleto\Cnab\ICnabHeader;
 
 interface IHeader extends ICnabHeader, ICnab400
@@ -51,14 +51,14 @@ interface IHeader extends ICnabHeader, ICnab400
     public function setSequencialReg($sequencialReg);
 
     /**
-     * @return IVector
+     * @return VectorInterface
      */
     public function getComplementos();
 
     /**
      * @return Header
      */
-    public function setComplementos(IVector $complementos);
+    public function setComplementos(VectorInterface $complementos);
 
     /**
      * @return Header

@@ -3,7 +3,7 @@
 namespace Umbrella\Ya\RetornoBoleto\Cnab\Cnab400;
 
 use Easy\Collections\ArrayList;
-use Easy\Collections\IVector;
+use Easy\Collections\VectorInterface;
 use Umbrella\Ya\RetornoBoleto\Model\Banco;
 use Umbrella\Ya\RetornoBoleto\Model\Cobranca;
 
@@ -45,7 +45,7 @@ class Trailer extends AbstractCnab400 implements ITrailer
 
     /**
      *
-     * @var IVector
+     * @var VectorInterface
      */
     protected $brancos;
 

@@ -3,7 +3,7 @@
 namespace Umbrella\Ya\RetornoBoleto\Cnab;
 
 use Easy\Collections\ArrayList;
-use Easy\Collections\IVector;
+use Easy\Collections\VectorInterface;
 use Umbrella\Ya\RetornoBoleto\Model\Cedente;
 use Umbrella\Ya\RetornoBoleto\Model\Empresa;
 
@@ -20,13 +20,13 @@ abstract class AbstractCnab
 
     /**
      *
-     * @var IVector
+     * @var VectorInterface
      */
     protected $cnabs;
 
     /**
      *
-     * @var IVector
+     * @var VectorInterface
      */
     protected $ocorrencias;
 
@@ -65,7 +65,7 @@ abstract class AbstractCnab
         return $this->cnabs;
     }
 
-    public function setCnabs(IVector $cnabs)
+    public function setCnabs(VectorInterface $cnabs)
     {
         $this->cnabs = $cnabs;
         return $this;
@@ -115,7 +115,7 @@ abstract class AbstractCnab
         return $this->ocorrencias;
     }
 
-    public function setOcorrencias(IVector $ocorrencias)
+    public function setOcorrencias(VectorInterface $ocorrencias)
     {
         $this->ocorrencias = $ocorrencias;
         return $this;

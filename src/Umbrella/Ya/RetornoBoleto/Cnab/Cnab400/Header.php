@@ -3,7 +3,7 @@
 namespace Umbrella\Ya\RetornoBoleto\Cnab\Cnab400;
 
 use Easy\Collections\ArrayList;
-use Easy\Collections\IVector;
+use Easy\Collections\VectorInterface;
 use Umbrella\Ya\RetornoBoleto\Model\Cedente;
 
 class Header extends AbstractCnab400 implements IHeader
@@ -17,7 +17,7 @@ class Header extends AbstractCnab400 implements IHeader
 
     /**
      *
-     * @var IVector
+     * @var VectorInterface
      */
     protected $complementos;
 
@@ -115,7 +115,7 @@ class Header extends AbstractCnab400 implements IHeader
         return $this->complementos;
     }
 
-    public function setComplementos(IVector $complementos)
+    public function setComplementos(VectorInterface $complementos)
     {
         $this->complementos = $complementos;
         return $this;
