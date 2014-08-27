@@ -86,8 +86,7 @@ class CNAB150Processor extends AbstractProcessor
 
         $detail
             ->setRegistro(substr($linha, 1, 1))
-            ->setDataPagamento($this->createDateTime(substr($linha, 22, 8),
-                                                            "Ymd"))
+            ->setDataPagamento($this->createDateTime(substr($linha, 22, 8), "Ymd"))
             ->setDataCredito($this->createDateTime(substr($linha, 30, 8), "Ymd"))
             ->setCodBarras(substr($linha, 38, 44))
             ->setValorRecebido(substr($linha, 82, 10))
@@ -161,8 +160,7 @@ class CNAB150Processor extends AbstractProcessor
         return $vlinha;
     }
 
-    public function processCnab(RetornoInterface $retorno, ComposableInterface $composable,
-                                LoteInterface $lote = null)
+    public function processCnab(RetornoInterface $retorno, ComposableInterface $composable, LoteInterface $lote = null)
     {
         switch ($composable->getRegistro()) {
             case self::HEADER_ARQUIVO:

@@ -35,7 +35,7 @@ class RetornoCNAB400Test extends AbstractCnabTestCase
 
         $this->assertInstanceOf("Umbrella\\Ya\\RetornoBoleto\\Retorno", $retorno);
 
-        $this->assertInstanceOf("Umbrella\\Ya\\RetornoBoleto\\Cnab\\Cnab400\\Convenio\\IHeaderConvenio",
+        $this->assertInstanceOf("Umbrella\\Ya\\RetornoBoleto\\Cnab\\Cnab400\\Convenio\\HeaderConvenioInterface",
                                 $retorno->getHeader());
     }
 
@@ -51,10 +51,10 @@ class RetornoCNAB400Test extends AbstractCnabTestCase
 
         $this->assertInstanceOf("Umbrella\\Ya\\RetornoBoleto\\Retorno", $retorno);
 
-        $this->assertInstanceOf("Umbrella\\Ya\\RetornoBoleto\\Cnab\\Cnab400\\IHeader",
+        $this->assertInstanceOf("Umbrella\\Ya\\RetornoBoleto\\Cnab\\Cnab400\\HeaderInterface",
                                 $retorno->getHeader());
 
-        $this->assertInstanceOf("Umbrella\\Ya\\RetornoBoleto\\Cnab\\Cnab400\\ITrailer",
+        $this->assertInstanceOf("Umbrella\\Ya\\RetornoBoleto\\Cnab\\Cnab400\\TrailerInterface",
                                 $retorno->getTrailer());
     }
 }

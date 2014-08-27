@@ -2,11 +2,11 @@
 
 namespace Umbrella\Ya\RetornoBoleto\Cnab\Cnab400;
 
-use Umbrella\Ya\RetornoBoleto\Cnab\ICnabDetail;
+use Umbrella\Ya\RetornoBoleto\Cnab\CnabDetailInterface;
 use Umbrella\Ya\RetornoBoleto\Model\Banco;
 use Umbrella\Ya\RetornoBoleto\Model\Cedente;
 
-interface DetailInterface extends ICnabDetail, ICnab400
+interface DetailInterface extends CnabDetailInterface, Cnab400Interface
 {
 
     public function getTaxaDesconto();

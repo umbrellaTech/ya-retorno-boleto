@@ -2,9 +2,9 @@
 
 namespace Umbrella\Ya\RetornoBoleto\Cnab\Cnab400\Convenio;
 
-use Umbrella\Ya\RetornoBoleto\Cnab\Cnab400\IHeader;
+use Umbrella\Ya\RetornoBoleto\Cnab\Cnab400\HeaderInterface;
 
-interface HeaderConvenioInterface extends IHeader
+interface HeaderConvenioInterface extends HeaderInterface
 {
 
     public function getConvenio();

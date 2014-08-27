@@ -2,11 +2,11 @@
 
 namespace Umbrella\Ya\RetornoBoleto\Cnab\Cnab400;
 
-use Umbrella\Ya\RetornoBoleto\Cnab\ICnabTrailer;
+use Umbrella\Ya\RetornoBoleto\Cnab\CnabTrailerInterface;
 use Umbrella\Ya\RetornoBoleto\Model\Banco;
 use Umbrella\Ya\RetornoBoleto\Model\Cobranca;
 
-interface TrailerInterface extends ICnabTrailer, ICnab400
+interface TrailerInterface extends CnabTrailerInterface, Cnab400Interface
 {
 
     public function getRetorno();

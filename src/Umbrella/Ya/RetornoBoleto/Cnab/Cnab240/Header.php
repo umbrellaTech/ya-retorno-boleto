@@ -3,11 +3,10 @@
 namespace Umbrella\Ya\RetornoBoleto\Cnab\Cnab240;
 
 use DateTime;
-use Umbrella\Ya\RetornoBoleto\Cnab\ICnabHeader;
+use Umbrella\Ya\RetornoBoleto\Cnab\CnabHeaderInterface;
 
-class Header extends AbstractHeader implements ICnab240, ICnabHeader
+class Header extends AbstractHeader implements Cnab240Interface, CnabHeaderInterface
 {
-
     protected $codArquivo;
     protected $densidade;
 
@@ -18,22 +17,22 @@ class Header extends AbstractHeader implements ICnab240, ICnabHeader
     protected $dataGeracao;
     protected $sequencialRet;
 
-    public function getCodArquivo ()
+    public function getCodArquivo()
     {
         return $this->codArquivo;
     }
 
-    public function getDensidade ()
+    public function getDensidade()
     {
         return $this->densidade;
     }
 
-    public function getDataGeracao ()
+    public function getDataGeracao()
     {
         return $this->dataGeracao;
     }
 
-    public function getSequencialRet ()
+    public function getSequencialRet()
     {
         return $this->sequencialRet;
     }
@@ -41,19 +40,19 @@ class Header extends AbstractHeader implements ICnab240, ICnabHeader
     /**
      * @param string $codArquivo
      */
-    public function setCodArquivo ($codArquivo)
+    public function setCodArquivo($codArquivo)
     {
         $this->codArquivo = $codArquivo;
         return $this;
     }
 
-    public function setDensidade ($densidade)
+    public function setDensidade($densidade)
     {
         $this->densidade = $densidade;
         return $this;
     }
 
-    public function setDataGeracao ($dataGeracao)
+    public function setDataGeracao($dataGeracao)
     {
         $this->dataGeracao = $dataGeracao;
         return $this;
@@ -62,10 +61,9 @@ class Header extends AbstractHeader implements ICnab240, ICnabHeader
     /**
      * @param string $sequencialRet
      */
-    public function setSequencialRet ($sequencialRet)
+    public function setSequencialRet($sequencialRet)
     {
         $this->sequencialRet = $sequencialRet;
         return $this;
     }
-
 }

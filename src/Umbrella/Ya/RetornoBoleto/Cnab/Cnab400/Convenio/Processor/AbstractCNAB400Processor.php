@@ -8,12 +8,12 @@ use Umbrella\Ya\RetornoBoleto\Cnab\Cnab400\Detail;
 use Umbrella\Ya\RetornoBoleto\Cnab\Cnab400\Header;
 use Umbrella\Ya\RetornoBoleto\Cnab\Cnab400\ITrailer;
 use Umbrella\Ya\RetornoBoleto\Cnab\Cnab400\Trailer;
-use Umbrella\Ya\RetornoBoleto\Cnab\IComposable;
-use Umbrella\Ya\RetornoBoleto\ILote;
-use Umbrella\Ya\RetornoBoleto\IRetorno;
+use Umbrella\Ya\RetornoBoleto\Cnab\ComposableInterface;
+use Umbrella\Ya\RetornoBoleto\LoteInterface;
 use Umbrella\Ya\RetornoBoleto\Model\Banco;
 use Umbrella\Ya\RetornoBoleto\Model\Cedente;
 use Umbrella\Ya\RetornoBoleto\Model\Cobranca;
+use Umbrella\Ya\RetornoBoleto\RetornoInterface;
 
 /**
  * Classe abstrata para leitura de arquivos de retorno de cobranças no padrão CNAB400/CBR643.<br/>
@@ -139,8 +139,7 @@ abstract class AbstractCNAB400Processor extends AbstractProcessor
             ->setValorRecebido($this->formataNumero(substr($linha, 254, 13)))
             ->setJurosMora($this->formataNumero(substr($linha, 267, 13)))
             ->setOutrosRecebimentos($this->formataNumero(substr($linha, 280, 13)))
-            ->setAbatimentoNaoAprovado($this->formataNumero(substr($linha, 293,
-                                                                   13)))
+            ->setAbatimentoNaoAprovado($this->formataNumero(substr($linha, 293, 13)))
             ->setValorLancamento($this->formataNumero(substr($linha, 306, 13)))
             ->setIndicativoDc(substr($linha, 319, 1))
             ->setIndicadorValor(substr($linha, 320, 1))
@@ -204,8 +203,7 @@ abstract class AbstractCNAB400Processor extends AbstractProcessor
         return $trailer;
     }
 
-    public function processCnab(IRetorno $retorno, IComposable $composable,
-                                ILote $lote = null)
+    public function processCnab(RetornoInterface $retorno, ComposableInterface $composable, LoteInterface $lote = null)
     {
         switch ((int) $composable->getRegistro()) {
             case self::HEADER_ARQUIVO:

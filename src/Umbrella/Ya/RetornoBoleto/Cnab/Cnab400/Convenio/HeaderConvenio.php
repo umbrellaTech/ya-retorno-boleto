@@ -4,7 +4,7 @@ namespace Umbrella\Ya\RetornoBoleto\Cnab\Cnab400\Convenio;
 
 use Umbrella\Ya\RetornoBoleto\Cnab\Cnab400\Header;
 
-class HeaderConvenio extends Header implements IHeaderConvenio
+class HeaderConvenio extends Header implements HeaderConvenioInterface
 {
     protected $convenio;
     protected $sequencialRet;

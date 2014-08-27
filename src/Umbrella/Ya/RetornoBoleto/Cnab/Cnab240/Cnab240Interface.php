@@ -2,9 +2,9 @@
 
 namespace Umbrella\Ya\RetornoBoleto\Cnab\Cnab240;
 
-use Umbrella\Ya\RetornoBoleto\Cnab\IComposable;
+use Umbrella\Ya\RetornoBoleto\Cnab\ComposableInterface;
 
-interface Cnab240Interface extends IComposable
+interface Cnab240Interface extends ComposableInterface
 {
     
 }

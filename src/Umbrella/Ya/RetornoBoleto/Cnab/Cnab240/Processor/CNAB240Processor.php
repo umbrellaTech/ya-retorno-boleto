@@ -3,20 +3,20 @@
 namespace Umbrella\Ya\RetornoBoleto\Cnab\Cnab240\Processor;
 
 use Umbrella\Ya\RetornoBoleto\AbstractProcessor;
+use Umbrella\Ya\RetornoBoleto\Cnab\Cnab240\Cnab240Interface;
 use Umbrella\Ya\RetornoBoleto\Cnab\Cnab240\Detail;
 use Umbrella\Ya\RetornoBoleto\Cnab\Cnab240\Header;
 use Umbrella\Ya\RetornoBoleto\Cnab\Cnab240\HeaderLote;
-use Umbrella\Ya\RetornoBoleto\Cnab\Cnab240\ICnab240;
 use Umbrella\Ya\RetornoBoleto\Cnab\Cnab240\Trailer;
 use Umbrella\Ya\RetornoBoleto\Cnab\Cnab240\TrailerLote;
 use Umbrella\Ya\RetornoBoleto\Cnab\Cnab400\Convenio\Processor\AbstractCNAB400Processor;
-use Umbrella\Ya\RetornoBoleto\Cnab\IComposable;
-use Umbrella\Ya\RetornoBoleto\ILote;
-use Umbrella\Ya\RetornoBoleto\IRetorno;
+use Umbrella\Ya\RetornoBoleto\Cnab\ComposableInterface;
+use Umbrella\Ya\RetornoBoleto\LoteInterface;
 use Umbrella\Ya\RetornoBoleto\Model\Banco;
 use Umbrella\Ya\RetornoBoleto\Model\Cedente;
 use Umbrella\Ya\RetornoBoleto\Model\Empresa;
 use Umbrella\Ya\RetornoBoleto\Model\Endereco;
+use Umbrella\Ya\RetornoBoleto\RetornoInterface;
 
 /**
  * Classe para leitura_arquivos_retorno_cobranças_padrão CNAB240.<br/>
@@ -70,9 +70,7 @@ class CNAB240Processor extends AbstractProcessor
             ->setCodArquivo(substr($linha, 143, 1))
         ;
 
-        $header->setDataGeracao($this->createDateTime(substr($linha, 144, 8) . " " . substr($linha,
-                                                                                            152,
-                                                                                            6)))
+        $header->setDataGeracao($this->createDateTime(substr($linha, 144, 8) . " " . substr($linha, 152, 6)))
             ->setSequencialRet(substr($linha, 158, 6))
             ->setVersaoLayout(substr($linha, 164, 3))
         ;
@@ -300,8 +298,7 @@ class CNAB240Processor extends AbstractProcessor
         return $vlinha;
     }
 
-    public function processCnab(IRetorno $retorno, IComposable $composable,
-                                ILote $lote = null)
+    public function processCnab(RetornoInterface $retorno, ComposableInterface $composable, LoteInterface $lote = null)
     {
         switch ((int) $composable->getRegistro()) {
             case AbstractCNAB400Processor::HEADER_ARQUIVO:
@@ -313,7 +310,7 @@ class CNAB240Processor extends AbstractProcessor
                 break;
 
             case self::HEADER_LOTE:
-                if ($composable instanceof ICnab240) {
+                if ($composable instanceof Cnab240Interface) {
                     $lote->setHeader($composable);
                 } else {
                     $lote->addDetail($composable);
