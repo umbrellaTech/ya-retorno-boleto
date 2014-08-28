@@ -9,6 +9,8 @@ use Umbrella\Ya\RetornoBoleto\Cnab\Cnab400\Header;
 use Umbrella\Ya\RetornoBoleto\Cnab\Cnab400\ITrailer;
 use Umbrella\Ya\RetornoBoleto\Cnab\Cnab400\Trailer;
 use Umbrella\Ya\RetornoBoleto\Cnab\ComposableInterface;
+use Umbrella\Ya\RetornoBoleto\Exception\EmptyLineException;
+use Umbrella\Ya\RetornoBoleto\Exception\InvalidPositionException;
 use Umbrella\Ya\RetornoBoleto\LoteInterface;
 use Umbrella\Ya\RetornoBoleto\Model\Banco;
 use Umbrella\Ya\RetornoBoleto\Model\Cedente;

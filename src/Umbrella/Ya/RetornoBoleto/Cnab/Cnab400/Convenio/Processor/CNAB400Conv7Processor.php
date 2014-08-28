@@ -4,9 +4,6 @@ namespace Umbrella\Ya\RetornoBoleto\Cnab\Cnab400\Convenio\Processor;
 
 use Umbrella\Ya\RetornoBoleto\Cnab\Cnab400\Convenio\DetailConvenio;
 use Umbrella\Ya\RetornoBoleto\Cnab\Cnab400\Convenio\HeaderConvenio;
-use Umbrella\Ya\RetornoBoleto\Cnab\IComposable;
-use Umbrella\Ya\RetornoBoleto\Exception\EmptyLineException;
-use Umbrella\Ya\RetornoBoleto\Exception\InvalidPositionException;
 
 /**
  * Classe para leitura de arquivos de retorno de cobranças no padrão CNAB400/CBR643 com convênio de 7 posições.<br/>
