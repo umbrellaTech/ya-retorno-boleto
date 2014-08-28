@@ -84,7 +84,7 @@ class CNAB400Conv7Processor extends AbstractCNAB400Processor
     {
         $tamLinha = 400; //total de caracteres das linhas do arquivo
         //o +2 é utilizado para contar o \r\n no final da linha
-        if (strlen($linha) != $tamLinha and strlen($linha) != $tamLinha + 2) {
+        if (strlen($linha) != $tamLinha && strlen($linha) != $tamLinha + 2) {
             throw new InvalidPositionException("A linha $numLn não tem $tamLinha posições. Possui " . strlen($linha));
         }
 
