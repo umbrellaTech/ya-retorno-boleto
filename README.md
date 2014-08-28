@@ -5,7 +5,7 @@ ya-retorno-boleto
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/umbrellaTech/ya-retorno-boleto/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/umbrellaTech/ya-retorno-boleto/?branch=master)
 [![Code Coverage](https://scrutinizer-ci.com/g/umbrellaTech/ya-retorno-boleto/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/umbrellaTech/ya-retorno-boleto/?branch=master)
 
-[![SensioLabsInsight](https://insight.sensiolabs.com/projects/ef6e9331-a2ad-4a22-bc43-1dd7c28ae086/small.png)](https://insight.sensiolabs.com/projects/ef6e9331-a2ad-4a22-bc43-1dd7c28ae086)
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/1f67b9bd-f120-43d5-9f02-f73aa6132d86/small.png)](https://insight.sensiolabs.com/projects/1f67b9bd-f120-43d5-9f02-f73aa6132d86)
 
 O que é?
 ---
