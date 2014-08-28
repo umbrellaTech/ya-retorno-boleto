@@ -150,16 +150,6 @@ class CNAB400BradescoProcessor extends AbstractProcessor
         ;
 
         return $detail;
-
-        $vlinha["motivo_cod_ocorrencia"] = substr($linha, 319, 10);  //Motivos das Rejeições para 
-        //os Códigos de Ocorrência da Posição 109 a 110 
-        $vlinha["num_cartorio"] = substr($linha, 369, 2);
-        $vlinha["num_protocolo"] = substr($linha, 371, 10);
-
-        $vlinha["abatimento_nao_aprov"] = $this->formataNumero(substr($linha,
-                                                                      293, 13)); //9  v99 Abatimento não aproveitado pelo sacado
-
-        return $vlinha;
     }
 
     /**
@@ -214,8 +204,7 @@ class CNAB400BradescoProcessor extends AbstractProcessor
         return $trailer;
     }
 
-    public function processCnab(IRetorno $retorno, IComposable $composable,
-                                ILote $lote = null)
+    public function processCnab(IRetorno $retorno, IComposable $composable, ILote $lote = null)
     {
         switch ((int) $composable->getRegistro()) {
             case self::HEADER_ARQUIVO:

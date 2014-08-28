@@ -31,8 +31,7 @@ abstract class AbstractProcessor
      * ao evento aoProcessarLinha. Se for informado um valor ao parâmetro, a função, indicada por ele, 
      * será executada após cada linha ser processada no arquivo de retorno.
      */
-    public function __construct($nomeArquivo = null,
-                                $aoProcessarLinhaFunctionName = null)
+    public function __construct($nomeArquivo = null, $aoProcessarLinhaFunctionName = null)
     {
         if (isset($nomeArquivo)) {
             $this->setNomeArquivo($nomeArquivo);
@@ -77,8 +76,7 @@ abstract class AbstractProcessor
      */
     public abstract function processarLinha($numLn, $linha);
 
-    public abstract function processCnab(RetornoInterface $retorno,
-                                         ComposableInterface $composable,
+    public abstract function processCnab(RetornoInterface $retorno, ComposableInterface $composable,
                                          LoteInterface $lote = null);
 
     /**
@@ -134,9 +132,7 @@ abstract class AbstractProcessor
         }
         $casas = $numCasasDecimais;
         if ($casas > 0) {
-            $valor = substr($valor, 0, strlen($valor) - $casas) . "." . substr($valor,
-                                                                               strlen($valor) - $casas,
-                                                                                      $casas);
+            $valor = substr($valor, 0, strlen($valor) - $casas) . "." . substr($valor, strlen($valor) - $casas, $casas);
             $valor = (float) $valor;
         } else {
             $valor = (int) $valor;

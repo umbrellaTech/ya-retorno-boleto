@@ -48,8 +48,7 @@ class ProcessHandler
         $lines = file($this->processor->getNomeArquivo(), FILE_IGNORE_NEW_LINES);
         foreach ($lines as $lineNumber => $lineContent) {
             $composable = $this->processor->processarLinha($lineNumber,
-                                                           rtrim($lineContent,
-                                                                 "\r\n"));
+                                                           rtrim($lineContent, "\r\n"));
 
             if ($this->processor->needToCreateLote()) {
                 $lote = $this->createLote($retorno);
@@ -58,8 +57,7 @@ class ProcessHandler
             $this->processor->processCnab($retorno, $composable, $lote);
 
             //Dispara o evento aoProcessarLinha, caso haja alguma função handler associada a ele
-            $this->processor->triggerAoProcessarLinha($this->processor,
-                                                      $lineNumber, $composable);
+            $this->processor->triggerAoProcessarLinha($this->processor, $lineNumber, $composable);
         }
 
         return $retorno;

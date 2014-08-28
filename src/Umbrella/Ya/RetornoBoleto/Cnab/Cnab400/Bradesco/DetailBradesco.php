@@ -2,10 +2,9 @@
 
 namespace Umbrella\Ya\RetornoBoleto\Cnab\Cnab400\Bradesco;
 
-use DateTime;
-use Umbrella\Ya\RetornoBoleto\Cnab\Cnab400\Header;
+use Umbrella\Ya\RetornoBoleto\Cnab\Cnab400\Detail;
 
-class DetailBradesco extends \Umbrella\Ya\RetornoBoleto\Cnab\Cnab400\Detail
+class DetailBradesco extends Detail
 {
     /**
      * @var int
