@@ -73,43 +73,4 @@ class CNAB400Conv7Processor extends AbstractCNAB400Processor
         ;
         return $detail;
     }
-
-    /**
-     * Processa uma linha do arquivo de retorno.
-     * @param int $numLn Número_linha a ser processada
-     * @param string $linha String contendo a linha a ser processada
-     * @return IComposable Retorna um vetor associativo contendo os valores_linha processada. 
-     */
-    public function processarLinha($numLn, $linha)
-    {
-        $tamLinha = 400; //total de caracteres das linhas do arquivo
-        //o +2 é utilizado para contar o \r\n no final da linha
-        if (strlen($linha) != $tamLinha && strlen($linha) != $tamLinha + 2) {
-            throw new InvalidPositionException("A linha $numLn não tem $tamLinha posições. Possui " . strlen($linha));
-        }
-
-        if (trim($linha) == "") {
-            throw new EmptyLineException("A linha $numLn está vazia.");
-        }
-
-        //é adicionado um espaço vazio no início_linha para que
-        //possamos trabalhar com índices iniciando_1, no lugar_zero,
-        //e assim, ter os valores_posição_campos exatamente
-        //como no manual CNAB400
-        $linha = " $linha";
-        $tipoLn = substr($linha, 1, 1);
-
-        $this->needToCreateLote = false;
-        if ($tipoLn == self::HEADER_ARQUIVO) {
-            $this->needToCreateLote = true;
-            $vlinha = $this->processarHeaderArquivo($linha);
-        } elseif ($tipoLn == self::DETALHE) {
-            $vlinha = $this->processarDetalhe($linha);
-        } elseif ($tipoLn == self::TRAILER_ARQUIVO) {
-            $vlinha = $this->processarTrailerArquivo($linha);
-        } else {
-            $vlinha = null;
-        }
-        return $vlinha;
-    }
 }

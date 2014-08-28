@@ -2,17 +2,12 @@
 
 namespace Umbrella\Ya\RetornoBoleto\Cnab\Cnab400\Bradesco\Processor;
 
-use Umbrella\Ya\RetornoBoleto\AbstractProcessor;
 use Umbrella\Ya\RetornoBoleto\Cnab\Cnab400\Bradesco\DetailBradesco;
 use Umbrella\Ya\RetornoBoleto\Cnab\Cnab400\Bradesco\HeaderBradesco;
-use Umbrella\Ya\RetornoBoleto\Cnab\Cnab400\ITrailer;
+use Umbrella\Ya\RetornoBoleto\Cnab\Cnab400\Convenio\Processor\AbstractCNAB400Processor;
 use Umbrella\Ya\RetornoBoleto\Cnab\Cnab400\Trailer;
-use Umbrella\Ya\RetornoBoleto\Cnab\IComposable;
-use Umbrella\Ya\RetornoBoleto\ILote;
-use Umbrella\Ya\RetornoBoleto\IRetorno;
 use Umbrella\Ya\RetornoBoleto\Model\Banco;
 use Umbrella\Ya\RetornoBoleto\Model\Cedente;
-use Umbrella\Ya\RetornoBoleto\Model\Cobranca;
 use Umbrella\Ya\RetornoBoleto\Model\Empresa;
 
 /**
@@ -25,7 +20,7 @@ use Umbrella\Ya\RetornoBoleto\Model\Empresa;
  * (arquivos Doc8826BR643Pos6.pdf e Doc2628CBR643Pos7.pdf)
  * @author Ítalo Lelis de Vietro <italolelis@gmail.com>
  */
-class CNAB400BradescoProcessor extends AbstractProcessor
+class CNAB400BradescoProcessor extends AbstractCNAB400Processor
 {
     /**
      * @property int HEADER_ARQUIVO Define o valor que identifica uma coluna do tipo HEADER DE ARQUIVO 
@@ -150,75 +145,6 @@ class CNAB400BradescoProcessor extends AbstractProcessor
         ;
 
         return $detail;
-    }
-
-    /**
-     * Processa a linha trailer do arquivo.
-     * @param string $linha Linha trailer do arquivo processado
-     * @return ITrailer Retorna um vetor contendo os dados dos campos da linha trailer do arquivo. 
-     */
-    protected function processarTrailerArquivo($linha)
-    {
-        $trailer = $this->createTrailer();
-
-        $banco = new Banco();
-        $banco->setCod(substr($linha, 5, 3));
-
-        $simples = new Cobranca();
-        $simples->setQtdTitulos(substr($linha, 18, 8))
-            ->setValorTotal($this->formataNumero(substr($linha, 26, 14)))
-            ->setNumAviso(substr($linha, 40, 8));
-
-        $vinculada = new Cobranca();
-        $vinculada->setQtdTitulos(substr($linha, 58, 8))
-            ->setValorTotal($this->formataNumero(substr($linha, 66, 14)))
-            ->setNumAviso(substr($linha, 80, 8));
-
-        $caucionada = new Cobranca();
-        $caucionada->setQtdTitulos(substr($linha, 98, 8))
-            ->setValorTotal($this->formataNumero(substr($linha, 106, 14)))
-            ->setNumAviso(substr($linha, 120, 8));
-
-        $descontada = new Cobranca();
-        $descontada->setQtdTitulos(substr($linha, 138, 8))
-            ->setValorTotal($this->formataNumero(substr($linha, 146, 14)))
-            ->setNumAviso(substr($linha, 160, 8));
-
-        $vendor = new Cobranca();
-        $vendor->setQtdTitulos(substr($linha, 218, 8))
-            ->setValorTotal($this->formataNumero(substr($linha, 226, 14)))
-            ->setNumAviso(substr($linha, 240, 8));
-
-        $trailer
-            ->setBanco($banco)
-            ->setRegistro(substr($linha, 1, 1))
-            ->setRetorno(substr($linha, 2, 1))
-            ->setTipoRegistro(substr($linha, 3, 2))
-            ->setSimples($simples)
-            ->setVinculada($vinculada)
-            ->setCaucionada($caucionada)
-            ->setDescontada($descontada)
-            ->setVendor($vendor)
-            ->setSequencial(substr($linha, 395, 6))
-        ;
-        return $trailer;
-    }
-
-    public function processCnab(IRetorno $retorno, IComposable $composable, ILote $lote = null)
-    {
-        switch ((int) $composable->getRegistro()) {
-            case self::HEADER_ARQUIVO:
-                $retorno->setHeader($composable);
-                break;
-
-            case self::TRAILER_ARQUIVO:
-                $retorno->setTrailer($composable);
-                break;
-
-            default:
-                $lote->addDetail($composable);
-                break;
-        }
     }
 
     public function processarLinha($numLn, $linha)
