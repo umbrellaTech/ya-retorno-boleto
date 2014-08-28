@@ -30,8 +30,7 @@ class ProcessFactory
      * @param string $aoProcessarLinhaFunctionName 
      * @return AbstractProcessor Retorna um objeto de uma das sub-classes de AbstractProcessor.
      */
-    public static function getRetorno($fileName,
-                                      $aoProcessarLinhaFunctionName = null)
+    public static function getRetorno($fileName, $aoProcessarLinhaFunctionName = null)
     {
         if (!$fileName) {
             throw new InvalidArgumentException("Informe o nome do arquivo de retorno.");
@@ -57,9 +56,6 @@ class ProcessFactory
         } elseif ($len >= 400 && $len <= 402) {
             if (strstr($linha, "BRADESCO")) {
                 throw new ReturnFileNotSupportedException('Arquivo de retorno Bradesco não suportado.');
-                //Tipo de retorno ainda não implementado (BRADESCO);
-//                return new CNAB400BradescoProcessor($fileName,
-//                                                  $aoProcessarLinhaFunctionName);
             }
 
             //Lê o primeiro registro detalhe
@@ -69,11 +65,9 @@ class ProcessFactory
             }
             switch ($linha[0]) {
                 case CNAB400Conv6Processor::DETALHE:
-                    return new CNAB400Conv6Processor($fileName,
-                                                     $aoProcessarLinhaFunctionName);
+                    return new CNAB400Conv6Processor($fileName, $aoProcessarLinhaFunctionName);
                 case CNAB400Conv7Processor::DETALHE:
-                    return new CNAB400Conv7Processor($fileName,
-                                                     $aoProcessarLinhaFunctionName);
+                    return new CNAB400Conv7Processor($fileName, $aoProcessarLinhaFunctionName);
                 default:
                     throw new Exception("Tipo de registro detalhe desconhecido: " . $linha[0]);
             }
