@@ -5,7 +5,7 @@ namespace Umbrella\Ya\RetornoBoleto\Cnab\Cnab240;
 use DateTime;
 use Umbrella\Ya\RetornoBoleto\Cnab\CnabDetailInterface;
 
-class Detail extends AbstractCnab240 implements Cnab240Interface, CnabDetailInterface
+class Detail extends AbstractCnab240 implements CnabDetailInterface
 {
     protected $numRegistroLote;
     protected $segmento;

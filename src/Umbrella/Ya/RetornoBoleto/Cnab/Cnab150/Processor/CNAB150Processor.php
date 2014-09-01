@@ -107,13 +107,9 @@ class CNAB150Processor extends AbstractProcessor
         ;
 
         $cedente = new Cedente();
-        $cedente
-            ->setNome(substr($linha, 62, 30))
-            ->setBanco($banco);
+        $cedente->setBanco($banco);
 
-        $detail
-            ->setCedente($cedente)
-        ;
+        $detail->setCedente($cedente);
 
         return $detail;
     }

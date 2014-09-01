@@ -5,7 +5,7 @@ namespace Umbrella\Ya\RetornoBoleto\Cnab\Cnab240;
 use DateTime;
 use Umbrella\Ya\RetornoBoleto\Cnab\CnabHeaderInterface;
 
-class Header extends AbstractHeader implements Cnab240Interface, CnabHeaderInterface
+class Header extends AbstractHeader implements CnabHeaderInterface
 {
     protected $codArquivo;
     protected $densidade;

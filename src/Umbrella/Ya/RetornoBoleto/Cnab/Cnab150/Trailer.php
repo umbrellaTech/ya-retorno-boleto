@@ -4,7 +4,7 @@ namespace Umbrella\Ya\RetornoBoleto\Cnab\Cnab150;
 
 use Umbrella\Ya\RetornoBoleto\Cnab\CnabTrailerInterface;
 
-class Trailer extends AbstractCnab150 implements Cnab150Interface, CnabTrailerInterface
+class Trailer extends AbstractCnab150 implements CnabTrailerInterface
 {
     protected $valorTotal;
     protected $quantidadeRegistros;

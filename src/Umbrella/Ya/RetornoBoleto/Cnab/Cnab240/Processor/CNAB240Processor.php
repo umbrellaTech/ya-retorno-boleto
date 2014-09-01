@@ -3,13 +3,13 @@
 namespace Umbrella\Ya\RetornoBoleto\Cnab\Cnab240\Processor;
 
 use Umbrella\Ya\RetornoBoleto\AbstractProcessor;
-use Umbrella\Ya\RetornoBoleto\Cnab\Cnab240\Cnab240Interface;
 use Umbrella\Ya\RetornoBoleto\Cnab\Cnab240\Detail;
 use Umbrella\Ya\RetornoBoleto\Cnab\Cnab240\Header;
 use Umbrella\Ya\RetornoBoleto\Cnab\Cnab240\HeaderLote;
 use Umbrella\Ya\RetornoBoleto\Cnab\Cnab240\Trailer;
 use Umbrella\Ya\RetornoBoleto\Cnab\Cnab240\TrailerLote;
 use Umbrella\Ya\RetornoBoleto\Cnab\Cnab400\Convenio\Processor\AbstractCNAB400Processor;
+use Umbrella\Ya\RetornoBoleto\Cnab\CnabHeaderInterface;
 use Umbrella\Ya\RetornoBoleto\Cnab\ComposableInterface;
 use Umbrella\Ya\RetornoBoleto\LoteInterface;
 use Umbrella\Ya\RetornoBoleto\Model\Banco;
@@ -310,7 +310,7 @@ class CNAB240Processor extends AbstractProcessor
                 break;
 
             case self::HEADER_LOTE:
-                if ($composable instanceof Cnab240Interface) {
+                if ($composable instanceof CnabHeaderInterface) {
                     $lote->setHeader($composable);
                 } else {
                     $lote->addDetail($composable);

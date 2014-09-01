@@ -5,16 +5,14 @@ namespace Umbrella\Ya\RetornoBoleto\Cnab\Cnab150;
 use DateTime;
 use Umbrella\Ya\RetornoBoleto\Cnab\CnabDetailInterface;
 
-class Detail extends AbstractCnab150 implements Cnab150Interface, CnabDetailInterface
+class Detail extends AbstractCnab150 implements CnabDetailInterface
 {
     /**
-     *
      * @var DateTime
      */
     protected $dataPagamento;
 
     /**
-     *
      * @var DateTime
      */
     protected $dataCredito;

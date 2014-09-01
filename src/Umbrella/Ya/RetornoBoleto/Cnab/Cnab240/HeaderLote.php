@@ -6,7 +6,7 @@ use Easy\Collections\ArrayList;
 use Easy\Collections\VectorInterface;
 use Umbrella\Ya\RetornoBoleto\Cnab\CnabHeaderInterface;
 
-class HeaderLote extends AbstractHeader implements Cnab240Interface, CnabHeaderInterface
+class HeaderLote extends AbstractHeader implements CnabHeaderInterface
 {
     protected $operacao;
     protected $servico;

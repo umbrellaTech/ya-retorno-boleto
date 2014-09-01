@@ -7,7 +7,7 @@ use Easy\Collections\VectorInterface;
 use Umbrella\Ya\RetornoBoleto\Model\Cedente;
 use Umbrella\Ya\RetornoBoleto\Model\Empresa;
 
-abstract class AbstractCnab
+abstract class AbstractCnab implements ComposableInterface
 {
     protected $registro;
     protected $lote;
