@@ -2,6 +2,10 @@
 
 namespace Umbrella\Ya\RetornoBoleto;
 
+use Symfony\Component\EventDispatcher\EventDispatcher;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Umbrella\Ya\RetornoBoleto\Event\OnDetailRegisterEvent;
+
 /**
  * Classe que implementa o design pattern Strategy,
  * para leitura de arquivos de retorno de cobranças dos bancos brasileiros,
@@ -17,6 +21,7 @@ class ProcessHandler
      * Atributo que deve ser um objeto de uma classe que estenda a classe AbstractRetorno 
      */
     protected $processor;
+    protected $dispatcher;
 
     /**
      * Construtor da classe
@@ -27,6 +32,16 @@ class ProcessHandler
     public function __construct(AbstractProcessor $retorno)
     {
         $this->processor = $retorno;
+        $this->dispatcher = new EventDispatcher();
+    }
+
+    /**
+     * Recupera o dispatcher para o EventDispatcher.
+     * @return EventDispatcherInterface
+     */
+    public function getDispatcher()
+    {
+        return $this->dispatcher;
     }
 
     private function createLote(RetornoInterface $retorno)
@@ -47,8 +62,7 @@ class ProcessHandler
 
         $lines = file($this->processor->getNomeArquivo(), FILE_IGNORE_NEW_LINES);
         foreach ($lines as $lineNumber => $lineContent) {
-            $composable = $this->processor->processarLinha($lineNumber,
-                                                           rtrim($lineContent, "\r\n"));
+            $composable = $this->processor->processarLinha($lineNumber, rtrim($lineContent, "\r\n"));
 
             if ($this->processor->needToCreateLote()) {
                 $lote = $this->createLote($retorno);
@@ -56,8 +70,8 @@ class ProcessHandler
 
             $this->processor->processCnab($retorno, $composable, $lote);
 
-            //Dispara o evento aoProcessarLinha, caso haja alguma função handler associada a ele
-            $this->processor->triggerAoProcessarLinha($this->processor, $lineNumber, $composable);
+            $event = new OnDetailRegisterEvent($this->processor, $lineNumber, $composable);
+            $this->dispatcher->dispatch(RetornoEvents::ON_DETAIL_REGISTER, $event);
         }
 
         return $retorno;
