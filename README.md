@@ -28,7 +28,7 @@ Instalação
 ----------
 
 ```shell
-require: { "umbrella/retorno-boleto": "~1.2" }
+require: { "umbrella/retorno-boleto": "~1.3" }
   
 $ composer install
 ``` 
