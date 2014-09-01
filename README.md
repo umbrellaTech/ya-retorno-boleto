@@ -80,7 +80,9 @@ Atualmente temos os seguintes eventos:
 | **ON_DETAIL_REGISTER** | OnDetailRegisterEvent    | Lançado sempre que um registro é iterado | 
 
 
-API
+Demo
 ----------
+
+A aplicação de demonstração está no repositório [Ya Boleto Demo](https://github.com/umbrellaTech/ya-boleto-demo)
 
 Em breve.
