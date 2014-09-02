@@ -40,24 +40,6 @@ html_sidebars = {
 # Output file base name for HTML help builder.
 htmlhelp_basename = 'Guzzledoc'
 
-# -- Guzzle Sphinx theme setup ------------------------------------------------
-
-sys.path.insert(0, '/Users/dowling/projects/guzzle_sphinx_theme')
-
-import guzzle_sphinx_theme
-html_translator_class = 'guzzle_sphinx_theme.HTMLTranslator'
-html_theme_path = guzzle_sphinx_theme.html_theme_path()
-html_theme = 'guzzle_sphinx_theme'
-
-# Guzzle theme options (see theme.conf for more information)
-html_theme_options = {
-    "index_template": "index.html",
-    "project_nav_name": "Guzzle",
-    "github_user": "guzzle",
-    "github_repo": "guzzle",
-    "disqus_comments_shortname": "guzzle",
-    "google_analytics_account": "UA-22752917-1"
-}
 
 # -- Options for LaTeX output --------------------------------------------------
 
