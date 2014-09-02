@@ -6,6 +6,7 @@ ya-retorno-boleto
 [![Code Coverage](https://scrutinizer-ci.com/g/umbrellaTech/ya-retorno-boleto/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/umbrellaTech/ya-retorno-boleto/?branch=master)
 [![Latest Stable Version](https://poser.pugx.org/umbrella/retorno-boleto/v/stable.png)](https://packagist.org/packages/umbrella/retorno-boleto)
 [![Latest Unstable Version](https://poser.pugx.org/umbrella/retorno-boleto/v/unstable.png)](https://packagist.org/packages/umbrella/retorno-boleto)
+[![Documentation Status](https://readthedocs.org/projects/ya-retorno-boleto/badge/?version=latest)](https://readthedocs.org/projects/ya-retorno-boleto/?badge=latest)
 
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/1f67b9bd-f120-43d5-9f02-f73aa6132d86/small.png)](https://insight.sensiolabs.com/projects/1f67b9bd-f120-43d5-9f02-f73aa6132d86)
 
@@ -85,4 +86,7 @@ Demo
 
 A aplicação de demonstração está no repositório [Ya Boleto Demo](https://github.com/umbrellaTech/ya-boleto-demo)
 
-Em breve.
+Documentação
+----------
+
+Mais informações podem ser encontradas na documentação on-line em http://ya-retorno-boleto.readthedocs.org/pt_BR/latest/.
