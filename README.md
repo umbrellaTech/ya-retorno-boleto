@@ -8,7 +8,7 @@ ya-retorno-boleto
 [![Latest Unstable Version](https://poser.pugx.org/umbrella/retorno-boleto/v/unstable.png)](https://packagist.org/packages/umbrella/retorno-boleto)
 [![Documentation Status](https://readthedocs.org/projects/ya-retorno-boleto/badge/?version=latest)](https://readthedocs.org/projects/ya-retorno-boleto/?badge=latest)
 
-[![SensioLabsInsight](https://insight.sensiolabs.com/projects/1f67b9bd-f120-43d5-9f02-f73aa6132d86/small.png)](https://insight.sensiolabs.com/projects/1f67b9bd-f120-43d5-9f02-f73aa6132d86)
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/ef6e9331-a2ad-4a22-bc43-1dd7c28ae086/small.png)](https://insight.sensiolabs.com/projects/ef6e9331-a2ad-4a22-bc43-1dd7c28ae086)
 
 O que é?
 ---
@@ -28,11 +28,19 @@ Arquivos suportados:
 Instalação
 ----------
 
-```shell
-require: { "umbrella/retorno-boleto": "~1.3" }
-  
-$ composer install
+```bash
+# Install Composer
+curl -sS https://getcomposer.org/installer | php
+
+# Adicionando YA Retorno Boleto como dependencia
+php composer.phar require umbrella/retorno-boleto:~1.2
 ``` 
+
+Após a instalação, é necessário carregar o autoloader do composer:
+
+```php
+require 'vendor/autoload.php';
+```
 
 Uso
 ----------
