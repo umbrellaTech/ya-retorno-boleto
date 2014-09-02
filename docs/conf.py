@@ -13,10 +13,10 @@ templates_path = ['_templates']
 source_suffix = '.rst'
 master_doc = 'index'
 
-project = u'Guzzle'
-copyright = u'2012, Michael Dowling'
-version = '3.0.0'
-release = '3.0.0'
+project = u'Ya Retorno Boleto'
+copyright = u'2014, Italo Lelis de Vietro'
+version = '1.0.0'
+release = '1.0.0'
 
 exclude_patterns = ['_build']
 
@@ -24,8 +24,8 @@ exclude_patterns = ['_build']
 
 # The name for this set of Sphinx documents.  If None, it defaults to
 # "<project> v<release> documentation".
-html_title = "Guzzle documentation"
-html_short_title = "Guzzle"
+html_title = "Ya Retorno Boleto documentation"
+html_short_title = "YARetornoBoleto"
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
@@ -38,7 +38,7 @@ html_sidebars = {
 }
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'Guzzledoc'
+htmlhelp_basename = 'RetornoBoletodoc'
 
 
 # -- Options for LaTeX output --------------------------------------------------
@@ -48,8 +48,8 @@ latex_elements = {}
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title, author, documentclass [howto/manual]).
 latex_documents = [
-  ('index', 'Guzzle.tex', u'Guzzle Documentation',
-   u'Michael Dowling', 'manual'),
+  ('index', 'umbrella.tex', u'Ya Retorno Boleto Documentation',
+   u'Italo Lelis de Vietro', 'manual'),
 ]
 
 # -- Options for manual page output --------------------------------------------
@@ -57,8 +57,8 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    ('index', 'guzzle', u'Guzzle Documentation',
-     [u'Michael Dowling'], 1)
+    ('index', 'umbrella', u'Ya Retorno Boleto Documentation',
+     [u'Italo Lelis de Vietro'], 1)
 ]
 
 # If true, show URL addresses after external links.
@@ -70,7 +70,7 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-  ('index', 'Guzzle', u'Guzzle Documentation',
-   u'Michael Dowling', 'Guzzle', 'One line description of project.',
+  ('index', 'Umbrella', u'Ya Retorno Boleto Documentation',
+   u'Italo Lelis de Vietro', 'Umbrella', 'One line description of project.',
    'Miscellaneous'),
 ]
