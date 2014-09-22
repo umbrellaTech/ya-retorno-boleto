@@ -13,7 +13,7 @@ class RetornoEventDispatcherTest extends AbstractCnabTestCase
     public function cnabProvider()
     {
         return array(
-            array(__DIR__ . '/../../Resources/ret/150/RCB001458908201414507.ret')
+            array(__DIR__ . '/Resources/ret/150/RCB001458908201414507.ret')
         );
     }
 

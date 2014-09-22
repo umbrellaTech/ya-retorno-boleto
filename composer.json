@@ -16,16 +16,21 @@
         "symfony/event-dispatcher": "~2.5"
     },
     "require-dev": {
-        "phpunit/phpunit": "~4.1"
+        "phpunit/phpunit": "~4.2"
     },
     "autoload": {
         "psr-4": {
-            "": "src/"
+            "Umbrella\\Ya\\RetornoBoleto\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Umbrella\\Tests\\Ya\\RetornoBoleto\\": "tests/"
         }
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "1.4.x-dev"
+            "dev-master": "1.5.x-dev"
         }
     }
 }

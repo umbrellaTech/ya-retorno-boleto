@@ -1,12 +1,11 @@
-ya-retorno-boleto
-=================
+# Ya Retorno Boleto
 
-[![Build Status](https://travis-ci.org/umbrellaTech/ya-retorno-boleto.svg?branch=master)](https://travis-ci.org/umbrellaTech/ya-retorno-boleto)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/umbrellaTech/ya-retorno-boleto/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/umbrellaTech/ya-retorno-boleto/?branch=master)
-[![Code Coverage](https://scrutinizer-ci.com/g/umbrellaTech/ya-retorno-boleto/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/umbrellaTech/ya-retorno-boleto/?branch=master)
-[![Latest Stable Version](https://poser.pugx.org/umbrella/retorno-boleto/v/stable.png)](https://packagist.org/packages/umbrella/retorno-boleto)
-[![Latest Unstable Version](https://poser.pugx.org/umbrella/retorno-boleto/v/unstable.png)](https://packagist.org/packages/umbrella/retorno-boleto)
-[![Documentation Status](https://readthedocs.org/projects/ya-retorno-boleto/badge/?version=latest)](https://readthedocs.org/projects/ya-retorno-boleto/?badge=latest)
+[![Build Status](http://img.shields.io/travis/umbrellaTech/ya-retorno-boleto.svg?style=flat-square)](https://travis-ci.org/umbrellaTech/ya-retorno-boleto)
+[![Scrutinizer Code Quality](http://img.shields.io/scrutinizer/g/umbrellaTech/ya-retorno-boleto.svg?style=flat-square)](https://scrutinizer-ci.com/g/umbrellaTech/ya-retorno-boleto/)
+[![Code Coverage](http://img.shields.io/scrutinizer/coverage/g/umbrellaTech/ya-retorno-boleto.svg?style=flat-square)](https://scrutinizer-ci.com/g/umbrellaTech/ya-retorno-boleto/)
+[![Latest Stable Version](http://img.shields.io/packagist/v/umbrella/retorno-boleto.svg?style=flat-square)](https://packagist.org/packages/umbrella/retorno-boleto)
+[![Downloads](https://img.shields.io/packagist/dt/umbrella/retorno-boleto.svg?style=flat-square)](https://packagist.org/packages/umbrella/retorno-boleto)
+
 
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/ef6e9331-a2ad-4a22-bc43-1dd7c28ae086/small.png)](https://insight.sensiolabs.com/projects/ef6e9331-a2ad-4a22-bc43-1dd7c28ae086)
 

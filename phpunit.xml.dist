@@ -9,7 +9,7 @@
          processIsolation="false"
          stopOnFailure="false"
          syntaxCheck="false"
-         bootstrap="./tests/Umbrella/Tests/TestInit.php"
+         bootstrap="./tests/bootstrap.php"
 >
     
     <php>
@@ -17,8 +17,8 @@
     </php>
     
     <testsuites>
-        <testsuite name="Suite de Testes do Ya Retorno Boleto">
-            <directory>./tests/Umbrella/</directory>
+        <testsuite name="Ya Retorno Boleto test suite">
+            <directory>./tests/</directory>
         </testsuite>
     </testsuites>
 
@@ -26,7 +26,7 @@
         <whitelist>
             <directory>./</directory>
             <exclude>
-                <directory>./tests/Umbrella/</directory>
+                <directory>./tests/</directory>
                 <directory>./vendor</directory>
             </exclude>
         </whitelist>
