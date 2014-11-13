@@ -3,18 +3,7 @@
 namespace Umbrella\Ya\RetornoBoleto\Cnab\Cnab240\Segmento;
 
 use DateTime;
-use Exception;
-use InvalidArgumentException;
-use League\Flysystem\FileNotFoundException;
 use Stringy\Stringy;
-use Umbrella\Ya\RetornoBoleto\Cnab\Cnab150\Processor\CNAB150Processor;
-use Umbrella\Ya\RetornoBoleto\Cnab\Cnab240\Processor\CNAB240Processor;
-use Umbrella\Ya\RetornoBoleto\Cnab\Cnab400\Convenio\Processor\CNAB400Conv6Processor;
-use Umbrella\Ya\RetornoBoleto\Cnab\Cnab400\Convenio\Processor\CNAB400Conv7Processor;
-use Umbrella\Ya\RetornoBoleto\Exception\DetailSectionNotFoundException;
-use Umbrella\Ya\RetornoBoleto\Exception\HeaderSectionNotFoundException;
-use Umbrella\Ya\RetornoBoleto\Exception\InvalidHeaderException;
-use Umbrella\Ya\RetornoBoleto\Exception\ReturnFileNotSupportedException;
 
 /**
  * Classe que identifica o tipo de arquivo de retorno sendo carregado e instancia a classe

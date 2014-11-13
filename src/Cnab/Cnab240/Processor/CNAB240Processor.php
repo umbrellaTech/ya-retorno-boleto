@@ -17,7 +17,6 @@ use Umbrella\Ya\RetornoBoleto\Model\Cedente;
 use Umbrella\Ya\RetornoBoleto\Model\Empresa;
 use Umbrella\Ya\RetornoBoleto\Model\Endereco;
 use Umbrella\Ya\RetornoBoleto\RetornoInterface;
-use Umbrella\Ya\RetornoBoleto\SegmentoFactory;
 
 /**
  * Classe para leitura_arquivos_retorno_cobranças_padrão CNAB240.<br/>
