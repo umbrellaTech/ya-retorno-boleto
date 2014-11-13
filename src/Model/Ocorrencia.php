@@ -2,9 +2,6 @@
 
 namespace Umbrella\Ya\RetornoBoleto\Model;
 
-use Easy\Collections\ArrayList;
-use Easy\Collections\VectorInterface;
-
 /**
  * Classe que representa um banco.
  */

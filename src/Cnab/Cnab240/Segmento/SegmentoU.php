@@ -7,8 +7,6 @@ use Umbrella\Ya\RetornoBoleto\Cnab\Cnab240\DadosTitulo;
 use Umbrella\Ya\RetornoBoleto\Cnab\Cnab240\Detail;
 use Umbrella\Ya\RetornoBoleto\Model\Banco;
 use Umbrella\Ya\RetornoBoleto\Model\Cedente;
-use Umbrella\Ya\RetornoBoleto\Model\Empresa;
-use Umbrella\Ya\RetornoBoleto\Model\Inscricao;
 use Umbrella\Ya\RetornoBoleto\Model\Ocorrencia;
 use Umbrella\Ya\RetornoBoleto\Model\Sacado;
 

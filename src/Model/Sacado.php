@@ -2,9 +2,6 @@
 
 namespace Umbrella\Ya\RetornoBoleto\Model;
 
-use Easy\Collections\VectorInterface;
-use Stringy\Stringy;
-
 class Sacado extends Pessoa
 {
     /**
