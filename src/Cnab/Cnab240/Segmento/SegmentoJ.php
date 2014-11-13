@@ -2,10 +2,8 @@
 
 namespace Umbrella\Ya\RetornoBoleto\Cnab\Cnab240\Segmento;
 
-use DateTime;
 use Stringy\Stringy;
 use Umbrella\Ya\RetornoBoleto\Cnab\Cnab240\Detail;
-use Umbrella\Ya\RetornoBoleto\Cnab\CnabDetailInterface;
 use Umbrella\Ya\RetornoBoleto\Model\Banco;
 use Umbrella\Ya\RetornoBoleto\Model\Cedente;
 
