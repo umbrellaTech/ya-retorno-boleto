@@ -2,6 +2,7 @@
 
 namespace Umbrella\Ya\RetornoBoleto;
 
+use Stringy\Stringy;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Umbrella\Ya\RetornoBoleto\Event\OnDetailRegisterEvent;
@@ -17,8 +18,8 @@ use Umbrella\Ya\RetornoBoleto\Event\OnDetailRegisterEvent;
 class ProcessHandler
 {
     /**
-     * @property AbstractProcessor $processor 
-     * Atributo que deve ser um objeto de uma classe que estenda a classe AbstractRetorno 
+     * @property AbstractProcessor $processor
+     * Atributo que deve ser um objeto de uma classe que estenda a classe AbstractRetorno
      */
     protected $processor;
     protected $dispatcher;
@@ -52,7 +53,7 @@ class ProcessHandler
     }
 
     /**
-     * Executa o processamento de todo o arquivo, linha a linha. 
+     * Executa o processamento de todo o arquivo, linha a linha.
      * @return RetornoInterface
      */
     public function processar()
@@ -62,7 +63,8 @@ class ProcessHandler
 
         $lines = file($this->processor->getNomeArquivo(), FILE_IGNORE_NEW_LINES);
         foreach ($lines as $lineNumber => $lineContent) {
-            $composable = $this->processor->processarLinha($lineNumber, rtrim($lineContent, "\r\n"));
+            $string = new Stringy(rtrim($lineContent, "\r\n"));
+            $composable = $this->processor->processarLinha($lineNumber, $string);
 
             if ($this->processor->needToCreateLote()) {
                 $lote = $this->createLote($retorno);

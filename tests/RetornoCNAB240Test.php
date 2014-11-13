@@ -20,6 +20,7 @@ class RetornoCNAB240Test extends AbstractCnabTestCase
 
     /**
      * @dataProvider cnabProvider
+     * @param $fileName
      */
     public function testCnab240($fileName)
     {
@@ -31,9 +32,9 @@ class RetornoCNAB240Test extends AbstractCnabTestCase
         $this->assertInstanceOf("Umbrella\\Ya\\RetornoBoleto\\Retorno", $retorno);
 
         $this->assertInstanceOf("Umbrella\\Ya\\RetornoBoleto\\Cnab\\Cnab240\\Header",
-                                $retorno->getHeader());
+            $retorno->getHeader());
 
         $this->assertInstanceOf("Umbrella\\Ya\\RetornoBoleto\\Cnab\\Cnab240\\Trailer",
-                                $retorno->getTrailer());
+            $retorno->getTrailer());
     }
 }

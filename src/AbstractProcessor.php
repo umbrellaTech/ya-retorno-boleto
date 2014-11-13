@@ -3,6 +3,7 @@
 namespace Umbrella\Ya\RetornoBoleto;
 
 use DateTime;
+use Stringy\Stringy;
 use Umbrella\Ya\RetornoBoleto\Cnab\ComposableInterface;
 
 /**
@@ -12,7 +13,7 @@ use Umbrella\Ya\RetornoBoleto\Cnab\ComposableInterface;
 abstract class AbstractProcessor
 {
     /**
-     * @property string $nomeArquivo Nome do arquivo de texto a ser lido 
+     * @property string $nomeArquivo Nome do arquivo de texto a ser lido
      */
     protected $nomeArquivo = "";
     protected $needToCreateLote = false;
@@ -62,7 +63,7 @@ abstract class AbstractProcessor
      * @param string $linha String contendo a linha a ser processada
      * @return ComposableInterface Retorna um vetor associativo contendo os valores da linha processada.
      */
-    public abstract function processarLinha($numLn, $linha);
+    public abstract function processarLinha($numLn, Stringy $linha);
 
     public abstract function processCnab(RetornoInterface $retorno, ComposableInterface $composable,
                                          LoteInterface $lote = null);
@@ -75,7 +76,7 @@ abstract class AbstractProcessor
      * @param int $numCasasDecimais Total de casas decimais do número
      * representado em $valor.
      * @return float Retorna o número representado em $valor, no seu formato float,
-     * contendo o separador de decimais. 
+     * contendo o separador de decimais.
      */
     public function formataNumero($valor, $numCasasDecimais = 2)
     {
@@ -85,9 +86,9 @@ abstract class AbstractProcessor
         $casas = $numCasasDecimais;
         if ($casas > 0) {
             $valor = substr($valor, 0, strlen($valor) - $casas) . "." . substr($valor, strlen($valor) - $casas, $casas);
-            $valor = (float) $valor;
+            $valor = (float)$valor;
         } else {
-            $valor = (int) $valor;
+            $valor = (int)$valor;
         }
 
         return $valor;
@@ -110,7 +111,7 @@ abstract class AbstractProcessor
     /**
      * Formata uma string, contendo uma data sem o separador, no formato DDMMAA HHIISS.
      * @param string $dateTimeString String contendo a data no formato DDMMAA.
-     * @return DateTime 
+     * @return DateTime
      */
     public function createDateTime($dateTimeString, $format = "mdy His")
     {

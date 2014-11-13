@@ -6,6 +6,7 @@ use Easy\Collections\ArrayList;
 use Easy\Collections\VectorInterface;
 use Umbrella\Ya\RetornoBoleto\Model\Cedente;
 use Umbrella\Ya\RetornoBoleto\Model\Empresa;
+use Umbrella\Ya\RetornoBoleto\Model\Sacado;
 
 abstract class AbstractCnab implements ComposableInterface
 {
@@ -13,10 +14,14 @@ abstract class AbstractCnab implements ComposableInterface
     protected $lote;
 
     /**
-     *
      * @var Cedente
      */
     protected $cedente;
+
+    /**
+     * @var Sacado
+     */
+    protected $sacado;
 
     /**
      *
@@ -43,7 +48,26 @@ abstract class AbstractCnab implements ComposableInterface
     }
 
     /**
+     * @return Sacado
+     */
+    public function getSacado()
+    {
+        return $this->sacado;
+    }
+
+    /**
+     * @param Sacado $sacado
+     * @return $this
+     */
+    public function setSacado(Sacado $sacado)
+    {
+        $this->sacado = $sacado;
+        return $this;
+    }
+
+    /**
      * @param string $cnab
+     * @return $this
      */
     public function addCnab($cnab)
     {
@@ -88,6 +112,7 @@ abstract class AbstractCnab implements ComposableInterface
 
     /**
      * @param string $registro
+     * @return $this
      */
     public function setRegistro($registro)
     {
@@ -97,6 +122,7 @@ abstract class AbstractCnab implements ComposableInterface
 
     /**
      * @param string $lote
+     * @return $this
      */
     public function setLote($lote)
     {
@@ -134,19 +160,20 @@ abstract class AbstractCnab implements ComposableInterface
 
     /**
      * @param string $ocorrencia
+     * @return $this
      */
     public function addOcorrencia($ocorrencia)
     {
         $trim = trim($ocorrencia);
         if (!empty($trim)) {
-            $this->cnabs->add($ocorrencia);
+            $this->ocorrencias->add($ocorrencia);
         }
         return $this;
     }
 
     public function removeOcorrencia($ocorrencia)
     {
-        $this->cnabs->remove($ocorrencia);
+        $this->ocorrencias->remove($ocorrencia);
         return $this;
     }
 }

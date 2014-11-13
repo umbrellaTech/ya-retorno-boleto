@@ -38,9 +38,9 @@ class CNAB400Conv6Processor extends AbstractCNAB400Processor
     protected function processarHeaderArquivo($linha)
     {
         $header = parent::processarHeaderArquivo($linha);
-        $header->setConvenio(substr($linha, 41, 6))
-            ->setSequencialRet(substr($linha, 101, 7))
-            ->addComplemento(substr($linha, 108, 287));
+        $header->setConvenio($linha->substr(41, 6))
+            ->setSequencialRet($linha->substr(101, 7))
+            ->addComplemento($linha->substr(108, 287));
 
         return $header;
     }
@@ -54,20 +54,20 @@ class CNAB400Conv6Processor extends AbstractCNAB400Processor
     {
         $detail = parent::processarDetalhe($linha);
         $detail
-            ->setConvenio(substr($linha, 32, 6))
-            ->setControle(substr($linha, 38, 25))
-            ->setNossoNumero(substr($linha, 63, 11))
-            ->setDvNossoNumero(substr($linha, 74, 1))
-            ->setTipoCobranca(substr($linha, 75, 1))
-            ->setTipoCobrancaCmd72(substr($linha, 76, 1))
-            ->setDiasCalculo(substr($linha, 77, 4))
-            ->setNatureza(substr($linha, 81, 2))
-            ->addUsoBanco(substr($linha, 83, 3))
-            ->setVariacaoCarteira(substr($linha, 86, 3))
-            ->setContaCaucao(substr($linha, 89, 1))
-            ->addUsoBanco(substr($linha, 90, 5))
-            ->addUsoBanco(substr($linha, 95, 1))
-            ->setConfirmacao(substr($linha, 127, 20))
+            ->setConvenio($linha->substr(32, 6))
+            ->setControle($linha->substr(38, 25))
+            ->setNossoNumero($linha->substr(63, 11))
+            ->setDvNossoNumero($linha->substr(74, 1))
+            ->setTipoCobranca($linha->substr(75, 1))
+            ->setTipoCobrancaCmd72($linha->substr(76, 1))
+            ->setDiasCalculo($linha->substr(77, 4))
+            ->setNatureza($linha->substr(81, 2))
+            ->addUsoBanco($linha->substr(83, 3))
+            ->setVariacaoCarteira($linha->substr(86, 3))
+            ->setContaCaucao($linha->substr(89, 1))
+            ->addUsoBanco($linha->substr(90, 5))
+            ->addUsoBanco($linha->substr(95, 1))
+            ->setConfirmacao($linha->substr(127, 20))
         ;
         return $detail;
     }

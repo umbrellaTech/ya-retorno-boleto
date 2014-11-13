@@ -4,6 +4,7 @@ namespace Umbrella\Ya\RetornoBoleto\Model;
 
 use Easy\Collections\ArrayList;
 use Easy\Collections\VectorInterface;
+use Stringy\Stringy;
 
 class Empresa
 {
@@ -38,6 +39,7 @@ class Empresa
     public function __construct()
     {
         $this->reservados = new ArrayList();
+        $this->usos = new ArrayList();
     }
 
     public function getCod()
@@ -116,12 +118,32 @@ class Empresa
     }
 
     /**
-     * @param string $cnab
+     * @param Stringy $uso
+     * @return $this
      */
-    public function addReservado($cnab)
+    public function addUso(Stringy $uso)
     {
-        $trim = trim($cnab);
-        if (!empty($trim)) {
+        $uso = $uso->trim();
+        if (!$uso->isBlank()) {
+            $this->usos->add($uso);
+        }
+        return $this;
+    }
+
+    public function removeUso($uso)
+    {
+        $this->usos->remove($uso);
+        return $this;
+    }
+
+    /**
+     * @param Stringy $cnab
+     * @return $this
+     */
+    public function addReservado(Stringy $cnab)
+    {
+        $cnab = $cnab->trim();
+        if (!$cnab->isBlank()) {
             $this->reservados->add($cnab);
         }
         return $this;
