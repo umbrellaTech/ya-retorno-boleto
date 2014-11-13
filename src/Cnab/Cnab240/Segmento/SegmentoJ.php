@@ -4,18 +4,21 @@ namespace Umbrella\Ya\RetornoBoleto\Cnab\Cnab240\Segmento;
 
 use DateTime;
 use Stringy\Stringy;
+use Umbrella\Ya\RetornoBoleto\Cnab\Cnab240\Detail;
 use Umbrella\Ya\RetornoBoleto\Cnab\CnabDetailInterface;
+use Umbrella\Ya\RetornoBoleto\Model\Banco;
+use Umbrella\Ya\RetornoBoleto\Model\Cedente;
 
 class SegmentoJ extends AbstractSegmento
 {
 
     public function buildDetail(Stringy $linha)
     {
-        $detail = new Detail;
-
+        $detail = new Detail();
+        $cedente = new Cedente();
         $banco = new Banco();
-        $banco
-            ->setCod($linha->substr(1, 3));
+
+        $banco->setCod($linha->substr(1, 3));
 
         $detail
             ->setLote($linha->substr(4, 4))
@@ -38,7 +41,7 @@ class SegmentoJ extends AbstractSegmento
             ->addCnab($linha->substr(225, 6))
             ->addOcorrencia($linha->substr(231, 10));
 
-        $cedente = new Cedente();
+
         $cedente
             ->setNome($linha->substr(62, 30))
             ->setBanco($banco);
