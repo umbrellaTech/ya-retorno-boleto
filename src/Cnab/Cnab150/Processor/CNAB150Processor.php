@@ -46,25 +46,25 @@ class CNAB150Processor extends AbstractProcessor
         $header = $this->createHeader();
 
         $header
-            ->setRegistro($linha->substr(1, 1))
-            ->setRemessa($linha->substr(2, 1))
-            ->setConvenio($linha->substr(3, 20));
+            ->setRegistro($linha->substr(1, 1)->trim())
+            ->setRemessa($linha->substr(2, 1)->trim())
+            ->setConvenio($linha->substr(3, 20)->trim());
 
         $empresa = new Empresa();
         $empresa
-            ->setNome($linha->substr(23, 20));
+            ->setNome($linha->substr(23, 20)->trim());
 
         $banco = new Banco();
         $banco
-            ->setCod($linha->substr(43, 3))
-            ->setNome($linha->substr(46, 20));
+            ->setCod($linha->substr(43, 3)->trim())
+            ->setNome($linha->substr(46, 20)->trim());
 
         $header
-            ->setDataGeracao($this->createDateTime($linha->substr(66, 8), "Ymd"))
-            ->setSequencialRet($linha->substr(74, 6))
-            ->setVersaoLayout($linha->substr(80, 2))
-            ->setCodBarras($linha->substr(82, 17))
-            ->setFiller($linha->substr(99, 52));
+            ->setDataGeracao($this->createDateTime($linha->substr(66, 8)->trim(), "Ymd"))
+            ->setSequencialRet($linha->substr(74, 6)->trim())
+            ->setVersaoLayout($linha->substr(80, 2)->trim())
+            ->setCodBarras($linha->substr(82, 17)->trim())
+            ->setFiller($linha->substr(99, 52)->trim());
 
         $cedente = new Cedente();
         $cedente->setBanco($banco);
@@ -81,24 +81,24 @@ class CNAB150Processor extends AbstractProcessor
         $detail = new Detail();
 
         $detail
-            ->setRegistro($linha->substr(1, 1))
-            ->setDataPagamento($this->createDateTime($linha->substr(22, 8), "Ymd"))
-            ->setDataCredito($this->createDateTime($linha->substr(30, 8), "Ymd"))
-            ->setCodBarras($linha->substr(38, 44))
-            ->setValorRecebido($linha->substr(82, 10))
-            ->setValorTarifa($linha->substr(94, 5))
-            ->setNumeroSequencial($linha->substr(101, 8))
-            ->setCodigoAgenciaArrecadadora($linha->substr(109, 8))
-            ->setFormaArrecadacao($linha->substr(117, 1))
-            ->setNumeroAutenticacao($linha->substr(118, 23))
-            ->setFormaPagamento($linha->substr(141, 1))
-            ->setFiller($linha->substr(142, 9));
+            ->setRegistro($linha->substr(1, 1)->trim())
+            ->setDataPagamento($this->createDateTime($linha->substr(22, 8)->trim(), "Ymd"))
+            ->setDataCredito($this->createDateTime($linha->substr(30, 8)->trim(), "Ymd"))
+            ->setCodBarras($linha->substr(38, 44)->trim())
+            ->setValorRecebido($linha->substr(82, 10)->trim())
+            ->setValorTarifa($linha->substr(94, 5)->trim())
+            ->setNumeroSequencial($linha->substr(101, 8)->trim())
+            ->setCodigoAgenciaArrecadadora($linha->substr(109, 8)->trim())
+            ->setFormaArrecadacao($linha->substr(117, 1)->trim())
+            ->setNumeroAutenticacao($linha->substr(118, 23)->trim())
+            ->setFormaPagamento($linha->substr(141, 1)->trim())
+            ->setFiller($linha->substr(142, 9)->trim());
 
         $banco = new Banco();
         $banco
-            ->setAgencia($linha->substr(2, 4))
-            ->setConta($linha->substr(6, 14))
-            ->setDvConta($linha->substr(20, 1));
+            ->setAgencia($linha->substr(2, 4)->trim())
+            ->setConta($linha->substr(6, 14)->trim())
+            ->setDvConta($linha->substr(20, 1)->trim());
 
         $cedente = new Cedente();
         $cedente->setBanco($banco);
@@ -113,10 +113,10 @@ class CNAB150Processor extends AbstractProcessor
         $trailer = new Trailer();
 
         $trailer
-            ->setRegistro($linha->substr(1, 1))
-            ->setQuantidadeRegistros($linha->substr(2, 6))
-            ->setValorTotal($linha->substr(8, 17))
-            ->setFiller($linha->substr(25, 126));
+            ->setRegistro($linha->substr(1, 1)->trim())
+            ->setQuantidadeRegistros($linha->substr(2, 6)->trim())
+            ->setValorTotal($linha->substr(8, 17)->trim())
+            ->setFiller($linha->substr(25, 126)->trim());
 
         return $trailer;
     }
@@ -134,7 +134,7 @@ class CNAB150Processor extends AbstractProcessor
         //e assim, ter os valores_posição_campos exatamente
         //como no manual CNAB150
         $linha = $linha->insert(" ", 0);
-        $tipoLn = $linha->substr(1, 1);
+        $tipoLn = $linha->substr(1, 1)->trim();
 
         $this->needToCreateLote = false;
         if ((string)$tipoLn == self::HEADER_ARQUIVO) {

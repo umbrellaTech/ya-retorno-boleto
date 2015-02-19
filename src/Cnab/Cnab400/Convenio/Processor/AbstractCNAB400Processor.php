@@ -64,15 +64,15 @@ abstract class AbstractCNAB400Processor extends AbstractProcessor
     {
         $header = $this->createHeader();
         //X = ALFANUMÉRICO 9 = NUMÉRICO V = VÍRGULA DECIMAL ASSUMIDA
-        $header->setRegistro($linha->substr(1, 1));
-        $header->setTipoOperacao($linha->substr(2, 1));
-        $header->setIdTipoOperacao($linha->substr(3, 7));
-        $header->setIdTipoServico($linha->substr(10, 2));
-        $header->setTipoServico($linha->substr(12, 8));
-        $header->addComplemento($linha->substr(20, 7));
+        $header->setRegistro($linha->substr(1, 1)->trim());
+        $header->setTipoOperacao($linha->substr(2, 1)->trim());
+        $header->setIdTipoOperacao($linha->substr(3, 7)->trim());
+        $header->setIdTipoServico($linha->substr(10, 2)->trim());
+        $header->setTipoServico($linha->substr(12, 8)->trim());
+        $header->addComplemento($linha->substr(20, 7)->trim());
 
         $bancoArray = array();
-        if (!preg_match('#^([\d]{3})(.+)#', $linha->substr(77, 18), $bancoArray)) {
+        if (!preg_match('#^([\d]{3})(.+)#', $linha->substr(77, 18)->trim(), $bancoArray)) {
             throw new InvalidArgumentException('Banco invalido');
         }
 
@@ -80,19 +80,19 @@ abstract class AbstractCNAB400Processor extends AbstractProcessor
         $banco
             ->setCod($bancoArray[1])
             ->setNome($bancoArray[2])
-            ->setAgencia($linha->substr(27, 4))
-            ->setDvAgencia($linha->substr(31, 1))
-            ->setConta($linha->substr(32, 8))
-            ->setDvConta($linha->substr(40, 1));
+            ->setAgencia($linha->substr(27, 4)->trim())
+            ->setDvAgencia($linha->substr(31, 1)->trim())
+            ->setConta($linha->substr(32, 8)->trim())
+            ->setDvConta($linha->substr(40, 1)->trim());
 
 
         $cedente = new Cedente();
         $cedente->setBanco($banco)
-            ->setNome($linha->substr(47, 30));
+            ->setNome($linha->substr(47, 30)->trim());
 
         $header->setCedente($cedente);
-        $header->setDataGravacao($this->createDate($linha->substr(95, 6)));
-        $header->setSequencialReg($linha->substr(395, 6));
+        $header->setDataGravacao($this->createDate($linha->substr(95, 6)->trim()));
+        $header->setSequencialReg($linha->substr(395, 6)->trim());
 
         return $header;
     }
@@ -108,47 +108,47 @@ abstract class AbstractCNAB400Processor extends AbstractProcessor
 
         $bancoEmissor = new Banco();
         $bancoEmissor
-            ->setAgencia($linha->substr(22, 1))
-            ->setDvAgencia($linha->substr(31, 1))
-            ->setConta($linha->substr(23, 8))
-            ->setDvConta($linha->substr(31, 1));
+            ->setAgencia($linha->substr(22, 1)->trim())
+            ->setDvAgencia($linha->substr(31, 1)->trim())
+            ->setConta($linha->substr(23, 8)->trim())
+            ->setDvConta($linha->substr(31, 1)->trim());
 
         $bancoRecebedor = new Banco();
         $bancoRecebedor
-            ->setCod($linha->substr(166, 3))
-            ->setAgencia($linha->substr(169, 4))
-            ->setDvAgencia($linha->substr(173, 1));
+            ->setCod($linha->substr(166, 3)->trim())
+            ->setAgencia($linha->substr(169, 4)->trim())
+            ->setDvAgencia($linha->substr(173, 1)->trim());
 
         $detail
             ->setBancoEmissor($bancoEmissor)
             ->setBancoRecebedor($bancoRecebedor)
-            ->setRegistro($linha->substr(1, 1))
-            ->setTaxaDesconto($this->formataNumero($linha->substr(96, 5)))
-            ->setTaxaIof($linha->substr(101, 5))
-            ->setCateira($linha->substr(107, 2))
-            ->setComando($linha->substr(109, 2))
-            ->setDataOcorrencia($this->createDate($linha->substr(111, 6)))
-            ->setNumTitulo($linha->substr(117, 10))
-            ->setDataVencimento($this->createDate($linha->substr(147, 6)))
-            ->setValor($this->formataNumero($linha->substr(153, 13)))
-            ->setEspecie($linha->substr(174, 2))
-            ->setDataCredito($this->createDate($linha->substr(176, 6)))
-            ->setValorTarifa($this->formataNumero($linha->substr(182, 7)))
-            ->setOutrasDespesas($this->formataNumero($linha->substr(189, 13)))
-            ->setJurosDesconto($this->formataNumero($linha->substr(202, 13)))
-            ->setIofDesconto($this->formataNumero($linha->substr(215, 13)))
-            ->setValorAbatimento($this->formataNumero($linha->substr(228, 13)))
-            ->setDescontoConcedido($this->formataNumero($linha->substr(241, 13)))
-            ->setValorRecebido($this->formataNumero($linha->substr(254, 13)))
-            ->setJurosMora($this->formataNumero($linha->substr(267, 13)))
-            ->setOutrosRecebimentos($this->formataNumero($linha->substr(280, 13)))
-            ->setAbatimentoNaoAprovado($this->formataNumero($linha->substr(293, 13)))
-            ->setValorLancamento($this->formataNumero($linha->substr(306, 13)))
-            ->setIndicativoDc($linha->substr(319, 1))
-            ->setIndicadorValor($linha->substr(320, 1))
-            ->setValorAjuste($this->formataNumero($linha->substr(321, 12)))
-            ->setCanalPagTitulo($linha->substr(393, 2))
-            ->setSequencial($linha->substr(395, 6));
+            ->setRegistro($linha->substr(1, 1)->trim())
+            ->setTaxaDesconto($this->formataNumero($linha->substr(96, 5)->trim()))
+            ->setTaxaIof($linha->substr(101, 5)->trim())
+            ->setCateira($linha->substr(107, 2)->trim())
+            ->setComando($linha->substr(109, 2)->trim())
+            ->setDataOcorrencia($this->createDate($linha->substr(111, 6)->trim()))
+            ->setNumTitulo($linha->substr(117, 10)->trim())
+            ->setDataVencimento($this->createDate($linha->substr(147, 6)->trim()))
+            ->setValor($this->formataNumero($linha->substr(153, 13)->trim()))
+            ->setEspecie($linha->substr(174, 2)->trim())
+            ->setDataCredito($this->createDate($linha->substr(176, 6)->trim()))
+            ->setValorTarifa($this->formataNumero($linha->substr(182, 7)->trim()))
+            ->setOutrasDespesas($this->formataNumero($linha->substr(189, 13)->trim()))
+            ->setJurosDesconto($this->formataNumero($linha->substr(202, 13)->trim()))
+            ->setIofDesconto($this->formataNumero($linha->substr(215, 13)->trim()))
+            ->setValorAbatimento($this->formataNumero($linha->substr(228, 13)->trim()))
+            ->setDescontoConcedido($this->formataNumero($linha->substr(241, 13)->trim()))
+            ->setValorRecebido($this->formataNumero($linha->substr(254, 13)->trim()))
+            ->setJurosMora($this->formataNumero($linha->substr(267, 13)->trim()))
+            ->setOutrosRecebimentos($this->formataNumero($linha->substr(280, 13)->trim()))
+            ->setAbatimentoNaoAprovado($this->formataNumero($linha->substr(293, 13)->trim()))
+            ->setValorLancamento($this->formataNumero($linha->substr(306, 13)->trim()))
+            ->setIndicativoDc($linha->substr(319, 1)->trim())
+            ->setIndicadorValor($linha->substr(320, 1)->trim())
+            ->setValorAjuste($this->formataNumero($linha->substr(321, 12)->trim()))
+            ->setCanalPagTitulo($linha->substr(393, 2)->trim())
+            ->setSequencial($linha->substr(395, 6)->trim());
 
         return $detail;
     }
@@ -163,44 +163,44 @@ abstract class AbstractCNAB400Processor extends AbstractProcessor
         $trailer = $this->createTrailer();
 
         $banco = new Banco();
-        $banco->setCod($linha->substr(5, 3));
+        $banco->setCod($linha->substr(5, 3)->trim());
 
         $simples = new Cobranca();
-        $simples->setQtdTitulos($linha->substr(18, 8))
-            ->setValorTotal($this->formataNumero($linha->substr(26, 14)))
-            ->setNumAviso($linha->substr(40, 8));
+        $simples->setQtdTitulos($linha->substr(18, 8)->trim())
+            ->setValorTotal($this->formataNumero($linha->substr(26, 14)->trim()))
+            ->setNumAviso($linha->substr(40, 8)->trim());
 
         $vinculada = new Cobranca();
-        $vinculada->setQtdTitulos($linha->substr(58, 8))
-            ->setValorTotal($this->formataNumero($linha->substr(66, 14)))
-            ->setNumAviso($linha->substr(80, 8));
+        $vinculada->setQtdTitulos($linha->substr(58, 8)->trim())
+            ->setValorTotal($this->formataNumero($linha->substr(66, 14)->trim()))
+            ->setNumAviso($linha->substr(80, 8)->trim());
 
         $caucionada = new Cobranca();
-        $caucionada->setQtdTitulos($linha->substr(98, 8))
-            ->setValorTotal($this->formataNumero($linha->substr(106, 14)))
-            ->setNumAviso($linha->substr(120, 8));
+        $caucionada->setQtdTitulos($linha->substr(98, 8)->trim())
+            ->setValorTotal($this->formataNumero($linha->substr(106, 14)->trim()))
+            ->setNumAviso($linha->substr(120, 8)->trim());
 
         $descontada = new Cobranca();
-        $descontada->setQtdTitulos($linha->substr(138, 8))
-            ->setValorTotal($this->formataNumero($linha->substr(146, 14)))
-            ->setNumAviso($linha->substr(160, 8));
+        $descontada->setQtdTitulos($linha->substr(138, 8)->trim())
+            ->setValorTotal($this->formataNumero($linha->substr(146, 14)->trim()))
+            ->setNumAviso($linha->substr(160, 8)->trim());
 
         $vendor = new Cobranca();
-        $vendor->setQtdTitulos($linha->substr(218, 8))
-            ->setValorTotal($this->formataNumero($linha->substr(226, 14)))
-            ->setNumAviso($linha->substr(240, 8));
+        $vendor->setQtdTitulos($linha->substr(218, 8)->trim())
+            ->setValorTotal($this->formataNumero($linha->substr(226, 14)->trim()))
+            ->setNumAviso($linha->substr(240, 8)->trim());
 
         $trailer
             ->setBanco($banco)
-            ->setRegistro($linha->substr(1, 1))
-            ->setRetorno($linha->substr(2, 1))
-            ->setTipoRegistro($linha->substr(3, 2))
+            ->setRegistro($linha->substr(1, 1)->trim())
+            ->setRetorno($linha->substr(2, 1)->trim())
+            ->setTipoRegistro($linha->substr(3, 2)->trim())
             ->setSimples($simples)
             ->setVinculada($vinculada)
             ->setCaucionada($caucionada)
             ->setDescontada($descontada)
             ->setVendor($vendor)
-            ->setSequencial($linha->substr(395, 6));
+            ->setSequencial($linha->substr(395, 6)->trim());
         return $trailer;
     }
 
@@ -244,7 +244,7 @@ abstract class AbstractCNAB400Processor extends AbstractProcessor
         //e assim, ter os valores_posição_campos exatamente
         //como no manual CNAB400
         $linha = $linha->insert(" ", 0);
-        $tipoLn = $linha->substr(1, 1);
+        $tipoLn = $linha->substr(1, 1)->trim();
 
         $this->needToCreateLote = false;
         if ((string)$tipoLn == static::HEADER_ARQUIVO) {
