@@ -40,9 +40,9 @@ class CNAB400Conv7Processor extends AbstractCNAB400Processor
     {
         $header = parent::processarHeaderArquivo($linha);
         $header
-            ->addComplemento($linha->substr(108, 42))
-            ->setConvenio($linha->substr(150, 7))
-            ->addComplemento($linha->substr(108, 42))
+            ->addComplemento($linha->substr(108, 42)->trim())
+            ->setConvenio($linha->substr(150, 7)->trim())
+            ->addComplemento($linha->substr(108, 42)->trim())
         ;
 
         return $header;
@@ -57,16 +57,16 @@ class CNAB400Conv7Processor extends AbstractCNAB400Processor
     {
         $detail = parent::processarDetalhe($linha);
         $detail
-            ->setConvenio($linha->substr(32, 7))
-            ->setControle($linha->substr(38, 25))
-            ->setNossoNumero($linha->substr(64, 17))
-            ->setTipoCobranca($linha->substr(81, 1))
-            ->setTipoCobrancaCmd72($linha->substr(82, 1))
-            ->setDiasCalculo($linha->substr(83, 4))
-            ->setNatureza($linha->substr(87, 2))
-            ->setPrefixoTitulo($linha->substr(89, 3))
-            ->setVariacaoCarteira($linha->substr(92, 3))
-            ->setContaCaucao($linha->substr(95, 1))
+            ->setConvenio($linha->substr(32, 7)->trim())
+            ->setControle($linha->substr(38, 25)->trim())
+            ->setNossoNumero($linha->substr(64, 17)->trim())
+            ->setTipoCobranca($linha->substr(81, 1)->trim())
+            ->setTipoCobrancaCmd72($linha->substr(82, 1)->trim())
+            ->setDiasCalculo($linha->substr(83, 4)->trim())
+            ->setNatureza($linha->substr(87, 2)->trim())
+            ->setPrefixoTitulo($linha->substr(89, 3)->trim())
+            ->setVariacaoCarteira($linha->substr(92, 3)->trim())
+            ->setContaCaucao($linha->substr(95, 1)->trim())
         ;
         return $detail;
     }

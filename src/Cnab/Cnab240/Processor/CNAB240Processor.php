@@ -61,36 +61,36 @@ class CNAB240Processor extends AbstractProcessor
         $header = $this->createHeader();
         //X = ALFANUMÉRICO 9 = NUMÉRICO V = VÍRGULA DECIMAL ASSUMIDA
         $header
-            ->setRegistro($linha->substr(8, 1))
-            ->setLote($linha->substr(4, 4))
-            ->addCnab($linha->substr(9, 9))
-            ->addCnab($linha->substr(133, 10))
-            ->addCnab($linha->substr(212, 29))
-            ->setConvenio($linha->substr(33, 20))
-            ->setCodArquivo($linha->substr(143, 1));
+            ->setRegistro($linha->substr(8, 1)->trim())
+            ->setLote($linha->substr(4, 4)->trim())
+            ->addCnab($linha->substr(9, 9)->trim())
+            ->addCnab($linha->substr(133, 10)->trim())
+            ->addCnab($linha->substr(212, 29)->trim())
+            ->setConvenio($linha->substr(33, 20)->trim())
+            ->setCodArquivo($linha->substr(143, 1)->trim());
 
-        $header->setDataGeracao($this->createDateTime($linha->substr(144, 8) . " " . $linha->substr(152, 6)))
-            ->setSequencialRet($linha->substr(158, 6))
-            ->setVersaoLayout($linha->substr(164, 3))
-            ->setDensidade($linha->substr(167, 5));
+        $header->setDataGeracao($this->createDateTime($linha->substr(144, 8)->trim() . " " . $linha->substr(152, 6)->trim()))
+            ->setSequencialRet($linha->substr(158, 6)->trim())
+            ->setVersaoLayout($linha->substr(164, 3)->trim())
+            ->setDensidade($linha->substr(167, 5)->trim());
 
         $empresa = new Empresa();
         $empresa
-            ->setTipoInscricao($linha->substr(18, 1))
-            ->setNumInscricao($linha->substr(19, 14))
-            ->setNome($linha->substr(73, 30))
-            ->addReservado($linha->substr(192, 20));
+            ->setTipoInscricao($linha->substr(18, 1)->trim())
+            ->setNumInscricao($linha->substr(19, 14)->trim())
+            ->setNome($linha->substr(73, 30)->trim())
+            ->addReservado($linha->substr(192, 20)->trim());
 
         $banco = new Banco();
         $banco
-            ->setCod($linha->substr(1, 3))
-            ->setNome($linha->substr(103, 30))
-            ->setAgencia($linha->substr(53, 5))
-            ->setDvAgencia($linha->substr(58, 1))
-            ->setConta($linha->substr(59, 12))
-            ->setDvConta($linha->substr(71, 1))
-            ->setDvAgenciaConta($linha->substr(72, 1))
-            ->addReservado($linha->substr(172, 20));
+            ->setCod($linha->substr(1, 3)->trim())
+            ->setNome($linha->substr(103, 30)->trim())
+            ->setAgencia($linha->substr(53, 5)->trim())
+            ->setDvAgencia($linha->substr(58, 1)->trim())
+            ->setConta($linha->substr(59, 12)->trim())
+            ->setDvConta($linha->substr(71, 1)->trim())
+            ->setDvAgenciaConta($linha->substr(72, 1)->trim())
+            ->addReservado($linha->substr(172, 20)->trim());
 
 
         $cedente = new Cedente();
@@ -108,43 +108,43 @@ class CNAB240Processor extends AbstractProcessor
         $header = new HeaderLote();
 
         $header
-            ->setRegistro($linha->substr(8, 1))
-            ->setLote($linha->substr(4, 4))
-            ->setOperacao($linha->substr(9, 1))
-            ->setServico($linha->substr(10, 2))
-            ->setFormaLancamento($linha->substr(12, 2))
-            ->setVersaoLayout($linha->substr(14, 3))
-            ->addCnab($linha->substr(17, 1))
-            ->addCnab($linha->substr(223, 8))
-            ->addOcorrencia($linha->substr(231, 10))
-            ->setConvenio($linha->substr(33, 20))
-            ->addMensagem($linha->substr(103, 40));
+            ->setRegistro($linha->substr(8, 1)->trim())
+            ->setLote($linha->substr(4, 4)->trim())
+            ->setOperacao($linha->substr(9, 1)->trim())
+            ->setServico($linha->substr(10, 2)->trim())
+            ->setFormaLancamento($linha->substr(12, 2)->trim())
+            ->setVersaoLayout($linha->substr(14, 3)->trim())
+            ->addCnab($linha->substr(17, 1)->trim())
+            ->addCnab($linha->substr(223, 8)->trim())
+            ->addOcorrencia($linha->substr(231, 10)->trim())
+            ->setConvenio($linha->substr(33, 20)->trim())
+            ->addMensagem($linha->substr(103, 40)->trim());
 
         $endereco = new Endereco();
         $endereco
-            ->setLogradourdo($linha->substr(143, 30))
-            ->setNumero($linha->substr(173, 5))
-            ->setComplemento($linha->substr(178, 15))
-            ->setCidade($linha->substr(193, 20))
-            ->setCep($linha->substr(213, 5))
-            ->setComplementoCep($linha->substr(218, 3))
-            ->setEstado($linha->substr(221, 2));
+            ->setLogradourdo($linha->substr(143, 30)->trim())
+            ->setNumero($linha->substr(173, 5)->trim())
+            ->setComplemento($linha->substr(178, 15)->trim())
+            ->setCidade($linha->substr(193, 20)->trim())
+            ->setCep($linha->substr(213, 5)->trim())
+            ->setComplementoCep($linha->substr(218, 3)->trim())
+            ->setEstado($linha->substr(221, 2)->trim());
         $empresa = new Empresa();
         $empresa
             ->setEndereco($endereco)
-            ->setTipoInscricao($linha->substr(18, 1))
-            ->setNumInscricao($linha->substr(19, 14))
-            ->setNome($linha->substr(73, 30));
+            ->setTipoInscricao($linha->substr(18, 1)->trim())
+            ->setNumInscricao($linha->substr(19, 14)->trim())
+            ->setNome($linha->substr(73, 30)->trim());
 
         $banco = new Banco();
         $banco
-            ->setCod($linha->substr(1, 3))
-            ->setNome($linha->substr(103, 30))
-            ->setAgencia($linha->substr(53, 5))
-            ->setDvAgencia($linha->substr(58, 1))
-            ->setConta($linha->substr(59, 12))
-            ->setDvConta($linha->substr(71, 1))
-            ->setDvAgenciaConta($linha->substr(72, 1));
+            ->setCod($linha->substr(1, 3)->trim())
+            ->setNome($linha->substr(103, 30)->trim())
+            ->setAgencia($linha->substr(53, 5)->trim())
+            ->setDvAgencia($linha->substr(58, 1)->trim())
+            ->setConta($linha->substr(59, 12)->trim())
+            ->setDvConta($linha->substr(71, 1)->trim())
+            ->setDvAgenciaConta($linha->substr(72, 1)->trim());
 
 
         $cedente = new Cedente();
@@ -160,7 +160,7 @@ class CNAB240Processor extends AbstractProcessor
     protected function processarDetalhe($linha)
     {
         $factory = new \Umbrella\Ya\RetornoBoleto\Cnab\Cnab240\Segmento\SegmentoFactory();
-        $segmento = $linha->substr(14, 1);
+        $segmento = $linha->substr(14, 1)->trim();
         return $factory->getDetail($segmento)->buildDetail($linha);
     }
 
@@ -170,23 +170,23 @@ class CNAB240Processor extends AbstractProcessor
 
         $banco = new Banco();
         $banco
-            ->setCod($linha->substr(1, 3));
+            ->setCod($linha->substr(1, 3)->trim());
 
         $cedente = new Cedente();
         $cedente
-            ->setNome($linha->substr(62, 30))
+            ->setNome($linha->substr(62, 30)->trim())
             ->setBanco($banco);
 
         $trailer
-            ->setLote($linha->substr(4, 4))
-            ->setRegistro($linha->substr(8, 1))
-            ->addCnab($linha->substr(9, 9))
-            ->setQuantidadeRegistros($linha->substr(18, 6))
-            ->setValor($linha->substr(24, 16))
-            ->setQuantidadeMoedas($linha->substr(42, 13))
-            ->setNumAvisoDepbito($linha->substr(60, 6))
-            ->addCnab($linha->substr(66, 165))
-            ->addOcorrencia($linha->substr(231, 10));
+            ->setLote($linha->substr(4, 4)->trim())
+            ->setRegistro($linha->substr(8, 1)->trim())
+            ->addCnab($linha->substr(9, 9)->trim())
+            ->setQuantidadeRegistros($linha->substr(18, 6)->trim())
+            ->setValor($linha->substr(24, 16)->trim())
+            ->setQuantidadeMoedas($linha->substr(42, 13)->trim())
+            ->setNumAvisoDepbito($linha->substr(60, 6)->trim())
+            ->addCnab($linha->substr(66, 165)->trim())
+            ->addOcorrencia($linha->substr(231, 10)->trim());
 
         return $trailer;
     }
@@ -197,21 +197,21 @@ class CNAB240Processor extends AbstractProcessor
 
         $banco = new Banco();
         $banco
-            ->setCod($linha->substr(1, 3));
+            ->setCod($linha->substr(1, 3)->trim());
 
         $cedente = new Cedente();
         $cedente
-            ->setNome($linha->substr(62, 30))
+            ->setNome($linha->substr(62, 30)->trim())
             ->setBanco($banco);
 
         $trailer
-            ->setLote($linha->substr(4, 4))
-            ->setRegistro($linha->substr(8, 1))
-            ->addCnab($linha->substr(9, 9))
-            ->setQuantidadeLotes($linha->substr(18, 6))
-            ->setQuantidadeRegistros($linha->substr(24, 6))
-            ->setQuantidadeContasConc($linha->substr(30, 6))
-            ->addCnab($linha->substr(36, 205));
+            ->setLote($linha->substr(4, 4)->trim())
+            ->setRegistro($linha->substr(8, 1)->trim())
+            ->addCnab($linha->substr(9, 9)->trim())
+            ->setQuantidadeLotes($linha->substr(18, 6)->trim())
+            ->setQuantidadeRegistros($linha->substr(24, 6)->trim())
+            ->setQuantidadeContasConc($linha->substr(30, 6)->trim())
+            ->addCnab($linha->substr(36, 205)->trim());
 
         return $trailer;
     }
@@ -229,7 +229,7 @@ class CNAB240Processor extends AbstractProcessor
         //e assim, ter os valores_posição_campos exatamente
         //como no manual CNAB240
         $linha = $linha->insert(" ", 0);
-        $tipoLn = $linha->substr(8, 1);
+        $tipoLn = $linha->substr(8, 1)->trim();
 
         $this->needToCreateLote = false;
         if ((string)$tipoLn == CNAB240Processor::HEADER_ARQUIVO) {
