@@ -59,6 +59,9 @@ class Detail extends AbstractCnab240 implements CnabDetailInterface
      * @var DadosTitulo
      */
     protected $dadosTitulo;
+    protected $numeroSequencial;
+    protected $numeroAutenticacao;
+    protected $valorRecebido;
 
     /**
      * @return mixed
@@ -455,6 +458,65 @@ class Detail extends AbstractCnab240 implements CnabDetailInterface
         $this->outrosCreditos = $outrosCreditos;
         return $this;
     }
-
+    
+    /**
+     * 
+     * @return mixed
+     */
+    public function getNumeroSequencial()
+    {
+        return $this->numeroSequencial;
+    }
+    
+    /**
+     * 
+     * @param mixed $numeroSequencial
+     * @return $this
+     */
+    public function setNumeroSequencial($numeroSequencial)
+    {
+        $this->numeroSequencial = $numeroSequencial;
+        return $this;
+    }
+    
+    /**
+     * 
+     * @return mixed
+     */
+    public function getNumeroAutenticacao()
+    {
+        return $this->numeroAutenticacao;
+    }
+    
+    /**
+     * 
+     * @param mixed $numeroAutenticacao
+     * @return $this
+     */
+    public function setNumeroAutenticacao($numeroAutenticacao)
+    {
+        $this->numeroAutenticacao = $numeroAutenticacao;
+        return $this;
+    }
+    
+    /**
+     * 
+     * @return mixed
+     */
+    public function getValorRecebido()
+    {
+        return $this->valorRecebido;
+    }
+    
+    /**
+     * 
+     * @param mixed $valorRecebido
+     * @return $this
+     */
+    public function setValorRecebido($valorRecebido)
+    {
+        $this->valorRecebido = $valorRecebido;
+        return $this;
+    }
 
 }
