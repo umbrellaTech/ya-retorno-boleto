@@ -99,7 +99,7 @@ abstract class AbstractProcessor
      * @param string $date String contendo a data no formato DDMMAA.
      * @return DateTime
      */
-    public function createDate($date, $format = "mdy")
+    public function createDate($date, $format = "dmy")
     {
         if (empty($date)) {
             return "";
