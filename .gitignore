@@ -9,6 +9,7 @@ tmp/*
 .~lock.*
 .buildpath
 .project
+.idea
 .settings
 composer.lock
 /resources/cache

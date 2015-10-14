@@ -12,6 +12,9 @@ use Stringy\Stringy;
  */
 abstract class AbstractSegmento implements SegmentoInterface
 {
+
+    const DECIMAL_POINTS = 2;
+
     /**
      * Formata uma string, contendo uma data sem o separador, no formato DDMMAA.
      * @param string $date String contendo a data no formato DDMMAA.
@@ -41,9 +44,18 @@ abstract class AbstractSegmento implements SegmentoInterface
         return DateTime::createFromFormat($format, $dateTimeString);
     }
 
-    public function convertToFloat(Stringy $string)
+    /**
+     * Converte uma stringy para um float, de acordo com a quantidade de casas decimais passadas
+     * @param Stringy $string
+     * @param int $decimalPoints
+     * @return float
+     */
+    public function convertToFloat(Stringy $string, $decimalPoints = self::DECIMAL_POINTS)
     {
-        return (float)$string->__toString();
+        if (!is_int($decimalPoints)) {
+            $decimalPoints = self::DECIMAL_POINTS;
+        }
+        return (float) preg_replace('#(\d*)(\d{' . $decimalPoints . '})$#', '$1.$2', $string->__toString());
     }
 
     public function convertToInt(Stringy $string)

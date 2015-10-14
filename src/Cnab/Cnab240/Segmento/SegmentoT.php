@@ -37,7 +37,7 @@ class SegmentoT extends AbstractSegmento
             ->setCarteira($linha->substr(58, 1))
             ->setNumeroDocumento($linha->substr(59, 15))
             ->setDataVencimento($linha->substr(74, 8))
-            ->setValorTitulo($linha->substr(82, 13));
+            ->setValorTitulo($this->convertToFloat($linha->substr(82, 15)));
 
         $banco->setCod($linha->substr(97, 3))
             ->setAgencia($linha->substr(100, 5))
@@ -53,7 +53,7 @@ class SegmentoT extends AbstractSegmento
             ->setNome($linha->substr(149, 40));
 
         $detail->setNumeroContrato($linha->substr(189, 10))
-            ->setValorTarifa($linha->substr(199, 13))
+            ->setValorTarifa($this->convertToFloat($linha->substr(199, 15)))
             ->addOcorrencia($linha->substr(214, 10))
             ->addCnab($linha->substr(224, 17));
 
