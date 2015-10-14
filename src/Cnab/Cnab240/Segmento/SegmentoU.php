@@ -35,22 +35,22 @@ class SegmentoU extends AbstractSegmento
             ->setCodMovimento($linha->substr(16, 2));
 
         //Dados do Titulo
-        $dadosTitulo->setAcrescimos($this->convertToFloat($linha->substr(18, 13)))
-            ->setValorDesconto($this->convertToFloat($linha->substr(33, 13)))
-            ->setValorAbatimento($this->convertToFloat($linha->substr(48, 13)))
-            ->setValorIOF($this->convertToFloat($linha->substr(63, 13)))
-            ->setValorPago($this->convertToFloat($linha->substr(78, 13)))
-            ->setValorLiquido($this->convertToFloat($linha->substr(93, 13)));
+        $dadosTitulo->setAcrescimos($this->convertToFloat($linha->substr(18, 15)))
+            ->setValorDesconto($this->convertToFloat($linha->substr(33, 15)))
+            ->setValorAbatimento($this->convertToFloat($linha->substr(48, 15)))
+            ->setValorIOF($this->convertToFloat($linha->substr(63, 15)))
+            ->setValorPago($this->convertToFloat($linha->substr(78, 15)))
+            ->setValorLiquido($this->convertToFloat($linha->substr(93, 15)));
 
         $detail->setDadosTitulo($dadosTitulo)
-            ->setOutrasDespesas($this->convertToFloat($linha->substr(108, 13)))
-            ->setOutrosCreditos($this->convertToFloat($linha->substr(123, 13)))
+            ->setOutrasDespesas($this->convertToFloat($linha->substr(108, 15)))
+            ->setOutrosCreditos($this->convertToFloat($linha->substr(123, 15)))
             ->setDataOcorrencia($this->createDate($linha->substr(138, 8), "dmY"))
             ->setDataCredito($this->createDate($linha->substr(146, 8), "dmY"));
 
         $ocorrencia->setCod(($this->convertToInt($linha->substr(154, 4))))
             ->setData($this->createDate($linha->substr(158, 8)))
-            ->setValor($this->convertToFloat($linha->substr(166, 13)))
+            ->setValor($this->convertToFloat($linha->substr(166, 15)))
             ->setComplemento($linha->substr(181, 30));
 
         $banco->setCod($linha->substr(211, 3));
