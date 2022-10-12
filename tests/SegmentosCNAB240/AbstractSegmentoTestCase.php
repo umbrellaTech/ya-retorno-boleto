@@ -36,4 +36,9 @@ abstract class AbstractSegmentoTestCase extends RetornoCNAB240Test
     {
         return $this->segmentoProvider('U');
     }
+
+    public function segmentoYProvider()
+    {
+        return $this->segmentoProvider('Y');
+    }
 }

@@ -16,6 +16,8 @@ class Detail extends AbstractCnab240 implements CnabDetailInterface
     protected $numeroDocumento;
     protected $numeroContrato;
     protected $valorTarifa;
+    protected $desconto;
+    protected $acrescimos;
 
     /**
      *
@@ -458,18 +460,18 @@ class Detail extends AbstractCnab240 implements CnabDetailInterface
         $this->outrosCreditos = $outrosCreditos;
         return $this;
     }
-    
+
     /**
-     * 
+     *
      * @return mixed
      */
     public function getNumeroSequencial()
     {
         return $this->numeroSequencial;
     }
-    
+
     /**
-     * 
+     *
      * @param mixed $numeroSequencial
      * @return $this
      */
@@ -478,18 +480,18 @@ class Detail extends AbstractCnab240 implements CnabDetailInterface
         $this->numeroSequencial = $numeroSequencial;
         return $this;
     }
-    
+
     /**
-     * 
+     *
      * @return mixed
      */
     public function getNumeroAutenticacao()
     {
         return $this->numeroAutenticacao;
     }
-    
+
     /**
-     * 
+     *
      * @param mixed $numeroAutenticacao
      * @return $this
      */
@@ -498,18 +500,18 @@ class Detail extends AbstractCnab240 implements CnabDetailInterface
         $this->numeroAutenticacao = $numeroAutenticacao;
         return $this;
     }
-    
+
     /**
-     * 
+     *
      * @return mixed
      */
     public function getValorRecebido()
     {
         return $this->valorRecebido;
     }
-    
+
     /**
-     * 
+     *
      * @param mixed $valorRecebido
      * @return $this
      */
@@ -519,4 +521,37 @@ class Detail extends AbstractCnab240 implements CnabDetailInterface
         return $this;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getDesconto()
+    {
+        return $this->desconto;
+    }
+
+    /**
+     * @param mixed $desconto
+     */
+    public function setDesconto($desconto)
+    {
+        $this->desconto = $desconto;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAcrescimos()
+    {
+        return $this->acrescimos;
+    }
+
+    /**
+     * @param mixed $acrescimos
+     */
+    public function setAcrescimos($acrescimos)
+    {
+        $this->acrescimos = $acrescimos;
+        return $this;
+    }
 }
